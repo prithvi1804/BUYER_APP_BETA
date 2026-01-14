@@ -1,21 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Redirect } from "react-router-dom";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { Navigate } from "react-router-dom";
 import styles from "../../../styles/auth/auth.module.scss";
 import { buttonTypes } from "../../shared/button/utils";
 import Button from "../../shared/button/button";
 import AuthActionCard from "../auth-action-card/authActionCard";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../shared/input/input";
 import PasswordInput from "../../shared/passwordInput/input";
 import ErrorMessage from "../../shared/error-message/errorMessage";
-import { toast_actions, toast_types } from "../../shared/toast/utils/toast";
-import { getErrorMessage } from "../../../api/utils/mapFirebaseError";
+// import { toast_actions, toast_types } from "../../shared/toast/utils/toast";
+// import { getErrorMessage } from "../../../api/utils/mapFirebaseError";
 import { AddCookie } from "../../../utils/cookies";
 import { ToastContext } from "../../../context/toastContext";
 import { v4 as uuidv4 } from "uuid";
@@ -24,98 +18,29 @@ import Google_Logo from "../../../assets/images/google.png";
 import { isLoggedIn } from "../../../utils/validateToken";
 
 export default function Login() {
-  const auth = getAuth();
-  const provider = new GoogleAuthProvider();
-  const history = useHistory();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [signInUsingGoogleloading, setSignInUsingGoogleLoading] =
-    useState(false);
-  const [
-    signInUsingEmailAndPasswordloading,
-    setSignInUsingEmailAndPasswordLoading,
-  ] = useState(false);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("test@test.com");
+  const [password, setPassword] = useState("password");
+  const [loading, setLoading] = useState(false);
   const dispatch = useContext(ToastContext);
-  const [inlineError, setInlineError] = useState({
-    email_error: "",
-    password_error: "",
-  });
-  // use this function to check the email
-  function checkEmail() {
-    if (!email) {
-      setInlineError((inlineError) => ({
-        ...inlineError,
-        email_error: "Email cannot be empty",
-      }));
-      return false;
-    }
-    return true;
-  }
 
-  function checkPassword() {
-    if (!password) {
-      setInlineError((inlineError) => ({
-        ...inlineError,
-        password_error: "Password cannot be empty",
-      }));
-      return false;
-    } else if (password && password.length < 8) {
-      setInlineError((inlineError) => ({
-        ...inlineError,
-        password_error: "Password cannot be less than 8 characters",
-      }));
-      return false;
-    }
-
-    return true;
-  }
-
-  function handleLoginWithEmailAndPassword(e) {
-    e.preventDefault();
-    const allCheckPassed = [checkEmail(), checkPassword()].every(Boolean);
-    if (!allCheckPassed) {
-      return;
-    }
-    setSignInUsingEmailAndPasswordLoading(true);
-    signInWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        handleRedirect(result.user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = getErrorMessage(errorCode);
-        dispatch({
-          type: toast_actions.ADD_TOAST,
-          payload: {
-            id: Math.floor(Math.random() * 100),
-            type: toast_types.error,
-            message: errorMessage,
-          },
+  function handleLogin(e) {
+    if(e) e.preventDefault();
+    setLoading(true);
+    
+    // Simulate API call delay
+    setTimeout(() => {
+        handleRedirect({
+            displayName: "Test User",
+            email: email,
+            photoURL: "",
+            accessToken: "mock_token_" + uuidv4(),
+            uid: "mock_uid_" + uuidv4()
         });
-      })
-      .finally(() => setSignInUsingEmailAndPasswordLoading(false));
+        setLoading(false);
+    }, 500);
   }
-  function handleLoginWithGoogle() {
-    setSignInUsingGoogleLoading(true);
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        handleRedirect(result.user);
-      })
-      .catch((error) => {
-        if (error.code !== "auth/popup-closed-by-user") {
-          const errorMessage = error.message;
-          dispatch({
-            type: toast_actions.ADD_TOAST,
-            payload: {
-              id: Math.floor(Math.random() * 100),
-              type: toast_types.error,
-              message: errorMessage,
-            },
-          });
-        }
-      })
-      .finally(() => setSignInUsingGoogleLoading(false));
-  }
+
   function handleRedirect(user) {
     localStorage.setItem("transaction_id", uuidv4());
     const { displayName, email, photoURL, accessToken, uid } = user;
@@ -124,11 +49,18 @@ export default function Login() {
       "user",
       JSON.stringify({ name: displayName, id: uid, email, photoURL })
     );
-    history.push("/application");
+
+    // Set dummy location cookies to prevent crashes
+    const dummyLocation = { lat: 12.9716, lng: 77.5946, name: "Bengaluru", pincode: "560001" };
+    AddCookie("LatLongInfo", JSON.stringify(dummyLocation));
+    AddCookie("search_context", JSON.stringify({ location: dummyLocation }));
+
+    navigate("/application");
   }
+
   const loginForm = (
     <div className={styles.auth_form}>
-      <form onSubmit={handleLoginWithEmailAndPassword}>
+      <form onSubmit={handleLogin}>
         <Input
           id="email"
           name="email"
@@ -136,60 +68,37 @@ export default function Login() {
           placeholder="Enter Email"
           label_name="Email"
           autoComplete="off"
-          has_error={inlineError.email_error}
-          onChange={(event) => {
-            setEmail(event.target.value);
-            setInlineError((inlineError) => ({
-              ...inlineError,
-              email_error: "",
-            }));
-          }}
-          onBlur={checkEmail}
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
           required
         />
-        {inlineError.email_error && (
-          <ErrorMessage>{inlineError.email_error}</ErrorMessage>
-        )}
+        
         <PasswordInput
           id="password"
           name="password"
-          // type="password"
           placeholder="Enter Password"
           label_name="Password"
           autoComplete="off"
-          has_error={inlineError.password_error}
-          onChange={(event) => {
-            setPassword(event.target.value);
-            setInlineError((inlineError) => ({
-              ...inlineError,
-              password_error: "",
-            }));
-          }}
-          onBlur={checkPassword}
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
           required
         />
-        {inlineError.password_error && (
-          <ErrorMessage>{inlineError.password_error}</ErrorMessage>
-        )}
+        
         <div className="py-3 text-center">
           <Button
-            isloading={signInUsingEmailAndPasswordloading ? 1 : 0}
-            disabled={
-              signInUsingGoogleloading || signInUsingEmailAndPasswordloading
-            }
+            isloading={loading ? 1 : 0}
+            disabled={loading}
             button_type={buttonTypes.primary}
             button_hover_type={buttonTypes.primary_hover}
-            button_text="Login"
+            button_text="Login (Mock)"
             type="submit"
           />
         </div>
         <hr style={{ margin: "5px 0", border: "1px solid #ddd" }} />
         <div className="py-3 text-center">
           <Button
-            isloading={signInUsingGoogleloading ? 1 : 0}
-            disabled={
-              signInUsingGoogleloading || signInUsingEmailAndPasswordloading
-            }
+            isloading={loading ? 1 : 0}
+            disabled={loading}
             button_type={buttonTypes.primary}
             button_hover_type={buttonTypes.primary_hover}
             button_text={
@@ -199,15 +108,16 @@ export default function Login() {
                   alt="logo"
                   style={{ height: "20px", marginRight: "10px" }}
                 />
-                Login with google
+                Login with google (Mock)
               </>
             }
-            onClick={handleLoginWithGoogle}
+            onClick={handleLogin}
           />
         </div>
       </form>
     </div>
   );
+  
   const navigation_link = (
     <div className="py-2 text-center">
       <p className={styles.navigation_link_label}>Don't have an account?</p>
@@ -218,7 +128,7 @@ export default function Login() {
   );
 
   if (isLoggedIn()) {
-    return <Redirect to={{ pathname: "/application" }} />;
+    return <Navigate to="/application" replace />;
   } else {
     return (
       <AuthActionCard

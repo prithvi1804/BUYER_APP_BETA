@@ -1,14 +1,16 @@
-import { getCall } from "./axios";
+import { PRODUCTS, FILTERS, FILTER_VALUES } from "../constants/mock-data";
 
 /**
  * function to get all products
  * @returns
  */
 export const getAllProductRequest = (params) => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         try {
-            const data = await getCall(`/clientApis/v2/search`, params);
-            return resolve(data.response);
+            // Simulate network delay
+            setTimeout(() => {
+                resolve({ data: PRODUCTS, count: PRODUCTS.length });
+            }, 500);
         } catch (err) {
             return reject(err);
         }
@@ -20,18 +22,12 @@ export const getAllProductRequest = (params) => {
  * @returns
  */
 export const getAllFiltersRequest = (subCatName=null, providerId=null) => {
-    let params = {};
-    if(subCatName){
-        let subCategoryName = subCatName.replace("And", "&");
-        params.category = subCategoryName;
-    }
-    if(providerId){
-        params.provider = providerId;
-    }else{}
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         try {
-            const data = await getCall(`/clientApis/v2/attributes`, params);
-            return resolve(data.response);
+             // Simulate network delay
+             setTimeout(() => {
+                resolve({ data: FILTERS.providers || [] }); // Returning providers as filters for now based on typical usage
+            }, 500);
         } catch (err) {
             return reject(err);
         }
@@ -43,20 +39,12 @@ export const getAllFiltersRequest = (subCatName=null, providerId=null) => {
  * @returns
  */
 export const getAllFilterValuesRequest = (attributeCode, subCatName = null, providerId = null) => {
-    let params = {
-        attribute_code: attributeCode,
-    };
-    if(subCatName){
-        let subCategoryName = subCatName.replace("And", "&");
-        params.category = subCategoryName;
-    }
-    if(providerId){
-        params.provider = providerId;
-    }else{}
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         try {
-            const data = await getCall(`/clientApis/v2/attributeValues`, params);
-            return resolve(data.response);
+             // Simulate network delay
+             setTimeout(() => {
+                resolve({ data: FILTER_VALUES });
+            }, 500);
         } catch (err) {
             return reject(err);
         }

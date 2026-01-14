@@ -5,7 +5,7 @@ import SupportCard from "./support-card/supportCard";
 import User from "../../shared/svg/user";
 import Orders from "../../shared/svg/orders";
 import logo from "../../../assets/images/logo.png";
-import supportSvg from "../../../assets/images/help.svg";
+import supportSvg from "../../../assets/icons/fontawesome/solid/circle-question.svg";
 
 export default function Support() {
   return (

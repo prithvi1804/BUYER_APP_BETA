@@ -13,7 +13,7 @@ import {
 } from "firebase/auth";
 import styles from "../../../styles/auth/auth.module.scss";
 import { buttonTypes } from "../../shared/button/utils";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast_actions, toast_types } from "../../shared/toast/utils/toast";
 import { getErrorMessage } from "../../../api/utils/mapFirebaseError";
 import { AddCookie } from "../../../utils/cookies";
@@ -24,7 +24,7 @@ import Google_Logo from "../../../assets/images/google.png";
 export default function SignUp() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -153,7 +153,7 @@ export default function SignUp() {
       "user",
       JSON.stringify({ name: displayName, id: uid, email, photoURL })
     );
-    history.push("/application");
+    navigate("/application");
   }
   const signUpForm = (
     <div className={styles.auth_form}>

@@ -56,7 +56,13 @@ const useStyles = makeStyles({
     addressActionContainer: {
         width: '100px',
         margin: 'auto',
-        textAlign: 'right'
+        textAlign: 'right',
+    },
+    addressActionIcon: {
+        height: "20px",
+        width: "20px",
+        color: palette.primary.main,
+        cursor: "pointer"
     },
     addAddress: {
         border: `1px dashed ${palette.primary.main} !important`,

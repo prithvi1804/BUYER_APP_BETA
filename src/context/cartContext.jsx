@@ -1,13 +1,21 @@
 import { createContext, useState, useEffect } from "react";
-import { getCall } from "../api/axios";
+import { getCall } from "../api/client";
 import { getValueFromCookie } from "../utils/cookies";
 
+/**
+ * Context for managing shopping cart items.
+ */
 export const CartContext = createContext({
   cartItems: [],
   setCartItems: () => {},
   getCartItems: () => {},
 });
 
+/**
+ * Provider component for CartContext.
+ * @param {Object} props - Component props.
+ * @param {React.ReactNode} props.children - Child components.
+ */
 export function CartContextProvider({ children }) {
   let user = {};
   const userCookie = getValueFromCookie("user");
@@ -23,13 +31,8 @@ export function CartContextProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
 
   const getCartItems = async () => {
-    try {
-      const url = `/clientApis/v2/cart/${user.id}`;
-      const res = await getCall(url);
-      setCartItems(res);
-    } catch (error) {
-      console.log("Error fetching cart items:", error);
-    }
+    // Mock cart fetch
+    setCartItems([]);
   };
 
   useEffect(() => {

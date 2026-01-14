@@ -31,7 +31,7 @@ const useStyles = makeStyles({
         height: '120px !important',
         width: '120px !important',
         minWidth: '120px !important',
-        borderRadius: '24.5px !important',
+        borderRadius: '24px !important',
         background:'#F5F5F5 !important',
         display: 'flex',
         boxShadow: "none !important",
@@ -40,6 +40,7 @@ const useStyles = makeStyles({
         margin: 'auto',
         height: '120px !important',
         width: '120px !important',
+        objectFit: 'contain',
     },
     subCatNameTypo: {
         fontWeight: '550 !important',

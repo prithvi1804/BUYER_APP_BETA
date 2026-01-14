@@ -1,4 +1,4 @@
-import { putCall } from "../../../../api/axios";
+import { putCall } from "../../../../api/client";
 import { getValueFromCookie } from "../../../../utils/cookies";
 
 let user = {};

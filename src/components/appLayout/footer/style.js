@@ -18,7 +18,12 @@ const useStyles = makeStyles({
     },
     contactUsItem: {
         display: 'flex',
-        marginTop: "20px"
+        marginTop: "20px",
+    },
+    contactUsIcon: {
+        height: "20px",
+        width: "20px",
+        fill: palette.common.white
     },
     itemDetailsContainer: {
         marginLeft: '11px'

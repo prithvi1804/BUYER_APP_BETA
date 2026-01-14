@@ -35,6 +35,9 @@ const useStyles = makeStyles({
         position: 'absolute',
         top: '8px',
         right: '8px',
+        height: "20px",
+        width: "20px",
+        color: palette.primary.main,
     },
     nonClickable: {
         cursor: "not-allowed !important"

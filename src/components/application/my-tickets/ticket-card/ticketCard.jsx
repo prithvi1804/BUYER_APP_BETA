@@ -7,13 +7,13 @@ import DropdownSvg from "../../../shared/svg/dropdonw";
 import { ToastContext } from "../../../../context/toastContext";
 import useCancellablePromise from "../../../../api/cancelRequest";
 import { toast_actions, toast_types } from "../../../shared/toast/utils/toast";
-import { getCall, postCall } from "../../../../api/axios";
+import { getCall, postCall } from "../../../../api/client";
 import { getValueFromCookie } from "../../../../utils/cookies";
 import { SSE_TIMEOUT } from "../../../../constants/sse-waiting-time";
 import Loading from "../../../shared/loading/loading";
 import CustomerActionCard from "../action-card/actionCard";
 import { ISSUE_TYPES } from "../../../../constants/issue-types";
-import { compareDateWithDuration, parseDuration } from "../../../../utils/helper";
+import { compareDateWithDuration, parseDuration } from "../../../../utils/utils";
 import ErrorMessage from "../../../shared/error-message/errorMessage";
 
 export default function TicketCard(props) {

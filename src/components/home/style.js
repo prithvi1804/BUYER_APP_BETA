@@ -1,54 +1,91 @@
 import { makeStyles } from "@mui/styles";
-import palette from "../../utils/Theme/palette";
+import colors from "../../utils/Theme/colors";
 
 const useStyles = makeStyles({
   homeContainer: {
-    padding: "39px 54px",
+    padding: "16px 16px",
+    "@media (max-width: 1024px)": {
+      padding: "16px 16px",
+    },
+    "@media (max-width: 768px)": {
+      marginTop: "32px !important",
+      padding: "16px 16px",
+    },
   },
   fashionCategory: {
     borderRadius: "8px !important",
-    background: "linear-gradient(180deg, #DCE6F9 0%, #ADCDFE 100%) !important",
+    background: `${colors.categories.fashion.background} !important`,
     paddingTop: "33px !important",
     paddingBottom: "23px !important",
     boxShadow: "none !important",
-    height: "317px !important",
+    minHeight: "317px !important",
+    height: "auto !important",
     cursor: "pointer",
+    "@media (max-width: 768px)": {
+      minHeight: "200px !important",
+      paddingTop: "20px !important",
+      paddingBottom: "16px !important",
+    },
   },
-  fashionImages: {
-    textAlign: "center",
-  },
-  categoryTypo: {
-    color: "#3A1500",
-    textAlign: "center",
-    marginTop: "24px !important",
-  },
-  fashionImage2: {
-    marginLeft: "-30px",
-  },
+  // fashionImages: {
+  //   textAlign: "center",
+  // },
+  // categoryTypo: {
+  //   color: colors.text.secondary,
+  //   textAlign: "center",
+  //   marginTop: "24px !important",
+  //   "@media (max-width: 768px)": {
+  //     marginTop: "16px !important",
+  //     fontSize: "14px !important",
+  //   },
+  // },
+  // fashionImage2: {
+  //   marginLeft: "-30px",
+  //   "@media (max-width: 768px)": {
+  //     marginLeft: "-15px",
+  //   },
+  // },
   electronicsCategory: {
-    borderRadius: "8px !important",
-    background: "linear-gradient(180deg, #DCF9F2 0%, #ADEFFE 100%) !important",
-    paddingTop: "23px !important",
-    paddingBottom: "23px !important",
+    borderRadius: "16px !important",
+    background: `${colors.categories.electronics.background} 100% !important`,
+    paddingTop: "24px !important",
+    paddingBottom: "24px !important",
     boxShadow: "none !important",
-    height: "177px !important",
+    minHeight: "14px !important",
+    height: "auto !important",
     cursor: "pointer",
+    "@media (max-width: 768px)": {
+      minHeight: "140px !important",
+      paddingTop: "16px !important",
+      paddingBottom: "16px !important",
+    },
   },
   electronicsImages: {
     textAlign: "center",
   },
   electronicsImage: {
     verticalAlign: "unset",
+    "@media (max-width: 768px)": {
+      maxWidth: "90%",
+    },
   },
-  tvImage: {
-    marginLeft: "-20px",
-  },
-  mobileImage: {
-    marginLeft: "-70px",
-  },
-  tabImage: {
-    marginLeft: "2px",
-  },
+  // tvImage: {
+  //   // marginLeft: "-20px",
+  //   "@media (max-width: 768px)": {
+  //     // marginLeft: "-10px",
+  //     maxWidth: "45%",
+  //   },
+  // },
+  // mobileImage: {
+  //   marginLeft: "-70px",
+  //   "@media (max-width: 768px)": {
+  //     marginLeft: "-30px",
+  //     maxWidth: "35%",
+  //   },
+  // },
+  // tabImage: {
+  //   marginLeft: "2px",
+  // },
   typoContainer: {
     display: "flex",
   },
@@ -59,18 +96,27 @@ const useStyles = makeStyles({
 
   groceryCategory: {
     borderRadius: "8px !important",
-    background: "linear-gradient(180deg, #F9E3DC 0%, #FECAAD 100%) !important",
+    background: `${colors.categories.grocery.background} !important`,
     paddingTop: "33px !important",
     paddingBottom: "23px !important",
     boxShadow: "none !important",
-    height: "210px !important",
+    minHeight: "210px !important",
+    height: "auto !important",
     cursor: "pointer",
+    "@media (max-width: 768px)": {
+      minHeight: "160px !important",
+      paddingTop: "20px !important",
+      paddingBottom: "16px !important",
+    },
   },
   groceryImages: {
     textAlign: "center",
   },
   groceryImage: {
     verticalAlign: "unset",
+    "@media (max-width: 768px)": {
+      maxWidth: "90%",
+    },
   },
   groceryTypo: {
     margin: "auto !important",
@@ -79,12 +125,18 @@ const useStyles = makeStyles({
 
   foodCategory: {
     borderRadius: "8px !important",
-    background: "linear-gradient(180deg, #FFE1C1 0%, #FED092 100%) !important",
+    background: `${colors.categories.food.background} !important`,
     paddingTop: "33px !important",
     paddingBottom: "23px !important",
     boxShadow: "none !important",
-    height: "288px !important",
+    minHeight: "288px !important",
+    height: "auto !important",
     cursor: "pointer",
+    "@media (max-width: 768px)": {
+      minHeight: "180px !important",
+      paddingTop: "20px !important",
+      paddingBottom: "16px !important",
+    },
   },
   foodImages: {
     textAlign: "center",
@@ -92,12 +144,18 @@ const useStyles = makeStyles({
 
   healthCategory: {
     borderRadius: "8px !important",
-    background: "linear-gradient(180deg, #CDFFD2 0%, #C2DDD8 100%) !important",
+    background: `${colors.categories.health.background} !important`,
     paddingTop: "33px !important",
     paddingBottom: "23px !important",
     boxShadow: "none !important",
-    height: "210px !important",
+    minHeight: "210px !important",
+    height: "auto !important",
     cursor: "pointer",
+    "@media (max-width: 768px)": {
+      minHeight: "160px !important",
+      paddingTop: "20px !important",
+      paddingBottom: "16px !important",
+    },
   },
   healthImages: {
     textAlign: "center",
@@ -108,24 +166,38 @@ const useStyles = makeStyles({
 
   healthTypo: {
     marginTop: "30px !important",
+    "@media (max-width: 768px)": {
+      marginTop: "16px !important",
+    },
   },
 
   homeCategory: {
     borderRadius: "8px !important",
-    background: "linear-gradient(180deg, #F9F2E2 0%, #D9C9A8 100%) !important",
+    background: `${colors.categories.home.background} !important`,
     paddingTop: "33px !important",
     paddingBottom: "23px !important",
     boxShadow: "none !important",
-    height: "317px !important",
+    minHeight: "317px !important",
+    height: "auto !important",
     cursor: "pointer",
+    "@media (max-width: 768px)": {
+      minHeight: "200px !important",
+      paddingTop: "20px !important",
+      paddingBottom: "16px !important",
+    },
   },
   homeImages: {
     textAlign: "center",
     height: "70%",
+    "@media (max-width: 768px)": {
+      height: "auto",
+    },
   },
   homeImage1: {
-    // marginLeft: '-30px'
     width: "200px",
+    "@media (max-width: 768px)": {
+      width: "140px",
+    },
   },
   homeImage2: {
     // marginLeft: '-30px'
@@ -134,18 +206,27 @@ const useStyles = makeStyles({
 
   bpcCategory: {
     borderRadius: "8px !important",
-    background: "linear-gradient(180deg, #F7DCF9 0%, #C7ADFE 100%) !important",
+    background: `${colors.categories.bpc.background} !important`,
     paddingTop: "15px !important",
     paddingBottom: "23px !important",
     boxShadow: "none !important",
-    height: "177px !important",
+    minHeight: "177px !important",
+    height: "auto !important",
     cursor: "pointer",
+    "@media (max-width: 768px)": {
+      minHeight: "140px !important",
+      paddingTop: "12px !important",
+      paddingBottom: "16px !important",
+    },
   },
   bpcImages: {
     textAlign: "center",
   },
   bpcImage: {
     verticalAlign: "unset",
+    "@media (max-width: 768px)": {
+      maxWidth: "90%",
+    },
   },
   bpcTypo: {
     margin: "auto !important",
@@ -156,21 +237,30 @@ const useStyles = makeStyles({
   },
   agricultureCategory: {
     borderRadius: "8px !important",
-    background: "linear-gradient(180deg, #E7F9DC 0%, #BFF2C1 100%) !important",
+    background: `${colors.categories.agriculture.background} !important`,
     paddingTop: "33px !important",
     paddingBottom: "23px !important",
     boxShadow: "none !important",
-    height: "288px !important",
+    minHeight: "288px !important",
+    height: "auto !important",
     cursor: "pointer",
+    "@media (max-width: 768px)": {
+      minHeight: "180px !important",
+      paddingTop: "20px !important",
+      paddingBottom: "16px !important",
+    },
   },
   agricultureImages: {
     textAlign: "center",
   },
   agricultureImage: {
     height: "230px",
+    "@media (max-width: 768px)": {
+      height: "140px",
+    },
   },
   agricultureCategoryTypo: {
-    color: "#3A1500",
+    color: colors.text.secondary,
     textAlign: "center",
     marginTop: "-10px !important",
   },
@@ -178,6 +268,37 @@ const useStyles = makeStyles({
     textAlign: "center",
     marginTop: "16px !important",
   },
+  subCatCard: {
+    cursor: 'pointer',
+    height: '100% !important',
+    width: '100% !important',
+    borderRadius: '24px !important',
+    background: colors.grey.cardBackground,
+    // background: '#F5F5F5 !important',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    boxShadow: "none !important",
+    padding: '16px',
+    '&:hover': {
+      background: `${colors.grey.cardBackgroundHover} !important`,
+    }
+  },
+  subCatImage: {
+    maxHeight: '120px',
+    maxWidth: '120px',
+    borderRadius: '24px !important',
+    objectFit: 'contain',
+    marginBottom: '12px'
+  },
+  subCatNameTypo: {
+    fontWeight: '600 !important',
+    textAlign: 'center',
+    color: colors.grey.text333,
+    fontSize: '0.8rem !important'
+  },
 });
 
 export default useStyles;
+

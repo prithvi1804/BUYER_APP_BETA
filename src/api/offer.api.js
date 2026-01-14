@@ -1,4 +1,4 @@
-import { getCall } from "./axios";
+import { getCall } from "./client";
 
 /**
  * function to get all brands
@@ -11,16 +11,11 @@ export const getAllOffersRequest = (
   provider = "",
   location = ""
 ) => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     try {
-      let url = `/clientApis/v2/offers?latitude=${lat}&longitude=${lng}${
-        domain ? `&domain=${domain}` : ""
-      }${provider ? `&provider=${provider}` : ""}${
-        location ? `&location=${location}` : ""
-      }`;
-      const data = await getCall(url);
-      console.log(data);
-      return resolve(data.response.data);
+      setTimeout(() => {
+        resolve([]);
+      }, 500);
     } catch (err) {
       return reject(err);
     }

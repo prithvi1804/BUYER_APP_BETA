@@ -10,8 +10,8 @@ import Navbar from "../../shared/navbar/navbar";
 import no_result_empty_illustration from "../../../assets/images/empty-state-illustration.svg";
 import Button from "../../shared/button/button";
 import { buttonTypes } from "../../shared/button/utils";
-import { useHistory } from "react-router-dom";
-import { getCall } from "../../../api/axios";
+import { useNavigate } from "react-router-dom";
+import { getCall } from "../../../api/client";
 import Loading from "../../shared/loading/loading";
 import { ONDC_COLORS } from "../../shared/colors";
 import OrderCard from "./order-card/orderCard";
@@ -22,7 +22,7 @@ import useCancellablePromise from "../../../api/cancelRequest";
 
 export default function Orders() {
   // HISTORY
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // STATES
   const [orders, setOrders] = useState([]);
@@ -163,7 +163,7 @@ export default function Orders() {
             button_type={buttonTypes.primary}
             button_hover_type={buttonTypes.primary_hover}
             button_text="Shop now"
-            onClick={() => history.push("/application/")}
+            onClick={() => navigate("/application/")}
           />
         </div>
       </div>

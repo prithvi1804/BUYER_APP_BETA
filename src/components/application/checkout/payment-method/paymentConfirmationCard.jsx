@@ -13,10 +13,10 @@ import { checkout_steps } from "../../../../constants/checkout-steps";
 import { ONDC_COLORS } from "../../../shared/colors";
 import AddressRadioButton from "../../initialize-order/address-details/address-radio-button/addressRadioButton";
 import { CartContext } from "../../../../context/cartContext";
-import { getCall, postCall } from "../../../../api/axios";
+import { getCall, postCall } from "../../../../api/client";
 import { constructQouteObject } from "../../../../api/utils/constructRequestObject";
 import { toast_actions, toast_types } from "../../../shared/toast/utils/toast";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CrossIcon from "../../../shared/svg/cross-icon";
 import { payment_methods } from "../../../../constants/payment-methods";
@@ -51,7 +51,7 @@ export default function PaymentConfirmationCard(props) {
   const hyperServiceObject = new window.HyperServices();
 
   // HISTORY
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // STATES
   const [confirmOrderLoading, setConfirmOrderLoading] = useState(false);
@@ -440,7 +440,7 @@ export default function PaymentConfirmationCard(props) {
         removeCookie("parent_and_transaction_id_map");
         removeCookie("LatLongInfo");
         setCartItems([]);
-        history.replace("/application/orders");
+        navigate("/application/orders", { replace: true });
       }
     }
     // eslint-disable-next-line

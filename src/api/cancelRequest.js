@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { makeCancelable } from "./axios";
+import { makeCancelable } from "./client";
 
 export default function useCancellablePromise() {
   // REFS

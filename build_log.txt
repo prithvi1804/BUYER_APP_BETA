@@ -1,0 +1,202 @@
+
+> biap-app-ui-front@0.1.0 build
+> vite build
+
+vite v7.3.1 building client environment for production...
+transforming...
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/error-boundary/errorBoundary.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/styles/globalStyles.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/button/button.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/loading/loading.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/styles/auth/auth.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/passwordInput/input.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/error-message/errorMessage.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/input/input.module.scss 1:9  root stylesheet
+
+[plugin vite:esbuild] src/components/common/ViewOnlyMap/ViewOnlyMap.js: Duplicate key "clickableIcons" in object literal
+37 |        draggable: false,
+38 |        fullscreenControl: false,
+39 |        clickableIcons: false,
+   |        ^
+40 |        disableDoubleClickZoom: false,
+41 |      }
+
+[plugin vite:esbuild] src/components/appLayout/navbar/addressForm/addressForm.js: Duplicate key "building" in object literal
+404 |              country: "IND",
+405 |              door: address.door.trim(),
+406 |              building: address.door.trim(),
+    |              ^
+407 |              state: address.state.trim(),
+408 |              street: address.street.trim(),
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/styles/cart/cartView.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/styles/search-product-modal/searchProductModal.module.scss 1:9  root stylesheet
+
+[plugin vite:esbuild] src/components/checkout/stepPayment/stepPaymentContent.js: Duplicate key "city" in object literal
+237 |                  transaction_id: transaction_id,
+238 |                  city: search_context.location.name,
+239 |                  city: item[0].contextCity,
+    |                  ^
+240 |                  state: search_context.location.state,
+241 |                  domain: item[0].domain,
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/application/initialize-order/address-details/address-radio-button/addressRadioButton.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/styles/products/productCard.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/styles/orders/orders.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/checkbox/checkbox.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/dropdown/dropdown.module.scss 1:9  root stylesheet
+
+✓ 12960 modules transformed.
+✗ Build failed in 7.95s
+error during build:
+src/components/common/Offers/OfferCard.js (5:9): "ReactComponent" is not exported by "src/assets/images/offer.svg", imported by "src/components/common/Offers/OfferCard.js".
+file: /Users/pavan/Documents/Dev/Avysh/ONDC Buyer App Beta/BUYER_APP_BETA/src/components/common/Offers/OfferCard.js:5:9
+
+3: import { useNavigate } from "react-router-dom";
+4: import { Button } from "@mui/material";
+5: import { ReactComponent as OfferIcon } from "../../../assets/images/offer.svg";
+            ^
+6: import ThemePalette from "../../../utils/Theme/theme.json";
+
+    at getRollupError (file:///Users/pavan/Documents/Dev/Avysh/ONDC%20Buyer%20App%20Beta/BUYER_APP_BETA/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
+    at error (file:///Users/pavan/Documents/Dev/Avysh/ONDC%20Buyer%20App%20Beta/BUYER_APP_BETA/node_modules/rollup/dist/es/shared/parseAst.js:397:42)
+    at Module.error (file:///Users/pavan/Documents/Dev/Avysh/ONDC%20Buyer%20App%20Beta/BUYER_APP_BETA/node_modules/rollup/dist/es/shared/node-entry.js:17022:16)
+    at Module.traceVariable (file:///Users/pavan/Documents/Dev/Avysh/ONDC%20Buyer%20App%20Beta/BUYER_APP_BETA/node_modules/rollup/dist/es/shared/node-entry.js:17478:29)
+    at ModuleScope.findVariable (file:///Users/pavan/Documents/Dev/Avysh/ONDC%20Buyer%20App%20Beta/BUYER_APP_BETA/node_modules/rollup/dist/es/shared/node-entry.js:15141:39)
+    at ReturnValueScope.findVariable (file:///Users/pavan/Documents/Dev/Avysh/ONDC%20Buyer%20App%20Beta/BUYER_APP_BETA/node_modules/rollup/dist/es/shared/node-entry.js:5688:38)
+    at FunctionBodyScope.findVariable (file:///Users/pavan/Documents/Dev/Avysh/ONDC%20Buyer%20App%20Beta/BUYER_APP_BETA/node_modules/rollup/dist/es/shared/node-entry.js:5688:38)
+    at TrackingScope.findVariable (file:///Users/pavan/Documents/Dev/Avysh/ONDC%20Buyer%20App%20Beta/BUYER_APP_BETA/node_modules/rollup/dist/es/shared/node-entry.js:5688:38)
+    at BlockScope.findVariable (file:///Users/pavan/Documents/Dev/Avysh/ONDC%20Buyer%20App%20Beta/BUYER_APP_BETA/node_modules/rollup/dist/es/shared/node-entry.js:5688:38)
+    at Identifier.bind (file:///Users/pavan/Documents/Dev/Avysh/ONDC%20Buyer%20App%20Beta/BUYER_APP_BETA/node_modules/rollup/dist/es/shared/node-entry.js:5462:40)

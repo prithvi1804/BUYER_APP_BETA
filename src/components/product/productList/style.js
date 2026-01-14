@@ -44,6 +44,11 @@ const useStyles = makeStyles({
     top: 14,
     right: 18,
   },
+  cartIconSvg: {
+    height: "20px",
+    width: "20px",
+    color: "#ffffff",
+  },
   productNameTypo: {
     fontWeight: "600 !important",
     marginTop: "13px !important",
@@ -76,6 +81,10 @@ const useStyles = makeStyles({
     borderRadius: "3px !important",
     padding: "11px 13px !important",
     marginLeft: "10px !important",
+  },
+  viewTypeIcon: {
+      height: "20px",
+      width: "20px",
   },
 
   productItemContainerList: {

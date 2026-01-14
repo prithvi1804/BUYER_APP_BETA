@@ -37,13 +37,13 @@ const CustomizationRenderer = (props) => {
 
   const formatCustomizationGroups = (customisation_groups) => {
     const formattedCustomizationGroups = customisation_groups?.map((group) => {
-      const configTags = group.tags.find((tag) => tag.code === "config").list;
-      const minConfig = configTags.find((tag) => tag.code === "min").value;
-      const maxConfig = configTags.find((tag) => tag.code === "max").value;
+      const configTags = group.tags?.find((tag) => tag.code === "config")?.list || [];
+      const minConfig = configTags.find((tag) => tag.code === "min")?.value || "0";
+      const maxConfig = configTags.find((tag) => tag.code === "max")?.value || "0";
       const inputTypeConfig = configTags.find(
         (tag) => tag.code === "input"
-      ).value;
-      const seqConfig = configTags.find((tag) => tag.code === "seq").value;
+      )?.value || "";
+      const seqConfig = configTags.find((tag) => tag.code === "seq")?.value || "0";
 
       const customizationObj = {
         id: group.local_id,
@@ -67,14 +67,14 @@ const CustomizationRenderer = (props) => {
   const formatCustomizations = (customisation_items) => {
     const customizations = customisation_items?.map((customization) => {
       const itemDetails = customization.item_details;
-      const parentTag = itemDetails.tags.find((tag) => tag.code === "parent");
-      const vegNonVegTag = itemDetails.tags.find(
+      const parentTag = itemDetails.tags?.find((tag) => tag.code === "parent");
+      const vegNonVegTag = itemDetails.tags?.find(
         (tag) => tag.code === "veg_nonveg"
       );
-      const isDefaultTag = parentTag.list.find((tag) => tag.code === "default");
-      const isDefault = isDefaultTag?.value.toLowerCase() === "yes";
-      const childTag = itemDetails.tags.find((tag) => tag.code === "child");
-      const childs = childTag?.list.map((item) => item.value);
+      const isDefaultTag = parentTag?.list?.find((tag) => tag.code === "default");
+      const isDefault = isDefaultTag?.value?.toLowerCase() === "yes";
+      const childTag = itemDetails.tags?.find((tag) => tag.code === "child");
+      const childs = childTag?.list?.map((item) => item.value) || [];
 
       return {
         id: itemDetails.id,
@@ -119,10 +119,10 @@ const CustomizationRenderer = (props) => {
   useEffect(() => {
     if (productPayload) {
       const { customisation_groups, customisation_items } = productPayload;
-      const customGroup = productPayload.item_details.tags.find(
+      const customGroup = productPayload.item_details?.tags?.find(
         (item) => item.code == "custom_group"
       );
-      if (customGroup && customGroup.list.length > 0) {
+      if (customGroup && customGroup.list?.length > 0) {
         const customizationGroupIds = customGroup?.list.map(
           (item) => item.value
         );

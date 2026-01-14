@@ -51,7 +51,11 @@ const useStyles = makeStyles({
         }
     },
     actionButton: {
-        border: '1px solid rgba(0, 0, 0, 0.14) !important'
+        border: '1px solid rgba(0, 0, 0, 0.14) !important',
+    },
+    actionIcon: {
+        height: "20px",
+        width: "20px",
     },
     pageEllipsisContainer: {
 
@@ -62,7 +66,12 @@ const useStyles = makeStyles({
     },
     allOptionsContainer: {
         textAlign: 'center',
-        cursor: 'pointer'
+        cursor: 'pointer',
+    },
+    allOptionsIcon: {
+        height: "20px",
+        width: "20px",
+        color: palette.primary.main,
     },
     allNameTypo: {
         fontWeight: '600 !important',

@@ -6,11 +6,11 @@ import MuiLink from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import VariationsRenderer from "./VariationsRenderer";
-import { deleteCall, getCall, postCall } from "../../../../api/axios";
+import { deleteCall, getCall, postCall } from "../../../../api/client";
 import CustomizationRenderer from "./CustomizationRenderer";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { getValueFromCookie } from "../../../../utils/cookies";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useCancellablePromise from "../../../../api/cancelRequest";
 import {
   Accordion,
@@ -32,7 +32,7 @@ import { toast_actions, toast_types } from "../../../shared/toast/utils/toast";
 
 const ProductDetails = ({ productId }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useContext(ToastContext);
   const { fetchCartItems, cartItems } = useContext(CartContext);
   const { locationData: deliveryAddressLocation } = useContext(SearchContext);
@@ -254,7 +254,7 @@ const ProductDetails = ({ productId }) => {
     }
   }, [cartItems, customization_state]);
 
-  const addToCart = async (navigate = false, isIncrement = true) => {
+  const addToCart = async (shouldNavigate = false, isIncrement = true) => {
     setAddToCartLoading(true);
     const user = JSON.parse(getValueFromCookie("user"));
     const url = `/clientApis/v2/cart/${user.id}`;
@@ -326,8 +326,8 @@ const ProductDetails = ({ productId }) => {
         },
       });
 
-      if (navigate) {
-        history.push("/application/cart");
+      if (shouldNavigate) {
+        navigate("/application/cart");
       }
     } else {
       const currentCount = parseInt(cartItem[0].item.quantity.count);
@@ -507,7 +507,7 @@ const ProductDetails = ({ productId }) => {
   };
 
   const renderAttributeDetails = () => {
-    return Object.keys(productPayload?.attributes).map((key) => (
+    return Object.keys(productPayload?.attributes || {}).map((key) => (
       <Grid container className={classes.keyValueContainer}>
         <Grid xs={3}>
           <Typography
@@ -580,7 +580,7 @@ const ProductDetails = ({ productId }) => {
       "Manufacturer address":
         productPayload.item_details?.[
           "@ondc/org/statutory_reqs_packaged_commodities"
-        ]?.["manufacturer_or_packer_address"],
+        ]?.["manufacturer_or_packer_address"] || "",
     };
 
     return Object.keys(data).map((key) => {
@@ -723,7 +723,7 @@ const ProductDetails = ({ productId }) => {
                 <Typography
                   variant="h4"
                   color="black"
-                  sx={{ marginBottom: 1, fontFamily: "inter", fontWeight: 600 }}
+                  sx={{ marginBottom: 1, fontFamily: "var(--font-body-fontFamily)", fontWeight: 600 }}
                 >
                   {productDetails?.descriptor?.name}
                 </Typography>
@@ -732,7 +732,7 @@ const ProductDetails = ({ productId }) => {
                     <Typography
                       variant="h4"
                       color="black"
-                      sx={{ fontFamily: "inter", fontWeight: 700 }}
+                      sx={{ fontFamily: "var(--font-body-fontFamily)", fontWeight: 700 }}
                     >
                       {`₹${rangePriceTag?.minPrice} - ₹${rangePriceTag?.maxPrice}`}
                     </Typography>
@@ -742,7 +742,7 @@ const ProductDetails = ({ productId }) => {
                     <Typography
                       variant="h4"
                       color="black"
-                      sx={{ fontFamily: "inter", fontWeight: 700 }}
+                      sx={{ fontFamily: "var(--font-body-fontFamily)", fontWeight: 700 }}
                     >
                       ₹{productDetails?.price?.value}
                     </Typography>
@@ -750,14 +750,14 @@ const ProductDetails = ({ productId }) => {
                       variant="h4"
                       color="black"
                       sx={{
-                        fontFamily: "inter",
+                        fontFamily: "var(--font-body-fontFamily)",
                         fontWeight: 400,
                         marginLeft: 2,
                         textDecoration: "line-through",
                       }}
                     >
                       ₹
-                      {parseInt(productDetails?.price?.maximum_value).toFixed(
+                      {parseInt(productDetails?.price?.maximum_value || 0).toFixed(
                         0
                       )}
                     </Typography>

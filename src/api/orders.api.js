@@ -1,18 +1,15 @@
-import { getCall } from "./axios";
+import { ORDERS_MOCK } from "../constants/mock-data";
 
 /**
  * function to get all products
  * @returns
  */
 export const getAllOrdersRequest = (paginationData) => {
-    const pageNumber = paginationData.page;
-    const limit = paginationData.pageSize;
-    const state = paginationData.status
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         try {
-            const quaryParams = `?limit=${limit}&pageNumber=${pageNumber}&state=${state}`
-            const data = await getCall(`/clientApis/v2/orders${quaryParams}`);
-            return resolve(data);
+            setTimeout(() => {
+                resolve({ orders: ORDERS_MOCK, totalCount: ORDERS_MOCK.length });
+            }, 500);
         } catch (err) {
             return reject(err);
         }
@@ -20,10 +17,11 @@ export const getAllOrdersRequest = (paginationData) => {
 };
 
 export const getOrderDetailsRequest = (orderId) => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         try {
-            const data = await getCall(`/clientApis/v2/orders/${orderId}`);
-            return resolve(data);
+            setTimeout(() => {
+                resolve({}); // Return empty object or specific order mock if available
+            }, 500);
         } catch (err) {
             return reject(err);
         }

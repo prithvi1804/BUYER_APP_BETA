@@ -12,6 +12,10 @@
   text-align: left;
   color: $primaryColor;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-18;
+  }
 }
 
 .illustration_header {
@@ -28,15 +32,32 @@
   text-align: center;
   margin: 0 auto;
   color: $secondaryColor;
+
+  @media screen and (max-width: 768px) {
+    width: 95%;
+  }
 }
 
 .order_list_wrapper {
   width: 700px;
   margin: 0 auto;
+
+  @media screen and (max-width: 992px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    padding: 0 12px;
+  }
 }
 
 .padding_20 {
   padding: 20px;
+
+  @media screen and (max-width: 768px) {
+    padding: 12px;
+  }
 }
 
 .orders_card {
@@ -44,7 +65,6 @@
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba($primaryColor, 0.15);
   background-color: $white;
-  // cursor: pointer;
 }
 
 .card_header_title {
@@ -54,6 +74,11 @@
   text-align: left;
   color: $primaryColor;
   margin: 0;
+  word-break: break-all;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-16;
+  }
 }
 
 .card_body_text {
@@ -61,6 +86,10 @@
   text-align: left;
   color: $secondaryColor;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-14;
+  }
 }
 
 .product_name {
@@ -69,12 +98,21 @@
   font-weight: $medium;
   color: $primaryColor;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    font-size: $font-14;
+  }
 }
 
 .address_type_label {
   font-size: $font-14;
   color: #a1a1a1;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-12;
+  }
 }
 
 .address_name_and_phone {
@@ -83,6 +121,10 @@
   text-align: left;
   color: $primaryColor;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-14;
+  }
 }
 
 .address_line_1 {
@@ -90,6 +132,10 @@
   text-align: left;
   color: $primaryColor;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-12;
+  }
 }
 
 .address_line_2 {
@@ -97,6 +143,10 @@
   text-align: left;
   color: $secondaryColor;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-12;
+  }
 }
 
 .product_price {
@@ -104,6 +154,10 @@
   font-weight: $medium;
   color: $secondaryColor;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-14;
+  }
 }
 
 .status_label {
@@ -111,18 +165,32 @@
   margin: 0;
   color: $primaryColor;
   text-align: left;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-12;
+  }
 }
 
 .status_chip {
-  padding: 2px;
+  padding: 2px 8px;
   border-radius: 36px;
   text-align: center;
+  display: inline-block;
+
+  @media screen and (max-width: 768px) {
+    padding: 2px 6px;
+  }
 }
 
 .status_text {
   font-size: $font-12;
   text-align: center;
   margin: 0;
+  white-space: nowrap;
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
 }
 
 .quantity_count {
@@ -132,6 +200,12 @@
   min-width: 100px;
   text-align: center;
   font-weight: 700;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-12;
+    min-width: 80px;
+    text-align: left;
+  }
 }
 
 .secondary_action,
@@ -147,6 +221,12 @@
   font-size: $font-14;
   font-weight: $medium;
   color: $secondaryColor;
+
+  @media screen and (max-width: 768px) {
+    width: 80px;
+    height: 32px;
+    font-size: $font-12;
+  }
 }
 
 .secondary_action:hover {
@@ -168,10 +248,20 @@
   font-size: $font-14;
   font-weight: $medium;
   color: $accentColor;
+
+  @media screen and (max-width: 768px) {
+    width: 80px;
+    height: 32px;
+    font-size: $font-12;
+  }
 }
 
 .cancel_return_button {
   width: 130px !important;
+
+  @media screen and (max-width: 768px) {
+    width: 100px !important;
+  }
 }
 
 .primary_action:hover {
@@ -189,6 +279,10 @@ button:disabled {
   background-color: #efefef;
   border: 0.5px solid #ddd;
   border-radius: 36px;
+
+  @media screen and (max-width: 768px) {
+    padding: 3px 6px;
+  }
 }
 
 .label_chip_text {
@@ -197,10 +291,25 @@ button:disabled {
   line-height: normal;
   text-align: center;
   text-transform: uppercase;
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
 }
 
-@media screen and (max-width: 767px) {
-  .order_list_wrapper {
-    width: 100%;
+// Status section responsive - make it stack on mobile
+@media screen and (max-width: 768px) {
+  .orders_card > div:first-child {
+    flex-wrap: wrap;
+  }
+
+  .orders_card .px-3 {
+    width: auto !important;
+    margin-top: 8px;
+  }
+
+  .orders_card .px-2 {
+    width: auto !important;
+    margin-left: auto;
   }
 }

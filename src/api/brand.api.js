@@ -1,14 +1,15 @@
-import { getCall } from "./axios";
+import { BRANDS, BRAND_DETAILS, OUTLETS } from "../constants/mock-data";
 
 /**
  * function to get all brands
  * @returns
  */
 export const getAllBrandsRequest = () => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     try {
-      const data = await getCall(`/clientApis/v2/providers`);
-      return resolve(data.response);
+      setTimeout(() => {
+        resolve({ data: BRANDS });
+      }, 500);
     } catch (err) {
       return reject(err);
     }
@@ -20,13 +21,11 @@ export const getAllBrandsRequest = () => {
  * @returns
  */
 export const getBrandDetailsRequest = (brandId) => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     try {
-      const data = await getCall(
-        `/clientApis/v2/provider-details?id=${brandId}`
-      );
-      //const data = await getCall(`/protocol/providers/${brandId}`);
-      return resolve(data);
+      setTimeout(() => {
+        resolve(BRAND_DETAILS[brandId] || BRANDS[0]); // Fallback to first brand if not found
+      }, 500);
     } catch (err) {
       return reject(err);
     }
@@ -38,13 +37,11 @@ export const getBrandDetailsRequest = (brandId) => {
  * @returns
  */
 export const getBrandCustomMenuRequest = (domain, brandId) => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     try {
-      // const data = await getCall(`/clientApis/v2/custom-menus?domain=${domain}`);
-      const data = await getCall(
-        `/clientApis/v2/custom-menus?domain=${domain}&provider=${brandId}`
-      );
-      return resolve(data);
+      setTimeout(() => {
+        resolve([]);
+      }, 500);
     } catch (err) {
       return reject(err);
     }
@@ -56,11 +53,11 @@ export const getBrandCustomMenuRequest = (domain, brandId) => {
  * @returns
  */
 export const getCustomMenuItemsRequest = (menuName) => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     try {
-      // const data = await getCall(`/clientApis/v2/items?customMenu=${menuName}`);
-      const data = await getCall(`/clientApis/v2/items?customMenu=${menuName}`);
-      return resolve(data);
+      setTimeout(() => {
+        resolve([]);
+      }, 500);
     } catch (err) {
       return reject(err);
     }
@@ -72,19 +69,11 @@ export const getCustomMenuItemsRequest = (menuName) => {
  * @returns
  */
 export const getAllOutletsRequest = (brandId, params) => {
-  return new Promise(async (resolve, reject) => {
-    const reqParams = {
-      latitude: params.lat,
-      longitude: params.lng,
-      radius: 100,
-    };
+  return new Promise((resolve, reject) => {
     try {
-      // const data = await getCall(`/clientApis/v2/locations?provider=${brandId}`);
-      const data = await getCall(
-        `/clientApis/v2/locations?provider=${brandId}`,
-        reqParams
-      );
-      return resolve(data);
+      setTimeout(() => {
+        resolve(OUTLETS);
+      }, 500);
     } catch (err) {
       return reject(err);
     }
@@ -96,18 +85,11 @@ export const getAllOutletsRequest = (brandId, params) => {
  * @returns
  */
 export const getAllOutletsFromCategoryAndLocationRequest = (params) => {
-  return new Promise(async (resolve, reject) => {
-    const reqParams = {
-      domain: params.domain,
-      latitude: params.lat,
-      longitude: params.lng,
-      radius: 100,
-      afterKey: params.afterKey,
-    };
+  return new Promise((resolve, reject) => {
     try {
-      // const data = await getCall(`/clientApis/v2/locations`);
-      const data = await getCall(`/clientApis/v2/locations`, reqParams);
-      return resolve(data);
+      setTimeout(() => {
+        resolve(OUTLETS);
+      }, 500);
     } catch (err) {
       return reject(err);
     }
@@ -130,14 +112,11 @@ export const getAllOutletsFromCategoryAndLocationRequest = (params) => {
 //   });
 // };
 export const getOutletDetailsRequest = (locationId) => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     try {
-      // const data = await getCall(`/clientApis/v2/locations/${locationId}`);
-      // const data = await getCall(`/clientApis/v2/locations/${locationId}`);
-      const data = await getCall(
-        `/clientApis/v2/location-details?id=${locationId}`
-      );
-      return resolve(data);
+      setTimeout(() => {
+        resolve(OUTLETS[0]);
+      }, 500);
     } catch (err) {
       return reject(err);
     }

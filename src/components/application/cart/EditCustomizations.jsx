@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import useStyles from "../product-list/product-details/style";
 import { Button, Divider, Grid, IconButton, Typography } from "@mui/material";
 import CustomizationRenderer from "../product-list/product-details/CustomizationRenderer";
 import { getValueFromCookie } from "../../../utils/cookies";
 import { CartContext } from "../../../context/cartContext";
-import { putCall } from "../../../api/axios";
+import { putCall } from "../../../api/client";
 
 const EditCustomizations = (props) => {
   const {
@@ -20,7 +20,7 @@ const EditCustomizations = (props) => {
   } = props;
 
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { fetchCartItems } = useContext(CartContext);
   let user = {};
   const userCookie = getValueFromCookie("user");
@@ -55,10 +55,10 @@ const EditCustomizations = (props) => {
     let group = customization_state[groupId];
     if (!group) return;
 
-    let customizations = group.selected.map((s) =>
+    let customizations = (group.selected || []).map((s) =>
       selectedCustomizationIds.push(s.id)
     );
-    group?.childs?.map((child) => {
+    (group?.childs || []).map((child) => {
       getCustomization_(child);
     });
   };
@@ -209,14 +209,14 @@ const EditCustomizations = (props) => {
         <Typography
           variant="h4"
           color="black"
-          sx={{ marginBottom: 1, fontFamily: "inter", fontWeight: 600 }}
+          sx={{ marginBottom: 1, fontFamily: "var(--font-body-fontFamily)", fontWeight: 600 }}
         >
           {productPayload?.item_details?.descriptor?.name}
         </Typography>
         <Typography
           variant="h4"
           color="black"
-          sx={{ marginBottom: 1, fontFamily: "inter", fontWeight: 700 }}
+          sx={{ marginBottom: 1, fontFamily: "var(--font-body-fontFamily)", fontWeight: 700 }}
         >
           ₹ {productPayload?.item_details?.price?.value}
         </Typography>
@@ -237,7 +237,7 @@ const EditCustomizations = (props) => {
           variant="outlined"
           sx={{ marginRight: 1.4 }}
           onClick={() =>
-            history.push(`/application/products?productId=${productPayload.id}`)
+            navigate(`/application/products?productId=${productPayload.id}`)
           }
           disabled={itemOutOfStock}
         >

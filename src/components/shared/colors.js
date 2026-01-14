@@ -1,10 +1,12 @@
+import colors from '../../utils/Theme/colors';
+
 export const ONDC_COLORS = {
-  ACCENTCOLOR: "#1c75bc",
-  BACKGROUNDCOLOR: "#f0f0f0",
-  PRIMARYCOLOR: "#606161",
-  SECONDARYCOLOR: "#606161",
-  ERROR: "#FF5959",
-  SUCCESS: "#2EB086",
-  WHITE: "#ffffff",
-  WARNING: "#F9C132",
+  ACCENTCOLOR: colors.primary.main,
+  BACKGROUNDCOLOR: colors.grey.background,
+  PRIMARYCOLOR: '#606161', // Preserving specific grey for now as it doesn't match master perfectly
+  SECONDARYCOLOR: '#606161',
+  ERROR: colors.error.main,
+  SUCCESS: colors.success.main,
+  WHITE: colors.common.white,
+  WARNING: colors.warning.main,
 };

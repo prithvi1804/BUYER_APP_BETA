@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
-import { postCall } from "../../../../api/axios";
+import { postCall } from "../../../../api/client";
 import styles from "../../../../styles/search-product-modal/searchProductModal.module.scss";
 import cancelRadioStyles from "../../../../styles/cart/cartView.module.scss";
 import inputStyles from "../../../shared/input/input.module.scss";

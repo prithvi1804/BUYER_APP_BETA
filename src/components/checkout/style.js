@@ -5,6 +5,12 @@ const useStyles = makeStyles({
   header: {
     background: palette.common.white,
     padding: "20px 100px 15px 100px !important",
+    "@media (max-width: 1024px)": {
+      padding: "20px 50px 15px 50px !important",
+    },
+    "@media (max-width: 768px)": {
+      padding: "16px 16px 12px 16px !important",
+    },
   },
   headerTypo: {
     fontWeight: "600 !important",
@@ -17,31 +23,53 @@ const useStyles = makeStyles({
   bodyContainer: {
     background: "#F9F9F9 !important",
     padding: "20px 100px !important",
-    // height: '100 !important'
+    "@media (max-width: 1024px)": {
+      padding: "20px 40px !important",
+    },
+    "@media (max-width: 768px)": {
+      padding: "16px 12px !important",
+    },
   },
   stepRoot: {
     marginTop: "24px !important",
     borderBottom: "1px solid #C8C8C8",
+    "@media (max-width: 768px)": {
+      marginTop: "16px !important",
+    },
   },
   stepContent: {
     borderLeft: "none !important",
     padding: "32px !important",
     marginLeft: "16px !important",
+    "@media (max-width: 768px)": {
+      padding: "16px 8px !important",
+      marginLeft: "8px !important",
+    },
   },
   stepContentHidden: {
     borderLeft: "none !important",
     padding: "16px !important",
     marginLeft: "16px !important",
+    "@media (max-width: 768px)": {
+      padding: "12px 8px !important",
+      marginLeft: "8px !important",
+    },
   },
   stepLabel: {
     alignItems: "start !important",
     "& .MuiStepLabel-labelContainer": {
       marginLeft: "16px !important",
+      "@media (max-width: 768px)": {
+        marginLeft: "8px !important",
+      },
     },
   },
   labelTypo: {
     fontWeight: "600 !important",
     lineHeight: "20px !important",
+    "@media (max-width: 768px)": {
+      fontSize: "14px !important",
+    },
   },
 
   summaryCard: {
@@ -49,35 +77,53 @@ const useStyles = makeStyles({
     background: `${palette.common.white} !important`,
     boxShadow: `0px 0px 0px 0px rgba(0, 0, 0, 0.05), 0px 6px 13px 0px rgba(0, 0, 0, 0.05), 0px 24px 24px 0px rgba(0, 0, 0, 0.04), 0px 54px 33px 0px rgba(0, 0, 0, 0.03), 0px 97px 39px 0px rgba(0, 0, 0, 0.01), 0px 151px 42px 0px rgba(0, 0, 0, 0.00) !important`,
     padding: "16px 20px !important",
+    "@media (max-width: 768px)": {
+      padding: "12px 14px !important",
+      borderRadius: "12px !important",
+    },
   },
   summaryItemContainer: {
     display: "flex",
     marginBottom: "10px",
+    flexWrap: "wrap",
   },
   summaryDeliveryItemContainer: {
     display: "flex",
     marginBottom: "10px",
+    flexWrap: "wrap",
   },
   summaryQuoteItemContainer: {
     display: "flex",
     marginBottom: "3px",
+    flexWrap: "wrap",
   },
   summaryItemLabel: {
     flex: 1,
     fontSize: "13px !important",
     fontWeight: "600 !important",
     marginTop: "20px !important",
+    minWidth: "150px",
+    "@media (max-width: 768px)": {
+      fontSize: "12px !important",
+      marginTop: "12px !important",
+    },
   },
   summaryDeliveryLabel: {
     flex: 1,
     fontSize: "13px !important",
     fontWeight: "600 !important",
+    "@media (max-width: 768px)": {
+      fontSize: "12px !important",
+    },
   },
   summaryOfferLabel: {
     flex: 1,
     fontSize: "13px !important",
     fontWeight: "600 !important",
     color: "blue !important",
+    "@media (max-width: 768px)": {
+      fontSize: "12px !important",
+    },
   },
   summaryCustomizationLabel: {
     flex: 1,
@@ -85,12 +131,20 @@ const useStyles = makeStyles({
     fontSize: "12px !important",
     fontWeight: "600 !important",
     marginLeft: "20px !important",
+    "@media (max-width: 768px)": {
+      marginLeft: "10px !important",
+      fontSize: "11px !important",
+    },
   },
   summaryItemPriceLabel: {
     flex: 1,
     fontSize: "12px !important",
     fontWeight: "600 !important",
     marginLeft: "10px !important",
+    "@media (max-width: 768px)": {
+      fontSize: "11px !important",
+      marginLeft: "5px !important",
+    },
   },
   summaryItemDiscountLabel: {
     flex: 1,
@@ -98,6 +152,10 @@ const useStyles = makeStyles({
     fontSize: "12px !important",
     fontWeight: "600 !important",
     marginLeft: "10px !important",
+    "@media (max-width: 768px)": {
+      fontSize: "11px !important",
+      marginLeft: "5px !important",
+    },
   },
   summaryCustomizationDiscountLabel: {
     flex: 1,
@@ -126,6 +184,9 @@ const useStyles = makeStyles({
     fontSize: "12px !important",
     fontWeight: "600 !important",
     marginLeft: "30px !important",
+    "@media (max-width: 768px)": {
+      marginLeft: "15px !important",
+    },
   },
   summaryCustomizationPriceLabel: {
     flex: 1,
@@ -133,12 +194,19 @@ const useStyles = makeStyles({
     fontSize: "12px !important",
     fontWeight: "600 !important",
     marginLeft: "30px !important",
+    "@media (max-width: 768px)": {
+      marginLeft: "15px !important",
+    },
   },
   summaryItemPriceValue: {
     width: "100px !important",
     textAlign: "right",
     fontSize: "12px !important",
     fontWeight: "600 !important",
+    "@media (max-width: 768px)": {
+      width: "70px !important",
+      fontSize: "11px !important",
+    },
   },
   summaryItemQuantityLabel: {
     flex: 1,
@@ -150,6 +218,9 @@ const useStyles = makeStyles({
     textAlign: "right",
     fontSize: "12px !important",
     fontWeight: "600 !important",
+    "@media (max-width: 768px)": {
+      width: "80px !important",
+    },
   },
   marginBottom10: {
     marginBottom: "10px !important",
@@ -166,17 +237,27 @@ const useStyles = makeStyles({
     textAlign: "right",
     fontSize: "12px !important",
     fontWeight: "600 !important",
+    "@media (max-width: 768px)": {
+      width: "70px !important",
+    },
   },
   summaryItemValue: {
     width: "100px !important",
     textAlign: "right",
     fontSize: "13px !important",
     fontWeight: "600 !important",
+    "@media (max-width: 768px)": {
+      width: "70px !important",
+      fontSize: "12px !important",
+    },
   },
   customizationValue: {
     width: "100px !important",
     textAlign: "right",
     color: "#A2A6B0 !important",
+    "@media (max-width: 768px)": {
+      width: "70px !important",
+    },
   },
   summaryItemLabelDescription: {
     color: "#A2A6B0 !important",
@@ -191,21 +272,33 @@ const useStyles = makeStyles({
     display: "flex",
     marginBottom: "0px !important",
     marginTop: "20px !important",
+    "@media (max-width: 768px)": {
+      marginTop: "12px !important",
+    },
   },
   subTotalValue: {
     width: "100px !important",
     textAlign: "right",
     fontWeight: "600 !important",
+    "@media (max-width: 768px)": {
+      width: "70px !important",
+    },
   },
   totalLabel: {
     flex: 1,
     fontSize: "16px !important",
     fontWeight: "600 !important",
+    "@media (max-width: 768px)": {
+      fontSize: "14px !important",
+    },
   },
   totalValue: {
     width: "100px !important",
     textAlign: "right",
     fontWeight: "600 !important",
+    "@media (max-width: 768px)": {
+      width: "80px !important",
+    },
   },
   outOfStockDivider: {
     height: "1px",
@@ -217,7 +310,6 @@ const useStyles = makeStyles({
     height: "1px",
     backgroundColor: "#CACDD8 !important",
     marginTop: "20px",
-    // marginBottom: "20px",
   },
   orderTotalDivider: {
     height: "1px",
@@ -231,3 +323,4 @@ const useStyles = makeStyles({
 });
 
 export default useStyles;
+

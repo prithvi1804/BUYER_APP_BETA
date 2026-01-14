@@ -19,18 +19,18 @@ import { AddressContext } from "../../../../context/addressContext";
 import { CartContext } from "../../../../context/cartContext";
 import CrossIcon from "../../../shared/svg/cross-icon";
 import ProductCard from "../../product-list/product-card/productCard";
-import { getCall, postCall } from "../../../../api/axios";
+import { getCall, postCall } from "../../../../api/client";
 import Cookies from "js-cookie";
 import { constructQouteObject } from "../../../../api/utils/constructRequestObject";
 import { toast_actions, toast_types } from "../../../shared/toast/utils/toast";
 import { AddCookie, getValueFromCookie } from "../../../../utils/cookies";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 import Loading from "../../../shared/loading/loading";
 import { ToastContext } from "../../../../context/toastContext";
 import ErrorMessage from "../../../shared/error-message/errorMessage";
 import { SSE_TIMEOUT } from "../../../../constants/sse-waiting-time";
 import useCancellablePromise from "../../../../api/cancelRequest";
-import { removeNullValues } from "../../../../utils/helper";
+import { removeNullValues } from "../../../../utils/utils";
 
 export default function OrderConfirmationCard(props) {
   const {
@@ -48,7 +48,7 @@ export default function OrderConfirmationCard(props) {
   // CONSTANTS
   const transaction_id = Cookies.get("transaction_id");
   const latLongInfo = JSON.parse(Cookies.get("LatLongInfo") || "{}");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // STATES
   const [initializeOrderLoading, setInitializeOrderLoading] = useState(false);
@@ -128,7 +128,7 @@ export default function OrderConfirmationCard(props) {
     });
     // AddCookie("checkout_details", JSON.stringify(checkoutObj));
     localStorage.setItem("checkout_details", JSON.stringify(checkoutObj));
-    history.replace("/application/checkout");
+    navigate("/application/checkout", { replace: true });
   }
 
   // use this function to initialize the order

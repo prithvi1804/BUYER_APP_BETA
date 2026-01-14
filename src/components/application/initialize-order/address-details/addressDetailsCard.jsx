@@ -9,7 +9,7 @@ import {
 } from "../../../../constants/checkout-steps";
 import Checkmark from "../../../shared/svg/checkmark";
 import Loading from "../../../shared/loading/loading";
-import { getCall } from "../../../../api/axios";
+import { getCall } from "../../../../api/client";
 import { AddressContext } from "../../../../context/addressContext";
 import DeliveryAddress from "./delivery-address/deliveryAddress";
 import BillingAddress from "./billing-address/billingAddress";

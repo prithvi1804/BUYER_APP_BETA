@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import axios from "axios";
 import { search_types } from "../../../../constants/searchTypes";
-import { postCall, getCall } from "../../../../api/axios";
+import { postCall, getCall } from "../../../../api/client";
 import {
   AddCookie,
   removeCookie,

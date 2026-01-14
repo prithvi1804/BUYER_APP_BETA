@@ -1,0 +1,215 @@
+
+> biap-app-ui-front@0.1.0 build
+> vite build
+
+vite v7.3.1 building client environment for production...
+transforming...
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/error-boundary/errorBoundary.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/styles/globalStyles.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/button/button.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/styles/auth/auth.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/loading/loading.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/input/input.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/error-message/errorMessage.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/passwordInput/input.module.scss 1:9  root stylesheet
+
+[plugin vite:esbuild] src/components/common/ViewOnlyMap/ViewOnlyMap.js: Duplicate key "clickableIcons" in object literal
+37 |        draggable: false,
+38 |        fullscreenControl: false,
+39 |        clickableIcons: false,
+   |        ^
+40 |        disableDoubleClickZoom: false,
+41 |      }
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/styles/cart/cartView.module.scss 1:9  root stylesheet
+
+[plugin vite:esbuild] src/components/appLayout/navbar/addressForm/addressForm.js: Duplicate key "building" in object literal
+404 |              country: "IND",
+405 |              door: address.door.trim(),
+406 |              building: address.door.trim(),
+    |              ^
+407 |              state: address.state.trim(),
+408 |              street: address.street.trim(),
+
+[plugin vite:esbuild] src/components/checkout/stepPayment/stepPaymentContent.js: Duplicate key "city" in object literal
+237 |                  transaction_id: transaction_id,
+238 |                  city: search_context.location.name,
+239 |                  city: item[0].contextCity,
+    |                  ^
+240 |                  state: search_context.location.state,
+241 |                  domain: item[0].domain,
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/styles/search-product-modal/searchProductModal.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/application/initialize-order/address-details/address-radio-button/addressRadioButton.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/styles/products/productCard.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/styles/orders/orders.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/dropdown/dropdown.module.scss 1:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "../../../assets/scss/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    src/components/shared/checkbox/checkbox.module.scss 1:9  root stylesheet
+
+✓ 12962 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                            1.93 kB │ gzip:   0.94 kB
+dist/assets/appStore-ReS-bUML.png          4.66 kB
+dist/assets/AppLogo-6i3OTAYF.svg           5.19 kB │ gzip:   3.91 kB
+dist/assets/playStore-qC51uE8y.png         5.21 kB
+dist/assets/eye_hidden-BYLy0PLD.png        8.53 kB
+dist/assets/eye_visible-CL_pUNMs.png       8.98 kB
+dist/assets/Electronics1-DMyXFR15.png     14.33 kB
+dist/assets/Health1-BXL7FrVe.png          14.56 kB
+dist/assets/Electronics2-TgXK5bVO.png     15.09 kB
+dist/assets/item-BTQaBVL3.png             16.50 kB
+dist/assets/Health2-jskTCcae.png          19.06 kB
+dist/assets/BPC-BmoE7Uqd.png              20.74 kB
+dist/assets/Home2-DdKdC6P6.png            24.64 kB
+dist/assets/Home1-D8IXQi1W.png            33.02 kB
+dist/assets/Auto1-B7Fe83Is.png            34.73 kB
+dist/assets/Fashion1-CIUPIvFq.png         36.65 kB
+dist/assets/Fashion2-QbD08cwa.png         37.19 kB
+dist/assets/veg-BQnoJCya.svg              40.39 kB │ gzip:  22.98 kB
+dist/assets/Food-DyIogNTb.png             43.21 kB
+dist/assets/nonveg-2dna-fCi.svg           53.39 kB │ gzip:  34.99 kB
+dist/assets/Agriculture-PcqPFqTw.png      55.15 kB
+dist/assets/Auto2-DkZEmh_k.png            68.06 kB
+dist/assets/Grocery-Cm0cVgTo.png          80.92 kB
+dist/assets/logo-DWp1__tL.png            159.59 kB
+dist/assets/index-nh0NzaQt.css           182.60 kB │ gzip:  27.44 kB
+dist/assets/index-8O6gAzPw.js          2,558.40 kB │ gzip: 779.75 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 8.71s

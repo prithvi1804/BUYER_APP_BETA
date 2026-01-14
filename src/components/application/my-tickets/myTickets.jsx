@@ -13,7 +13,7 @@ import useCancellablePromise from "../../../api/cancelRequest";
 import useStyles from "../cart/styles";
 import { Grid, Typography } from "@mui/material";
 import TicketCard from "./ticketCard";
-import { getCall } from "../../../api/axios";
+import { getCall } from "../../../api/client";
 
 export default function MyTickets() {
     // STATES

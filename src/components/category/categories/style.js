@@ -16,24 +16,24 @@ const useStyles = makeStyles({
     categoryItemImageContainer: {
         height: '108px',
         width: '108px',
-        borderRadius: '108px',
+        borderRadius: '12px',
         background: '#E7E7E7',
         display: 'flex',
         margin: 'auto'
     },
     categoryImage: {
-        height: '78px',
-        maxWidth: '78px',
-        minWidth: '42px',
-        margin: 'auto'
+        height: '80%',
+        width: '80%',
+        margin: 'auto',
+        objectFit: 'contain'
     },
     categoryNameTypo: {
         fontWeight: '600 !important',
         marginTop: '5px !important'
     },
     selectedCategory: {
-        background: '#EBEBEB !important',
-        border: `1px solid ${palette.secondary.main}`
+        background: '#BED9FD !important',
+        border: `2px solid ${palette.primary.main}`
     }
 });
 

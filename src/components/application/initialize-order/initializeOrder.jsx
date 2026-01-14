@@ -6,14 +6,14 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 import styles from "../../../styles/cart/cartView.module.scss";
 import { CartContext } from "../../../context/cartContext";
 import {
   checkout_steps,
   get_current_step,
 } from "../../../constants/checkout-steps";
-import { getCall, postCall } from "../../../api/axios";
+import { getCall, postCall } from "../../../api/client";
 import Loading from "../../shared/loading/loading";
 import { ONDC_COLORS } from "../../shared/colors";
 import { buttonTypes } from "../../shared/button/utils";
@@ -35,7 +35,7 @@ export default function InitializeOrder() {
   // CONSTANTS
   const { location } = JSON.parse(getValueFromCookie("search_context") || "{}");
   const transaction_id = localStorage.getItem("transaction_id");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // STATES
   const [getQuoteLoading, setGetQuoteLoading] = useState(true);
@@ -107,7 +107,7 @@ export default function InitializeOrder() {
         if (responseRef.current.length <= 0) {
           setGetQuoteLoading(false);
           dispatchToast("Cannot fetch details for this product");
-          history.replace("/application/products");
+          navigate("/application/products", { replace: true });
           return;
         }
         const request_object = constructQouteObject(cartItems);
@@ -189,7 +189,7 @@ export default function InitializeOrder() {
     } catch (err) {
       dispatchToast(err?.response?.data?.error?.message);
       setGetQuoteLoading(false);
-      history.replace("/application/products");
+      navigate("/application/products", { replace: true });
     }
     // eslint-disable-next-line
   }, []);
@@ -399,7 +399,7 @@ export default function InitializeOrder() {
             button_type={buttonTypes.primary}
             button_hover_type={buttonTypes.primary_hover}
             button_text="Shop now"
-            onClick={() => history.push("/application/")}
+            onClick={() => navigate("/application/")}
           />
         </div>
       </div>

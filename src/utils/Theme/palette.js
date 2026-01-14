@@ -1,57 +1,57 @@
-import Theme from './theme.json';
+import colors from './colors';
 
 const palette = {
     common: {
-        black: '#000',
-        white: '#fff',
-        fontColor: Theme.fontColor,
-        disableColor: Theme.disableColor,
+        black: colors.common.black,
+        white: colors.common.white,
+        fontColor: colors.text.primary,
+        disableColor: colors.grey.disable,
     },
     text: {
       // primary: '#fff',
       // secondary: '#fff',
-        success: Theme.successColor,
-        disabled: 'rgba(0, 0, 0, 0.38)',
+        success: colors.success.main,
+        disabled: colors.text.disabled,
     },
     primary: {
-        main: Theme.primaryColor,
-        light: Theme.primaryColorLight,
-        dark: Theme.primaryColorDark,
-        contrastText: Theme.primaryContrastTextColor,
+        main: colors.primary.main,
+        light: colors.primary.light,
+        dark: colors.primary.dark,
+        contrastText: colors.primary.contrastText,
     },
     secondary: {
-        main: Theme.secondaryColor,
-        light: Theme.secondaryColorLight,
-        dark: Theme.secondaryColorDark,
-        contrastText: Theme.secondaryContrastTextColor,
+        main: colors.secondary.main,
+        light: colors.secondary.light,
+        dark: colors.secondary.dark,
+        contrastText: colors.secondary.contrastText,
     },
     success: {
-        main: Theme.successColor,
-        light: Theme.successColorLight,
-        dark: Theme.successColorDark,
-        contrastText: Theme.successContrastTextColor,
+        main: colors.success.main,
+        light: colors.success.light,
+        dark: colors.success.dark,
+        contrastText: colors.success.contrastText,
     },
     warning: {
-        main: Theme.warningColor,
-        light: Theme.warningColorLight,
-        dark: Theme.warningColorDark,
-        contrastText: Theme.warningContrastTextColor,
+        main: colors.warning.main,
+        light: colors.warning.light,
+        dark: colors.warning.dark,
+        contrastText: colors.warning.contrastText,
     },
     error: {
-        main: Theme.errorColor,
-        light: Theme.errorColorLight,
-        dark: Theme.errorColorDark,
-        contrastText: Theme.errorContrastTextColor,
+        main: colors.error.main,
+        light: colors.error.light,
+        dark: colors.error.dark,
+        contrastText: colors.error.contrastText,
     },
     background: {
         default: '#fff',
         paper: "#fff",
     },
     action: {
-        disabled: Theme.disableColor,
-        active: Theme.linkColor,
+        disabled: colors.grey.disable,
+        active: colors.text.link,
     },
-    divider: Theme.divider
+    divider: colors.grey.divider
 };
 
 export default palette;

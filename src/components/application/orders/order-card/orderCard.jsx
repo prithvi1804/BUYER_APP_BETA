@@ -6,7 +6,7 @@ import {
 } from "../../../../constants/order-status";
 import styles from "../../../../styles/orders/orders.module.scss";
 import { ONDC_COLORS } from "../../../shared/colors";
-import { postCall, getCall } from "../../../../api/axios";
+import { postCall, getCall } from "../../../../api/client";
 import Loading from "../../../shared/loading/loading";
 import { toast_actions, toast_types } from "../../../shared/toast/utils/toast";
 import DropdownSvg from "../../../shared/svg/dropdonw";
@@ -19,7 +19,7 @@ import { SSE_TIMEOUT } from "../../../../constants/sse-waiting-time";
 import CancelOrderModal from "../cancel-order-modal/cancelOrderModal";
 import ReturnOrderModal from "../return-order-modal/returnOrderModal";
 import IssueOrderModal from "../issue-order-modal/issueOrderModal";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function OrderCard(props) {
   const {
     product = [],
@@ -66,7 +66,7 @@ export default function OrderCard(props) {
 
   // CONTEXT
   const dispatch = useContext(ToastContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // HOOKS
   const { cancellablePromise } = useCancellablePromise();
@@ -843,7 +843,7 @@ export default function OrderCard(props) {
                           ? styles.secondary_action_loading
                           : styles.secondary_action
                       }
-                      onClick={() => history.push("/application/tickets")}
+                      onClick={() => navigate("/application/tickets")}
                     >
                       {issueLoading ? (
                         <Loading backgroundColor={ONDC_COLORS.SECONDARYCOLOR} />

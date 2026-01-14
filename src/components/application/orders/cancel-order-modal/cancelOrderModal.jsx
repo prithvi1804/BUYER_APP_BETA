@@ -13,7 +13,7 @@ import { getValueFromCookie } from "../../../../utils/cookies";
 import { ToastContext } from "../../../../context/toastContext";
 import useCancellablePromise from "../../../../api/cancelRequest";
 import { SSE_TIMEOUT } from "../../../../constants/sse-waiting-time";
-import { postCall, getCall } from "../../../../api/axios";
+import { postCall, getCall } from "../../../../api/client";
 import AddressRadioButton from "../../initialize-order/address-details/address-radio-button/addressRadioButton";
 import Checkbox from "../../../shared/checkbox/checkbox";
 import Dropdown from "../../../shared/dropdown/dropdown";

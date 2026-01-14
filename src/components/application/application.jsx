@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { AddressContextProvider } from "../../context/addressContext";
 import { CartContextProvider } from "../../context/cartContext";
 import { SearchContextProvider } from "../../context/searchContext";
@@ -29,81 +29,93 @@ import ComplaintDetail from "./my-tickets/complaintDetail";
 export default function Application() {
   return (
     <CartContextProvider>
-      <Switch>
-        <AddressContextProvider>
-          <SearchContextProvider>
-            <Route path={"/application"} exact component={() => <Redirect to={"/application/products"} />} />
-            <PrivateRoute exact path={"/application/products"}>
-              <AppLayout>
-                <ProductRoutes />
-              </AppLayout>
-            </PrivateRoute>
-            {/* <PrivateRoute exact path={"/application/products"}>
-              <AppLayout>
-                <Products />
-              </AppLayout>
-            </PrivateRoute>
-
-            <PrivateRoute path={"/application/products/:id"}>
-              <AppLayout>
-                <ProductDetails />
-              </AppLayout>
-            </PrivateRoute> */}
-            <PrivateRoute path={"/application/cart"}>
-              <AppLayout>
-                <Cart />
-              </AppLayout>
-            </PrivateRoute>
-
-            <PrivateRoute path={"/application/brand"}>
-              <AppLayout>
-                <BrandRoutes />
-              </AppLayout>
-            </PrivateRoute>
-            <PrivateRoute exact path={"/application/checkout"}>
-              <AppLayout isCheckout={true}>
-                <Checkout />
-              </AppLayout>
-            </PrivateRoute>
-            <PrivateRoute path={"/application/orders"}>
-              <AppLayout>
-                <Orders />
-              </AppLayout>
-            </PrivateRoute>
-            <PrivateRoute path={"/application/order/:orderId"}>
-              <AppLayout>
-                <OrderDetails />
-              </AppLayout>
-            </PrivateRoute>
-
-            {/*<PrivateRoute path={"/application/orders"}>*/}
-            {/*  <Orders />*/}
-            {/*</PrivateRoute>*/}
-            <PrivateRoute path={"/application/complaints"}>
-              <AppLayout>
-                <MyTickets />
-              </AppLayout>
-            </PrivateRoute>
-            <PrivateRoute path={"/application/complaint/:issueId"}>
-              <AppLayout>
-                <ComplaintDetail />
-              </AppLayout>
-            </PrivateRoute>
-            {/*<PrivateRoute path={"/application/profile"}>*/}
-            {/*  <Profile />*/}
-            {/*</PrivateRoute>*/}
-            {/*<PrivateRoute path={"/application/support"}>*/}
-            {/*  <Support />*/}
-            {/*</PrivateRoute>*/}
-            {/*<PrivateRoute path={"/application/initialize"}>*/}
-            {/*  <InitializeOrder />*/}
-            {/*</PrivateRoute>*/}
-            {/*<PrivateRoute path={"/application/checkout"}>*/}
-            {/*  <Checkout />*/}
-            {/*</PrivateRoute>*/}
-          </SearchContextProvider>
-        </AddressContextProvider>
-      </Switch>
+      <AddressContextProvider>
+        <SearchContextProvider>
+          <Routes>
+            <Route path={"/"} element={<Navigate to={"/application/products"} replace />} />
+            <Route
+              path={"/products"}
+              element={
+                <PrivateRoute>
+                  <AppLayout>
+                    <ProductRoutes />
+                  </AppLayout>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={"/cart"}
+              element={
+                <PrivateRoute>
+                  <AppLayout>
+                    <Cart />
+                  </AppLayout>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={"/brand/*"}
+              element={
+                <PrivateRoute>
+                  <AppLayout>
+                    <BrandRoutes />
+                  </AppLayout>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={"/checkout"}
+              element={
+                <PrivateRoute>
+                  <AppLayout isCheckout={true}>
+                    <Checkout />
+                  </AppLayout>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={"/orders"}
+              element={
+                <PrivateRoute>
+                  <AppLayout>
+                    <Orders />
+                  </AppLayout>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={"/order/:orderId"}
+              element={
+                <PrivateRoute>
+                  <AppLayout>
+                    <OrderDetails />
+                  </AppLayout>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={"/complaints"}
+              element={
+                <PrivateRoute>
+                  <AppLayout>
+                    <MyTickets />
+                  </AppLayout>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={"/complaint/:issueId"}
+              element={
+                <PrivateRoute>
+                  <AppLayout>
+                    <ComplaintDetail />
+                  </AppLayout>
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </SearchContextProvider>
+      </AddressContextProvider>
     </CartContextProvider>
   );
 }

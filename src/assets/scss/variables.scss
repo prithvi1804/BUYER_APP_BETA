@@ -1,10 +1,10 @@
-$accentColor: #1c75bc;
-$backgroundColor: #f0f0f0;
-$primaryColor: #606161;
-$secondaryColor: #606161;
-$error: #ff5959;
-$success: #2eb086;
-$white: #ffffff;
+$accentColor: var(--color-primary-main);
+$backgroundColor: var(--color-grey-background);
+$primaryColor: var(--color-text-primary);
+$secondaryColor: var(--color-text-primary); // Unifying greys to primary text
+$error: var(--color-error-main);
+$success: var(--color-success-main);
+$white: var(--color-common-white);
 
 $font-10: 10px;
 $font-12: 12px;
@@ -20,4 +20,4 @@ $regular: 400;
 $medium: 500;
 $semibold: 600;
 
-$firaSans: "Fira Sans", sans-serif;
+$firaSans: var(--font-body-fontFamily), sans-serif;

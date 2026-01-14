@@ -10,7 +10,7 @@ import ErrorMessage from "../../../shared/error-message/errorMessage";
 import { toast_actions, toast_types } from "../../../shared/toast/utils/toast";
 import { ToastContext } from "../../../../context/toastContext";
 import useCancellablePromise from "../../../../api/cancelRequest";
-import { getCall, postCall } from "../../../../api/axios";
+import { getCall, postCall } from "../../../../api/client";
 import Checkbox from "../../../shared/checkbox/checkbox";
 import Dropdown from "../../../shared/dropdown/dropdown";
 import DropdownSvg from "../../../shared/svg/dropdonw";

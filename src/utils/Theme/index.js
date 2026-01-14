@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material';
-import typography from "./typography";
+import typography from "./typographyStyles";
 import palette from "./palette";
 import components from './components';
 const theme = createTheme({

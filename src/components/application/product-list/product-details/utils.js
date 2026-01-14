@@ -1,39 +1,39 @@
 export const formatCustomizations = (customisation_items) => {
-  const customizations = customisation_items?.map((customization) => {
+  const customizations = (customisation_items || [])?.map((customization) => {
     const itemDetails = customization.item_details;
-    const parentTag = itemDetails.tags.find((tag) => tag.code === "parent");
-    const vegNonVegTag = itemDetails.tags.find((tag) => tag.code === "veg_nonveg");
-    const isDefaultTag = parentTag.list.find((tag) => tag.code === "default");
-    const isDefault = isDefaultTag?.value.toLowerCase() === "yes";
-    const childTag = itemDetails.tags.find((tag) => tag.code === "child");
-    const childs = childTag?.list.map((item) => item.value);
+    const parentTag = itemDetails.tags?.find((tag) => tag.code === "parent");
+    const vegNonVegTag = itemDetails.tags?.find((tag) => tag.code === "veg_nonveg");
+    const isDefaultTag = parentTag?.list?.find((tag) => tag.code === "default");
+    const isDefault = isDefaultTag?.value?.toLowerCase() === "yes";
+    const childTag = itemDetails.tags?.find((tag) => tag.code === "child");
+    const childs = childTag?.list?.map((item) => item.value);
 
     return {
       id: itemDetails.id,
-      name: itemDetails.descriptor.name,
-      price: itemDetails.price.value,
-      inStock: itemDetails.quantity.available.count > 0,
-      parent: parentTag ? parentTag.list.find((tag) => tag.code === "id").value : null,
-      child: childTag ? childTag.list.find((tag) => tag.code === "id").value : null,
+      name: itemDetails.descriptor?.name,
+      price: itemDetails.price?.value,
+      inStock: itemDetails.quantity?.available?.count > 0,
+      parent: parentTag ? parentTag.list?.find((tag) => tag.code === "id")?.value : null,
+      child: childTag ? childTag.list?.find((tag) => tag.code === "id")?.value : null,
       childs: childs?.length > 0 ? childs : null,
       isDefault: isDefault ?? false,
-      vegNonVeg: vegNonVegTag ? vegNonVegTag.list[0].code : "",
+      vegNonVeg: vegNonVegTag ? vegNonVegTag.list?.[0]?.code : "",
     };
   });
-  return customizations;
+  return customizations || [];
 };
 
 export const formatCustomizationGroups = (customisation_groups) => {
-  const formattedCustomizationGroups = customisation_groups?.map((group) => {
-    const configTags = group.tags.find((tag) => tag.code === "config").list;
-    const minConfig = configTags.find((tag) => tag.code === "min").value;
-    const maxConfig = configTags.find((tag) => tag.code === "max").value;
-    const inputTypeConfig = configTags.find((tag) => tag.code === "input").value;
-    const seqConfig = configTags.find((tag) => tag.code === "seq").value;
+  const formattedCustomizationGroups = (customisation_groups || [])?.map((group) => {
+    const configTags = group.tags?.find((tag) => tag.code === "config")?.list || [];
+    const minConfig = configTags.find((tag) => tag.code === "min")?.value || "0";
+    const maxConfig = configTags.find((tag) => tag.code === "max")?.value || "0";
+    const inputTypeConfig = configTags.find((tag) => tag.code === "input")?.value || "";
+    const seqConfig = configTags.find((tag) => tag.code === "seq")?.value || "0";
 
     const customizationObj = {
       id: group.local_id,
-      name: group.descriptor.name,
+      name: group.descriptor?.name,
       inputType: inputTypeConfig,
       minQuantity: parseInt(minConfig),
       maxQuantity: parseInt(maxConfig),
@@ -47,7 +47,7 @@ export const formatCustomizationGroups = (customisation_groups) => {
     return customizationObj;
   });
 
-  return formattedCustomizationGroups;
+  return formattedCustomizationGroups || [];
 };
 
 export const getCustomizationGroupsForProduct = (allGroups, ids) => {
@@ -123,7 +123,7 @@ export const initializeCustomizationState_ = async (customizationGroups, customi
 export const createCustomizationAndGroupMapping = (customizations) => {
   let newCustomizationGroupMappings = {};
   let customizationToGroupMap = {};
-  customizations.forEach((customization) => {
+  (customizations || []).forEach((customization) => {
     const groupId = customization.parent;
     const childId = customization.id;
 
@@ -132,10 +132,12 @@ export const createCustomizationAndGroupMapping = (customizations) => {
       [customization.id]: customization.childs == undefined ? [] : customization.childs,
     };
 
-    if (!newCustomizationGroupMappings[groupId]) {
-      newCustomizationGroupMappings[groupId] = new Set();
+    if (groupId) {
+      if (!newCustomizationGroupMappings[groupId]) {
+        newCustomizationGroupMappings[groupId] = new Set();
+      }
+      newCustomizationGroupMappings[groupId].add(childId);
     }
-    newCustomizationGroupMappings[groupId].add(childId);
   });
 
   const finalizedCustomizationGroupMappings = {};

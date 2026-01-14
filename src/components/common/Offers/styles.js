@@ -1,5 +1,5 @@
 import { makeStyles } from "@mui/styles";
-import ThemePalette from "../../../utils/Theme/theme.json";
+import colors from "../../../utils/Theme/colors";
 
 const useStyles = makeStyles({
   offersContainer: {
@@ -69,6 +69,11 @@ const useStyles = makeStyles({
     right: 100,
     top: "30%",
   },
+  offerNavIcon: {
+      height: "20px",
+      width: "20px",
+      color: colors.primary.main,
+  },
 
   offerCardContainer: {
     width: "max-content",
@@ -92,13 +97,18 @@ const useStyles = makeStyles({
     width: "250 !important",
   },
   offerIconContainer: {
-    backgroundColor: ThemePalette.primaryColorLight,
+    backgroundColor: colors.primary.light,
     padding: "16px",
     borderTopLeftRadius: 24,
     borderBottomLeftRadius: 24,
   },
+  offerTypeIcon: {
+      height: "20px", // Adjust based on icon size preference
+      width: "20px",
+      color: colors.primary.main,
+  },
   checkoutOfferIconContainer: {
-    backgroundColor: ThemePalette.primaryColorLight,
+    backgroundColor: colors.primary.light,
     padding: "16px",
     borderTopLeftRadius: 12,
     borderBottomLeftRadius: 12,

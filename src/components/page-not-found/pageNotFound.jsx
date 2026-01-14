@@ -1,11 +1,11 @@
 import React from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 import Button from "../shared/button/button";
 import { buttonTypes } from "../shared/button/utils";
 import NotFoundIllustration from "../../assets/images/404NotFound.svg";
 
 export default function PageNotFound() {
-  const history = useHistory();
+  const navigate = useNavigate();
   return (
     <div className="h-100 d-flex align-items-center justify-content-center">
       <div style={{ width: "400px" }} className="text-center">
@@ -26,7 +26,7 @@ export default function PageNotFound() {
             button_type={buttonTypes.primary}
             button_hover_type={buttonTypes.primary_hover}
             button_text="Go To Home"
-            onClick={() => history.replace("/application")}
+            onClick={() => navigate("/application", { replace: true })}
           />
         </div>
       </div>

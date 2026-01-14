@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../../../context/cartContext";
 import styles from "../../../../styles/products/orderSummary.module.scss";
 import modalStyles from "../../../../styles/search-product-modal/searchProductModal.module.scss";
@@ -14,7 +14,7 @@ import CartItems from "./cart-items/cartItems";
 
 export default function OrderSummary() {
   const { cartItems, setCartItems } = useContext(CartContext);
-  const history = useHistory();
+  const navigate = useNavigate();
   const [toggleCollapse, setToggleCollapse] = useState(false);
   const [toggleClearCartModal, setToggleClearCartModal] = useState(false);
 
@@ -93,7 +93,7 @@ export default function OrderSummary() {
                   button_type={buttonTypes.primary}
                   button_hover_type={buttonTypes.primary_hover}
                   button_text="Checkout"
-                  onClick={() => history.push("/application/initialize")}
+                  onClick={() => navigate("/application/initialize")}
                 />
               </div>
             </div>

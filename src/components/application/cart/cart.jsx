@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import useStyles from "./styles";
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -19,7 +19,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { deleteCall, getCall, postCall, putCall } from "../../../api/axios";
+import { deleteCall, getCall, postCall, putCall } from "../../../api/client";
 import { AddCookie, getValueFromCookie } from "../../../utils/cookies";
 import Loading from "../../shared/loading/loading";
 import { constructQouteObject } from "../../../api/utils/constructRequestObject";
@@ -52,7 +52,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
   }
 
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useContext(ToastContext);
   const { deliveryAddress } = useContext(AddressContext);
   const { fetchCartItems } = useContext(CartContext);
@@ -94,7 +94,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
 
   const getCartSubtotal = () => {
     let subtotal = 0;
-    cartItems.map((cartItem) => {
+    (cartItems || []).map((cartItem) => {
       if (cartItem.item.hasCustomisations) {
         subtotal +=
           getPriceWithCustomisations(cartItem) *
@@ -130,7 +130,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
       setLoading(true);
       const url = `/clientApis/v2/cart/${user.id}`;
       const res = await getCall(url);
-      setCartItems(res);
+      setCartItems(Array.isArray(res) ? res : res?.items || []);
       updatedCartItems.current = res;
       if (setCheckoutCartItems) {
         setCheckoutCartItems(res);
@@ -631,7 +631,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
         />
         <Typography
           variant="h3"
-          sx={{ fontFamily: "Inter", fontWeight: 700, textTransform: "none" }}
+          sx={{ fontFamily: "var(--font-body-fontFamily)", fontWeight: 700, textTransform: "none" }}
         >
           Your Cart is Empty. Please add items
         </Typography>
@@ -739,7 +739,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
     if (cartItem.item.customisations) {
       const customisations = cartItem.item.customisations;
 
-      return customisations.map((c, idx) => {
+      return (customisations || []).map((c, idx) => {
         const isLastItem = idx === customisations.length - 1;
         return (
           <Grid container>
@@ -758,7 +758,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
   const getPriceWithCustomisations = (cartItem) => {
     let basePrice = cartItem.item.product.price.value;
     let price = 0;
-    cartItem?.item?.customisations?.map(
+    (cartItem?.item?.customisations || []).map(
       (c) => (price += c.item_details.price.value)
     );
 
@@ -860,7 +860,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
   };
 
   const renderProducts = () => {
-    return cartItems?.map((cartItem, idx) => {
+    return (cartItems || []).map((cartItem, idx) => {
       return (
         <Grid key={cartItem._id}>
           <Grid
@@ -877,7 +877,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
                       alt="product-image"
                       src={cartItem?.item?.product?.descriptor?.symbol}
                       onClick={() =>
-                        history.push(
+                        navigate(
                           `/application/products?productId=${cartItem.item.id}`
                         )
                       }
@@ -1057,7 +1057,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
   };
 
   const renderProductsForCheckoutPage = () => {
-    return cartItems?.map((cartItem, idx) => {
+    return (cartItems || []).map((cartItem, idx) => {
       return (
         <Grid key={cartItem._id}>
           <Grid
@@ -1074,7 +1074,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
                       alt="product-image"
                       src={cartItem?.item?.product?.descriptor?.symbol}
                       onClick={() =>
-                        history.push(
+                        navigate(
                           `/application/products?productId=${cartItem.item.id}`
                         )
                       }
@@ -1271,7 +1271,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
           disabled={!isValidCart()}
           onClick={() => {
             if (cartItems.length > 0) {
-              let c = cartItems.map((item) => {
+              let c = (cartItems || []).map((item) => {
                 return item.item;
               });
 
@@ -1289,7 +1289,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
 
   const getProviderIds = (request_object) => {
     let providers = [];
-    request_object.map((cartItem) => {
+    (request_object || []).map((cartItem) => {
       providers.push(cartItem.provider.local_id);
     });
     const ids = [...new Set(providers)];
@@ -1319,8 +1319,8 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
       console.log("selectedNonAdditiveOffer", selectedNonAdditiveOffer);
       return [offerInSelectFormat(selectedNonAdditiveOffer)];
     } else {
-      return selectedAdditiveOffers.length > 0
-        ? selectedAdditiveOffers.map((id) => offerInSelectFormat(id))
+      return (selectedAdditiveOffers || []).length > 0
+        ? (selectedAdditiveOffers || []).map((id) => offerInSelectFormat(id))
         : [];
     }
   };
@@ -1336,7 +1336,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
           searchContextData || JSON.parse(getValueFromCookie("search_context"));
         let domain = "";
         let contextCity = "";
-        const updatedItems = items.map((item) => {
+        const updatedItems = (items || []).map((item) => {
           const newItem = Object.assign({}, item);
           domain = newItem.domain;
           contextCity = newItem.contextCity;
@@ -1393,7 +1393,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
         } else {
           // fetch through events
           onFetchQuote(
-            data?.map((txn) => {
+            (data || []).map((txn) => {
               const { context } = txn;
               return context?.message_id;
             })
@@ -1409,7 +1409,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
           },
         });
         setGetQuoteLoading(false);
-        history.replace("/application/products");
+        navigate("/application/products", { replace: true });
         setCheckoutLoading(false);
       }
     } else {
@@ -1464,11 +1464,11 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
               message: "Cannot fetch details for this product",
             },
           });
-          history.replace("/application/products");
+          navigate("/application/products", { replace: true });
           return;
         } else {
         }
-        let c = cartItems.map((item) => {
+        let c = (cartItems || []).map((item) => {
           return item.item;
         });
         const request_object = constructQouteObject(c);
@@ -1539,7 +1539,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
           non_additive_offer: selectedNonAdditiveOffer,
         })
       );
-      history.push(`/application/checkout`);
+      navigate(`/application/checkout`);
     } catch (err) {
       setCheckoutLoading(false);
       dispatch({
@@ -1593,7 +1593,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
           sx={{ marginBottom: 1.5, marginLeft: 3 }}
           direction={"column"}
         >
-          {offers?.map((offer) => {
+          {(offers || []).map((offer) => {
             return (
               <div className={classes.fulfillment}>
                 <FormControlLabel
@@ -1641,7 +1641,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
           // sx={{ marginBottom: 1.5, marginLeft: 1.5 }}
           direction={"column"}
         >
-          {offers?.map((offer) => {
+          {(offers || []).map((offer) => {
             return (
               <div className={classes.fulfillment}>
                 <FormControlLabel

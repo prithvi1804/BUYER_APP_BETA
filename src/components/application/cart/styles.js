@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
   heading: {
     textTransform: "none !important",
-    fontFamily: "Inter !important",
+    fontFamily: "var(--font-body-fontFamily) !important",
   },
   cartContainer: {
     padding: "10px 40px",
@@ -94,7 +94,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
   },
   summaryTypo: {
-    fontFamily: "Inter !important",
+    fontFamily: "var(--font-body-fontFamily) !important",
     fontWeight: "600 !important",
     marginBottom: "20px",
   },
@@ -118,7 +118,7 @@ const useStyles = makeStyles({
     marginTop: "20px",
   },
   infoText: {
-    fontFamily: "Inter !important",
+    fontFamily: "var(--font-body-fontFamily) !important",
     fontSize: 14,
     fontWeight: "500 !important",
     color: "#C89A04",

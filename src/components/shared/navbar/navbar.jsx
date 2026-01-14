@@ -6,7 +6,7 @@ import Logout from "../svg/logout";
 import Orders from "../svg/orders";
 import User from "../svg/user";
 import Cart from "../svg/cart";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ProductList from "../svg/productList";
 import { deleteAllCookies, removeCookie } from "../../../utils/cookies";
 import { getValueFromCookie } from "../../../utils/cookies";
@@ -16,7 +16,7 @@ import MyTickets from "../svg/my-tickets";
 
 export default function Navbar() {
   const user = JSON.parse(getValueFromCookie("user"));
-  const history = useHistory();
+  const navigate = useNavigate();
   const dropdown_links = {
     PRODUCTS: "Products",
     CART: "Cart",
@@ -61,7 +61,7 @@ export default function Navbar() {
     deleteAllCookies();
     localStorage.removeItem("product_list");
     localStorage.removeItem("cartItems");
-    history.replace("/");
+    navigate("/", { replace: true });
   }
 
   const avatar = (
@@ -88,13 +88,13 @@ export default function Navbar() {
             style={{ height: "40px", cursor: "pointer" }}
             onClick={() => {
               removeCookie("search_context");
-              history.push("/application");
+              navigate("/application");
             }}
           />
           <div className="ms-auto px-3">
             <div
               className={styles.avatar_back}
-              onClick={() => history.push("/application/support")}
+              onClick={() => navigate("/application/support")}
             >
               <img
                 src={supportSvg}
@@ -110,19 +110,19 @@ export default function Navbar() {
               body_classes="dropdown-menu-end dropdown-menu-lg-start"
               click={(value) => {
                 if (value === dropdown_links.PRODUCTS) {
-                  return history.push("/application/");
+                  return navigate("/application/");
                 }
                 if (value === dropdown_links.CART) {
-                  return history.push("/application/cart");
+                  return navigate("/application/cart");
                 }
                 if (value === dropdown_links.ORDERS) {
-                  return history.push("/application/orders");
+                  return navigate("/application/orders");
                 }
                 if (value === dropdown_links.TICKETS) {
-                  return history.push("/application/tickets");
+                  return navigate("/application/tickets");
                 }
                 if (value === dropdown_links.PROFILE) {
-                  return history.push("/application/profile");
+                  return navigate("/application/profile");
                 }
                 if (value === dropdown_links.ONBOARD) {
                   const url = `${process.env.REACT_APP_SELLER_SIGNUP_URL}`

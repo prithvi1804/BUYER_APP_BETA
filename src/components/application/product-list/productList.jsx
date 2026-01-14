@@ -2,7 +2,7 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import styles from "../../../styles/products/productList.module.scss";
 import Navbar from "../../shared/navbar/navbar";
 import Cart from '../../shared/svg/cart';
-import { getCall } from "../../../api/axios";
+import { getCall } from "../../../api/client";
 import { ONDC_COLORS } from "../../shared/colors";
 import Loading from "../../shared/loading/loading";
 import ProductCard from "./product-card/productCard";

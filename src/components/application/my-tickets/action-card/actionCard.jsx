@@ -16,7 +16,7 @@ import cancelRadioStyles from "../../../../styles/cart/cartView.module.scss";
 import Like from "../../../shared/svg/like";
 import Dislike from "../../../shared/svg/dislike";
 import labelStyles from "../../../shared/input/input.module.scss";
-import { getCall, postCall } from "../../../../api/axios";
+import { getCall, postCall } from "../../../../api/client";
 import { SSE_TIMEOUT } from "../../../../constants/sse-waiting-time";
 import { Button } from "@mui/material";
 

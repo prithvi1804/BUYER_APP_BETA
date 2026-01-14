@@ -6,6 +6,10 @@
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
   background-color: $white;
+
+  @media screen and (max-width: 768px) {
+    padding: 12px;
+  }
 }
 
 .product_img_container {
@@ -16,19 +20,36 @@
   justify-content: center;
   flex-basis: 30%;
   border-radius: 8px;
-
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16);
   padding: 5px;
+  flex-shrink: 0;
+
+  @media screen and (max-width: 768px) {
+    height: 90px;
+    width: 90px;
+    flex-basis: auto;
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 80px;
+    width: 80px;
+  }
 }
 
 .product_img {
   width: 100%;
   height: 100%;
   border-radius: 8px;
+  object-fit: contain;
 }
 
 .product_name_and_description_wrapper {
   height: 70px;
+
+  @media screen and (max-width: 768px) {
+    height: auto;
+    min-height: 50px;
+  }
 }
 
 .product_name {
@@ -43,6 +64,11 @@
   font-weight: $medium;
   color: $primaryColor;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-14;
+    -webkit-line-clamp: 2;
+  }
 }
 
 .ordered_from {
@@ -60,6 +86,10 @@
   .bold {
     font-weight: $medium;
   }
+
+  @media screen and (max-width: 768px) {
+    font-size: 11px;
+  }
 }
 
 .product_price {
@@ -67,6 +97,10 @@
   font-weight: $medium;
   color: $accentColor;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-14;
+  }
 }
 
 .add_to_cart_button {
@@ -81,6 +115,18 @@
   font-size: $font-14;
   font-weight: $medium;
   color: $accentColor;
+
+  @media screen and (max-width: 768px) {
+    width: 100px;
+    height: 32px;
+    font-size: $font-12;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 90px;
+    height: 30px;
+    font-size: 11px;
+  }
 }
 
 .add_to_cart_button:hover {
@@ -98,11 +144,21 @@
   border-radius: 36px;
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    width: 85px;
+    height: 28px;
+  }
 }
 
 .quantity_count_wrapper > div {
   width: 40px;
   height: 35px;
+
+  @media screen and (max-width: 768px) {
+    width: 35px;
+    height: 30px;
+  }
 }
 
 .subtract_svg_color,
@@ -142,6 +198,10 @@
   color: $accentColor;
   text-align: center;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: $font-12;
+  }
 }
 
 .remove_product_text {
@@ -150,8 +210,13 @@
   cursor: pointer;
   padding: 0 5px;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: 11px;
+  }
 }
 
 .remove_product_text:hover {
   font-weight: $medium;
 }
+

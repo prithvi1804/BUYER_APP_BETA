@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useStyles from "./style";
 import { Grid, Typography } from "@mui/material";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import RightArrowIcon from "@mui/icons-material/ArrowForwardRounded";
 import { colorCodeToName } from "./utils";
 import ModalComponent from "../../../common/Modal";
@@ -15,7 +15,7 @@ const VariationsRenderer = (props) => {
     isFashion = false,
   } = props;
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [variationGroups, setVariationGroups] = useState([]);
   const [variations, setVariations] = useState([]);
@@ -25,16 +25,20 @@ const VariationsRenderer = (props) => {
   const [noVariations, setNoVariations] = useState(false);
 
   const getVariationGroups = () => {
-    const parentId = productPayload.item_details.parent_item_id;
-    const parentData = productPayload.categories.find(
+    const parentId = productPayload.item_details?.parent_item_id;
+    if (!parentId) {
+      setNoVariations(true);
+      return;
+    }
+    const parentData = productPayload.categories?.find(
       (item) => item.id === parentId
     );
 
     if (parentData) {
-      const attrTags = productPayload.categories[0].tags;
+      const attrTags = productPayload.categories?.[0]?.tags || [];
       const groupInfo = new Set(); // Use a Set to store unique items
 
-      for (const tag of parentData.tags) {
+      for (const tag of parentData.tags || []) {
         if (tag.code === "attr") {
           const nameTag = tag.list.find((item) => item.code === "name");
           const seqTag = tag.list.find((item) => item.code === "seq");
@@ -169,7 +173,7 @@ const VariationsRenderer = (props) => {
     if (groupData.id === Object.keys(variationState).length) {
       const matchingVariation = findMatchingVariation();
       if (matchingVariation) {
-        history.push(`/application/products?productId=${matchingVariation.id}`);
+        navigate(`/application/products?productId=${matchingVariation.id}`);
       }
     }
 
@@ -223,7 +227,7 @@ const VariationsRenderer = (props) => {
       const value = item.item_details.quantity.unitized.measure.value;
       if (parseFloat(value) === parseFloat(toFind)) return item;
     });
-    history.push(`/application/products?productId=${product?.id}`);
+    navigate(`/application/products?productId=${product?.id}`);
   };
 
   useEffect(() => {
@@ -251,14 +255,18 @@ const VariationsRenderer = (props) => {
 
         if (initialVariationState?.isUOM == true) {
           const selectedOption =
-            productPayload.item_details.quantity.unitized?.measure;
-          groupData.selected = [
-            `${selectedOption.value} ${selectedOption.unit}`,
-          ];
+            productPayload.item_details?.quantity?.unitized?.measure;
+          if (selectedOption) {
+            groupData.selected = [
+              `${selectedOption.value} ${selectedOption.unit}`,
+            ];
+          }
 
-          productPayload.related_items.map((item) => {
-            const option = item.item_details.quantity.unitized.measure;
-            groupData.options.push(`${option.value} ${option.unit}`);
+          productPayload.related_items?.map((item) => {
+            const option = item.item_details?.quantity?.unitized?.measure;
+            if (option) {
+              groupData.options.push(`${option.value} ${option.unit}`);
+            }
           });
         } else {
           groupData.selected = [initialVariationState[groupName]];
