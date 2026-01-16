@@ -83,6 +83,15 @@ const useStyles = makeStyles({
         display: 'flex',
         gap: '25px',
         paddingBottom: '10px',
+        overflowX: 'auto',
+        maxWidth: '100%',
+        marginLeft: '20px !important',
+        "@media (max-width: 1024px)": {
+            padding: "12px 16px !important",
+        },
+        "@media (max-width: 768px)": {
+            marginTop: "40px !important",
+        },
     }
 });
 
