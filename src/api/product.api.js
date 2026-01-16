@@ -47,6 +47,7 @@ export const getAllProductRequest = (params) => {
     });
 };
 
+
 /**
  * function to get all filters
  * @returns
