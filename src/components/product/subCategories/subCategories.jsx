@@ -60,6 +60,8 @@ const CategoriesComponent = () => {
   const subCategoryName = query.get("sc");
   const searchProductName = query.get("s");
 
+
+
   useEffect(() => {
     if (categoryName) {
       const options = PRODUCT_SUBCATEGORY[categoryName];
