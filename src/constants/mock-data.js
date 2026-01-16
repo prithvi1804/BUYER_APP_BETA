@@ -57,7 +57,7 @@ export const PRODUCTS = [
           count: "5"
         }
       },
-      category_id: "Smartphones",
+      category_id: "Smartphones", // [MODIFIED] Set category_id to "Smartphones" to match the category key in categories.js
       fulfillment_id: "f1",
       location_id: "loc-elec-1",
       tags: []
@@ -130,6 +130,7 @@ export const PRODUCTS = [
           count: "2"
         }
       },
+      category_id: "Laptop",
       tags: []
     },
     attributes: {
@@ -200,6 +201,7 @@ export const PRODUCTS = [
           count: "1"
         }
       },
+      category_id: "Washing Machines and Accessories",
       tags: []
     },
     attributes: {
@@ -207,6 +209,294 @@ export const PRODUCTS = [
       "Type": "Front Load",
       "Feature": "AI Control",
       "Warranty": "2 Years"
+    },
+    customisation_groups: [],
+    customisation_items: [],
+    locations: ["loc-app-1"],
+    related_items: [],
+    categories: []
+  },
+  {
+    id: "product-electronics-3",
+    local_id: "elec-3",
+    bpp_details: {
+      bpp_id: "tech-paradise-bpp",
+      bpp_uri: "https://tech-paradise.com/ondc"
+    },
+    context: {
+      domain: "ONDC:RET14",
+      city: "std:080",
+      bpp_uri: "https://tech-paradise.com/ondc"
+    },
+    descriptor: {
+      name: "Apple Watch Series 9",
+      short_desc: "Smarter. Brighter. Mightier.",
+      long_desc: "Apple Watch Series 9 helps you stay connected, active, healthy, and safe. Featuring double tap, a magical way to interact with Apple Watch; an even brighter display; faster on-device Siri; and Precision Finding for iPhone.",
+      images: [
+        "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      ],
+      symbol: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+    },
+    price: {
+      value: "41900",
+      currency: "INR",
+      maximum_value: "44900"
+    },
+    provider_details: {
+      id: "brand-electronics-1",
+      descriptor: {
+        name: "Tech Paradise"
+      }
+    },
+    location_id: "loc-elec-1",
+    item_details: {
+      id: "product-electronics-3",
+      descriptor: {
+        name: "Apple Watch Series 9",
+        short_desc: "Smarter. Brighter. Mightier.",
+        images: [
+          "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        ],
+        symbol: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      },
+      price: {
+        value: "41900",
+        currency: "INR",
+        maximum_value: "44900"
+      },
+      quantity: {
+        available: {
+          count: "15"
+        },
+        maximum: {
+          count: "3"
+        }
+      },
+      category_id: "Smart Watch",
+      fulfillment_id: "f1",
+      location_id: "loc-elec-1",
+      tags: []
+    },
+    attributes: {
+      "Case": "Aluminum",
+      "Size": "45mm",
+      "Connectivity": "GPS"
+    },
+    customisation_groups: [],
+    customisation_items: [],
+    locations: ["loc-elec-1"],
+    related_items: [],
+    categories: []
+  },
+  {
+    id: "product-electronics-4",
+    local_id: "elec-4",
+    bpp_details: {
+      bpp_id: "tech-paradise-bpp",
+      bpp_uri: "https://tech-paradise.com/ondc"
+    },
+    context: {
+      domain: "ONDC:RET14",
+      city: "std:080",
+      bpp_uri: "https://tech-paradise.com/ondc"
+    },
+    descriptor: {
+      name: "Sony WH-1000XM5",
+      short_desc: "Wireless Noise Cancelling Headphones",
+      long_desc: "The WH-1000XM5 headphones rewrite the rules for distraction-free listening and call clarity. Two processors control 8 microphones for unprecedented noise cancellation and exceptional call quality.",
+      images: [
+        "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      ],
+      symbol: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+    },
+    price: {
+      value: "29990",
+      currency: "INR",
+      maximum_value: "34990"
+    },
+    provider_details: {
+      id: "brand-electronics-1",
+      descriptor: {
+        name: "Tech Paradise"
+      }
+    },
+    location_id: "loc-elec-1",
+    item_details: {
+      id: "product-electronics-4",
+      descriptor: {
+        name: "Sony WH-1000XM5",
+        short_desc: "Wireless Noise Cancelling Headphones",
+        images: [
+          "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        ],
+        symbol: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      },
+      price: {
+        value: "29990",
+        currency: "INR",
+        maximum_value: "34990"
+      },
+      quantity: {
+        available: {
+          count: "25"
+        },
+        maximum: {
+          count: "5"
+        }
+      },
+      category_id: "Headset",
+      fulfillment_id: "f1",
+      location_id: "loc-elec-1",
+      tags: []
+    },
+    attributes: {
+      "Color": "Black",
+      "Battery Life": "30 Hours",
+      "Drivers": "30mm"
+    },
+    customisation_groups: [],
+    customisation_items: [],
+    locations: ["loc-elec-1"],
+    related_items: [],
+    categories: []
+  },
+  {
+    id: "product-appliances-2",
+    local_id: "app-2",
+    bpp_details: {
+      bpp_id: "home-essentials-bpp",
+      bpp_uri: "https://home-essentials.com/ondc"
+    },
+    context: {
+      domain: "ONDC:RET15",
+      city: "std:080",
+      bpp_uri: "https://home-essentials.com/ondc"
+    },
+    descriptor: {
+      name: "Sony Bravia 55 inch 4K",
+      short_desc: "4K Ultra HD Smart LED Google TV",
+      long_desc: "Experience thrilling entertainment with 4K X-Reality PRO, TRILUMINOS PRO, and Google TV. Enjoy immersive sound with Dolby Atmos and smooth gaming with HDMI 2.1.",
+      images: [
+        "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      ],
+      symbol: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+    },
+    price: {
+      value: "63990",
+      currency: "INR",
+      maximum_value: "99900"
+    },
+    provider_details: {
+      id: "brand-appliances-1",
+      descriptor: {
+        name: "Home Essentials"
+      }
+    },
+    location_id: "loc-app-1",
+    item_details: {
+      id: "product-appliances-2",
+      descriptor: {
+        name: "Sony Bravia 55 inch 4K",
+        short_desc: "4K Ultra HD Smart LED Google TV",
+        images: [
+          "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        ],
+        symbol: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      },
+      price: {
+        value: "63990",
+        currency: "INR",
+        maximum_value: "99900"
+      },
+      quantity: {
+        available: {
+          count: "10"
+        },
+        maximum: {
+          count: "2"
+        }
+      },
+      category_id: "Television",
+      fulfillment_id: "f1",
+      location_id: "loc-app-1",
+      tags: []
+    },
+    attributes: {
+      "Screen Size": "55 inch",
+      "Resolution": "4K Ultra HD",
+      "OS": "Google TV"
+    },
+    customisation_groups: [],
+    customisation_items: [],
+    locations: ["loc-app-1"],
+    related_items: [],
+    categories: []
+  },
+  {
+    id: "product-appliances-3",
+    local_id: "app-3",
+    bpp_details: {
+      bpp_id: "home-essentials-bpp",
+      bpp_uri: "https://home-essentials.com/ondc"
+    },
+    context: {
+      domain: "ONDC:RET15",
+      city: "std:080",
+      bpp_uri: "https://home-essentials.com/ondc"
+    },
+    descriptor: {
+      name: "Philips Coffee Maker",
+      short_desc: "Daily Collection Drip Coffee Maker",
+      long_desc: "Enjoy good coffee with a reliable coffeemaker in a smart and compact design for easy storage. The aroma twister circulates the coffee for an optimal taste experience.",
+      images: [
+        "https://images.unsplash.com/photo-1517036666792-5eb3dbf640c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      ],
+      symbol: "https://images.unsplash.com/photo-1517036666792-5eb3dbf640c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+    },
+    price: {
+      value: "3495",
+      currency: "INR",
+      maximum_value: "3995"
+    },
+    provider_details: {
+      id: "brand-appliances-1",
+      descriptor: {
+        name: "Home Essentials"
+      }
+    },
+    location_id: "loc-app-1",
+    item_details: {
+      id: "product-appliances-3",
+      descriptor: {
+        name: "Philips Coffee Maker",
+        short_desc: "Daily Collection Drip Coffee Maker",
+        images: [
+          "https://images.unsplash.com/photo-1517036666792-5eb3dbf640c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        ],
+        symbol: "https://images.unsplash.com/photo-1517036666792-5eb3dbf640c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      },
+      price: {
+        value: "3495",
+        currency: "INR",
+        maximum_value: "3995"
+      },
+      quantity: {
+        available: {
+          count: "20"
+        },
+        maximum: {
+          count: "5"
+        }
+      },
+      category_id: "Kitchen Appliances",
+      fulfillment_id: "f1",
+      location_id: "loc-app-1",
+      tags: []
+    },
+    attributes: {
+      "Capacity": "0.6 Liters",
+      "Power": "750 Watts",
+      "Brew Time": "10 min"
     },
     customisation_groups: [],
     customisation_items: [],
@@ -291,7 +581,11 @@ export const FILTERS = {
   categories: [
     { id: "cat-elec-1", name: "Smartphones" },
     { id: "cat-elec-2", name: "Laptops" },
-    { id: "cat-app-1", name: "Washing Machines" }
+    { id: "cat-elec-3", name: "Smart Watch" },
+    { id: "cat-elec-4", name: "Headset" },
+    { id: "cat-app-1", name: "Washing Machines" },
+    { id: "cat-app-2", name: "Television" },
+    { id: "cat-app-3", name: "Kitchen Appliances" }
   ],
   providers: [
     { id: "brand-electronics-1", name: "Tech Paradise" },
@@ -300,9 +594,9 @@ export const FILTERS = {
 };
 
 export const FILTER_VALUES = [
-    { id: "val-1", code: "brand", value: "Apple" },
-    { id: "val-2", code: "brand", value: "Samsung" },
-    { id: "val-3", code: "color", value: "Space Gray" }
+  { id: "val-1", code: "brand", value: "Apple" },
+  { id: "val-2", code: "brand", value: "Samsung" },
+  { id: "val-3", code: "color", value: "Space Gray" }
 ];
 
 export const ADDRESSES = [
@@ -318,6 +612,6 @@ export const ADDRESSES = [
 ];
 
 export const ORDERS_MOCK = {
-    orders: [],
-    count: 0
+  orders: [],
+  count: 0
 }

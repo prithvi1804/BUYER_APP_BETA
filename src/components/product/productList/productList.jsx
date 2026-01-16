@@ -87,7 +87,7 @@ const ProductList = () => {
         r[e.code] = e.selectedValues.join();
         return r;
       },
-      {});
+        {});
       paginationData.searchData.pageNumber = paginationData.page;
       paginationData.searchData.limit = paginationData.pageSize;
       if (searchName) {
@@ -385,9 +385,8 @@ const ProductList = () => {
                 color="inherit"
                 // to={`/category/${categoryName}`}
                 onClick={updateQueryParams}
-                href={`/application/products?${
-                  searchProductName ? `s=${searchProductName}&` : ""
-                }${categoryName ? `c=${categoryName}` : ""}`}
+                href={`/application/products?${searchProductName ? `s=${searchProductName}&` : ""
+                  }${categoryName ? `c=${categoryName}` : ""}`}
               >
                 {categoryName}
               </MuiLink>

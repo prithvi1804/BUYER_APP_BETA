@@ -91,7 +91,7 @@ const CategoriesComponent = () => {
           >
             <PreviousIcon className={classes.actionIcon} />
           </IconButton>
-          <div
+          {/* <div
             className={classes.allOptionsContainer}
             onClick={(e) => {
               e.preventDefault();
@@ -109,7 +109,7 @@ const CategoriesComponent = () => {
             <Typography variant="body1" color="primary" className={classes.allNameTypo}>
               All Options
             </Typography>
-          </div>
+          </div> */}
         </div>
         {
           subCatList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((subCat, subCatIndex) => (

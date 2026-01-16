@@ -23,8 +23,9 @@ export const categoryList = [
 export const PRODUCT_SUBCATEGORY = {
   Electronics: [
     {
-      value: "Mobile Phone",
-      key: "Mobile Phone",
+      // [MODIFIED] Renamed value and key from "Mobile Phone" to "Smartphones" to match the category_id in mock-data.js
+      value: "Smartphones",
+      key: "Smartphones",
       protocolKey: "@ondc/org/statutory_reqs_packaged_commodities",
       imageUrl: `https://reference-buyer-app-assets.s3-ap-south-1.amazonaws.com/public-assets/Electronics/Mobile Phone.png`,
     },
