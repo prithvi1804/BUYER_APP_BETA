@@ -3,7 +3,10 @@ import palette from "../../../utils/Theme/palette";
 
 const useStyles = makeStyles({
   productContainer: {
-    padding: "28px 54px !important",
+    padding: "20px 40px 40px 40px !important",
+    "@media (max-width: 600px)": {
+      padding: "20px 20px 20px 20px !important",
+    },
   },
   productItemContainer: {
     cursor: "pointer",
@@ -83,8 +86,8 @@ const useStyles = makeStyles({
     marginLeft: "10px !important",
   },
   viewTypeIcon: {
-      height: "20px",
-      width: "20px",
+    height: "20px",
+    width: "20px",
   },
 
   productItemContainerList: {
@@ -99,6 +102,11 @@ const useStyles = makeStyles({
     minHeight: "280px !important",
     // width: '314px !important',
     borderRadius: "12px 0px 0px 12px !important",
+    "@media (max-width: 600px)": {
+      borderRadius: "12px 12px 0px 0px !important",
+      height: "auto",
+      minHeight: "200px !important"
+    }
   },
   productDetailsTypo: {
     padding: "37px 16px 26px 16px",
@@ -131,11 +139,23 @@ const useStyles = makeStyles({
     position: "absolute",
     bottom: "16px",
     width: "calc(100% - 32px) !important",
+    "@media (max-width: 600px)": {
+      position: "relative",
+      bottom: "auto",
+      width: "100% !important",
+      marginTop: "20px"
+    }
   },
   addToCartBtn: {
     float: "right",
     marginLeft: "8px !important",
     width: "195px",
+    "@media (max-width: 600px)": {
+      float: "none",
+      width: "100%",
+      marginLeft: "0px !important",
+      marginTop: "10px !important"
+    }
   },
 
   paginationContainer: {

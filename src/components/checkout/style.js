@@ -4,12 +4,12 @@ import palette from "../../utils/Theme/palette";
 const useStyles = makeStyles({
   header: {
     background: palette.common.white,
-    padding: "20px 100px 15px 100px !important",
+    padding: "20px 40px 15px 40px !important",
     "@media (max-width: 1024px)": {
-      padding: "20px 50px 15px 50px !important",
+      padding: "20px 40px 15px 40px !important",
     },
     "@media (max-width: 768px)": {
-      padding: "16px 16px 12px 16px !important",
+      padding: "16px 20px 12px 20px !important",
     },
   },
   headerTypo: {
@@ -22,12 +22,12 @@ const useStyles = makeStyles({
   },
   bodyContainer: {
     background: "#F9F9F9 !important",
-    padding: "20px 100px !important",
+    padding: "20px 40px !important",
     "@media (max-width: 1024px)": {
       padding: "20px 40px !important",
     },
     "@media (max-width: 768px)": {
-      padding: "16px 12px !important",
+      padding: "16px 20px !important",
     },
   },
   stepRoot: {

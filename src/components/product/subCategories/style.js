@@ -5,18 +5,7 @@ const useStyles = makeStyles({
     categoriesRootContainer: {
         background: '#F9F9F9',
     },
-    categoriesContainer: {
-        "& ul": {
-            display: 'flex',
-            gap: '16px',
-            padding: '16px !important',
-            justifyContent: 'center',
-            "& li:has(.MuiPaginationItem-ellipsis)": {
-                background: 'red !important',
-                display: 'none'
-            }
-        },
-    },
+
     categoryItem: {
         textAlign: 'center',
         cursor: 'pointer'
@@ -27,20 +16,34 @@ const useStyles = makeStyles({
         borderRadius: '108px',
         background: '#E7E7E7',
         display: 'flex',
-        margin: 'auto'
+        margin: 'auto',
+        "@media (max-width: 600px)": {
+            height: '80px',
+            width: '80px',
+            borderRadius: '80px',
+        }
     },
     categoryImage: {
         height: '102px',
         maxWidth: '102px',
         minWidth: '42px',
         margin: 'auto',
-        borderRadius: '50%'
+        borderRadius: '50%',
+        "@media (max-width: 600px)": {
+            height: '74px',
+            maxWidth: '74px',
+        }
     },
     categoryNameTypo: {
         fontWeight: '600 !important',
         marginTop: '5px !important',
         maxWidth: '120px',
-        height: '40px !important'
+        height: '40px !important',
+        "@media (max-width: 600px)": {
+            fontSize: '12px !important',
+            maxWidth: '80px',
+            lineHeight: '1.2 !important'
+        }
     },
     selectedCategory: {
         background: '#EBEBEB !important',
@@ -48,49 +51,44 @@ const useStyles = makeStyles({
         '& $categoryImage': {
             height: '98px',
             maxWidth: '98px',
+            "@media (max-width: 600px)": {
+                height: '70px',
+                maxWidth: '70px',
+            }
         }
     },
-    actionButton: {
-        border: '1px solid rgba(0, 0, 0, 0.14) !important',
-    },
-    actionIcon: {
-        height: "20px",
-        width: "20px",
-    },
-    pageEllipsisContainer: {
 
-    },
-    previousIconContainer: {
-        display: 'flex',
-        gap: '29px'
-    },
-    allOptionsContainer: {
-        textAlign: 'center',
-        cursor: 'pointer',
-    },
-    allOptionsIcon: {
-        height: "20px",
-        width: "20px",
-        color: palette.primary.main,
-    },
-    allNameTypo: {
-        fontWeight: '600 !important',
-        marginTop: '8px !important',
-        maxWidth: '50px',
-        height: '40px !important'
-    },
     subCatContainer: {
         display: 'flex',
         gap: '25px',
-        paddingBottom: '10px',
         overflowX: 'auto',
+        overflowY: 'hidden',
+        flexWrap: 'nowrap',
+        width: 'fit-content',
+        margin: '0 auto',
         maxWidth: '100%',
-        marginLeft: '20px !important',
+        paddingLeft: '20px',
+        paddingRight: '20px',
+        paddingTop: '20px',
+        paddingBottom: '20px',
+        "&::-webkit-scrollbar": {
+            height: "6px",
+        },
+        "&::-webkit-scrollbar-track": {
+            background: "transparent",
+        },
+        "&::-webkit-scrollbar-thumb": {
+            background: "#D3D3D3",
+            borderRadius: "4px",
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+            background: "#A9A9A9",
+        },
         "@media (max-width: 1024px)": {
             padding: "12px 16px !important",
         },
         "@media (max-width: 768px)": {
-            marginTop: "40px !important",
+            marginTop: "10px !important",
         },
     }
 });

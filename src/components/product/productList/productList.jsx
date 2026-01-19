@@ -367,38 +367,8 @@ const ProductList = () => {
 
   return (
     <Grid container spacing={3} className={classes.productContainer}>
-      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-        <div role="presentation">
-          <Breadcrumbs aria-label="breadcrumb">
-            <MuiLink
-              component={Link}
-              underline="hover"
-              color="inherit"
-              to="/application/products"
-            >
-              Home
-            </MuiLink>
-            {categoryName && (
-              <MuiLink
-                component="div"
-                underline="hover"
-                color="inherit"
-                // to={`/category/${categoryName}`}
-                onClick={updateQueryParams}
-                href={`/application/products?${searchProductName ? `s=${searchProductName}&` : ""
-                  }${categoryName ? `c=${categoryName}` : ""}`}
-              >
-                {categoryName}
-              </MuiLink>
-            )}
-            {(subCategoryName || searchProductName) && (
-              <Typography color="text.primary">
-                {subCategoryName || searchProductName}
-              </Typography>
-            )}
-          </Breadcrumbs>
-        </div>
-      </Grid>
+
+
       <Grid
         item
         xs={12}

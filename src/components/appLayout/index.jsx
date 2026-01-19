@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import NavBar from "./navbar/navbar";
@@ -9,24 +9,27 @@ import palette from "../../utils/Theme/palette";
 
 const useStyles = makeStyles({
     allLayoutContainer: {
-        display: 'flex', flexDirection: 'column'
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+        overflow: 'hidden'
     },
     mainContainer: {
         flexGrow: 1,
-        height: '100%',
-        minHeight: '100vh',
-        // margin: '20px',
+        overflowY: 'auto',
+        width: '100%',
+        backgroundColor: '#F9F9F9',
     },
-    toolbar: {
-        height: '77px'
-    }
 });
 
-const AppLayout = ({ pageTitle, children, isCheckout=false }) => {
+const AppLayout = ({ pageTitle, children, isCheckout = false }) => {
     const classes = useStyles();
 
-    useEffect(()=>{
-        window.scrollTo(0,0);
+    useEffect(() => {
+        const mainContent = document.getElementById("main-content-area");
+        if (mainContent) {
+            mainContent.scrollTo(0, 0);
+        }
     }, [])
     return (
         <Box className={classes.allLayoutContainer}>
@@ -34,11 +37,11 @@ const AppLayout = ({ pageTitle, children, isCheckout=false }) => {
             <Box
                 component="main"
                 className={classes.mainContainer}
+                id="main-content-area"
             >
-                <Toolbar id="back-to-top-anchor" className={classes.toolbar} />
                 {children}
             </Box>
-            <Footer />
+            {/* <Footer /> */}
         </Box>
     )
 

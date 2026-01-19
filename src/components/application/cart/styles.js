@@ -18,17 +18,23 @@ const useStyles = makeStyles({
     backgroundColor: palette.background.paper,
     height: 70,
     width: "100%",
-    padding: "0 40px",
+    padding: "20px 40px 0 40px",
     display: "flex",
     alignItems: "center",
+    "@media (max-width: 600px)": {
+      padding: "20px 20px 0 20px",
+      height: "auto",
+    },
   },
   heading: {
     textTransform: "none !important",
     fontFamily: "var(--font-body-fontFamily) !important",
   },
   cartContainer: {
-    padding: "10px 40px",
-    backgroundColor: "#F9F9F9",
+    padding: "20px 40px",
+    "@media (max-width: 600px)": {
+      padding: "20px 20px",
+    },
   },
   tableHead: {
     fontWeight: "600 !important",
@@ -88,10 +94,22 @@ const useStyles = makeStyles({
   },
   summaryCard: {
     marginTop: 20,
-    width: 470,
-    padding: "16px 24px",
-    display: "flex",
     flexDirection: "column",
+    "@media (max-width: 600px)": {
+      width: "100%",
+      padding: "16px",
+    },
+  },
+  hideOnMobile: {
+    "@media (max-width: 600px)": {
+      display: "none !important",
+    },
+  },
+  showOnMobile: {
+    display: "none",
+    "@media (max-width: 600px)": {
+      display: "block !important",
+    },
   },
   summaryTypo: {
     fontFamily: "var(--font-body-fontFamily) !important",
@@ -108,7 +126,32 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     background: "#F9F9F9",
-    height: "80vh",
+    height: "60vh",
+    textAlign: "center",
+    padding: "0 20px",
+  },
+  emptyCartMsg: {
+    fontFamily: "var(--font-body-fontFamily) !important",
+    fontWeight: "700 !important",
+    textTransform: "none",
+    fontSize: "3rem !important",
+    "@media (max-width: 600px)": {
+      fontSize: "24px !important",
+    },
+  },
+  emptyCartSubMsg: {
+    marginTop: "16px !important",
+    marginBottom: "16px !important",
+    "@media (max-width: 600px)": {
+      fontSize: "14px !important",
+    },
+  },
+  emptyCartIcon: {
+    fontSize: "90px !important",
+    marginBottom: "16px !important",
+    "@media (max-width: 600px)": {
+      fontSize: "60px !important",
+    },
   },
   infoBox: {
     borderRadius: "8px",

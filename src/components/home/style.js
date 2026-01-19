@@ -3,13 +3,12 @@ import colors from "../../utils/Theme/colors";
 
 const useStyles = makeStyles({
   homeContainer: {
-    padding: "16px 16px",
+    padding: "20px 40px 40px 40px",
     "@media (max-width: 1024px)": {
-      padding: "16px 16px",
+      padding: "20px 40px 40px 40px",
     },
     "@media (max-width: 768px)": {
-      marginTop: "32px !important",
-      padding: "16px 16px",
+      padding: "20px 20px 20px 20px",
     },
   },
   fashionCategory: {

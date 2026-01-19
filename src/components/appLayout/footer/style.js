@@ -8,7 +8,12 @@ const useStyles = makeStyles({
         paddingRight: '122px',
         backgroundColor: palette.primary.main,
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        "@media (max-width: 600px)": {
+            paddingLeft: '20px',
+            paddingRight: '20px',
+            paddingTop: '30px'
+        }
     },
     footerAppLogo: {
         height: "40px"
@@ -80,7 +85,10 @@ const useStyles = makeStyles({
         borderRadius: '467px',
         position: 'absolute',
         top: '-120px',
-        right: '-150px'
+        right: '-150px',
+        "@media (max-width: 600px)": {
+            display: 'none'
+        }
     },
     circleTwo: {
         height: '434px',
@@ -89,7 +97,10 @@ const useStyles = makeStyles({
         borderRadius: '434px',
         position: 'absolute',
         top: '-105px',
-        right: '-135px'
+        right: '-135px',
+        "@media (max-width: 600px)": {
+            display: 'none'
+        }
     },
     copyright: {
         marginTop: '18px !important',

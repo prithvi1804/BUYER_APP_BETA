@@ -4,16 +4,16 @@ import colors from "../../../utils/Theme/colors";
 const useStyles = makeStyles((theme) => ({
   headerContainer: {
     display: "flex",
-    padding: "12px 16px !important",
+    padding: "12px 40px !important",
     alignItems: "center",
     flexWrap: "wrap",
     gap: "10px",
     "@media (max-width: 1024px)": {
-      padding: "12px 16px !important",
+      padding: "12px 40px !important",
     },
     "@media (max-width: 768px)": {
       marginTop: "16px !important",
-      padding: "12px 16px !important",
+      padding: "12px 20px !important",
       gap: "8px",
     },
   },

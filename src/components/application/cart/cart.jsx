@@ -627,15 +627,15 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
       <div className={classes.emptyCartScreen}>
         <InfoOutlinedIcon
           color="warning"
-          sx={{ fontSize: 90, marginBottom: 2 }}
+          className={classes.emptyCartIcon}
         />
         <Typography
           variant="h3"
-          sx={{ fontFamily: "var(--font-body-fontFamily)", fontWeight: 700, textTransform: "none" }}
+          className={classes.emptyCartMsg}
         >
           Your Cart is Empty. Please add items
         </Typography>
-        <Typography variant="body" sx={{ marginTop: 2, marginBottom: 2 }}>
+        <Typography variant="body" className={classes.emptyCartSubMsg}>
           Explore our wide selection and find something you like
         </Typography>
         <Link to="/application/products">
@@ -647,7 +647,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
 
   const renderTableHeads = () => {
     return (
-      <Grid>
+      <Grid className={classes.hideOnMobile}>
         <Grid container sx={{ paddingTop: "20px" }}>
           <Grid item xs={4.3}>
             <Typography variant="body1" className={classes.tableHead}>
@@ -868,7 +868,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
             key={cartItem?.item?.id}
             style={{ alignItems: "flex-start" }}
           >
-            <Grid item xs={4.3}>
+            <Grid item xs={12} sm={12} md={4.3}>
               <Grid container>
                 <div className={classes.moreImages}>
                   <div className={classes.greyContainer}>
@@ -942,14 +942,14 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
               </Grid>
               {/* {getCustomizations(cartItem)} */}
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={4} sm={4} md={1}>
               <Typography variant="body" sx={{ fontWeight: 600 }}>
                 {cartItem.item.hasCustomisations
                   ? `₹ ${getPriceWithCustomisations(cartItem)}`
                   : `₹ ${cartItem?.item?.product?.price?.value}`}
               </Typography>
             </Grid>
-            <Grid item xs={1.2}>
+            <Grid item xs={4} sm={4} md={1.2}>
               <div className={classes.qtyContainer}>
                 <Typography
                   variant="body1"
@@ -971,20 +971,18 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
                 />
               </div>
             </Grid>
-            <Grid item xs={1.4}>
+            <Grid item xs={4} sm={4} md={1.4}>
               <Typography variant="body" sx={{ fontWeight: 600 }}>
                 {cartItem.item.hasCustomisations
-                  ? `₹ ${
-                      parseInt(getPriceWithCustomisations(cartItem)) *
-                      parseInt(cartItem?.item?.quantity?.count)
-                    }`
-                  : `₹ ${
-                      parseInt(cartItem?.item?.product?.subtotal) *
-                      parseInt(cartItem?.item?.quantity?.count)
-                    }`}
+                  ? `₹ ${parseInt(getPriceWithCustomisations(cartItem)) *
+                  parseInt(cartItem?.item?.quantity?.count)
+                  }`
+                  : `₹ ${parseInt(cartItem?.item?.product?.subtotal) *
+                  parseInt(cartItem?.item?.quantity?.count)
+                  }`}
               </Typography>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={12} md={4}>
               {renderSpecialInstructions(cartItem.item, cartItem._id)}
 
               <Grid
@@ -1006,16 +1004,16 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
           </Grid>
           {cartItem.item.quantity.count >
             cartItem.item.product.quantity.available.count && (
-            <Grid>
-              <div className={classes.infoBox}>
-                <Typography className={classes.infoText}>
-                  Only {cartItem.item.product.quantity.available.count}{" "}
-                  available instead of {cartItem.item.quantity.count}. Update
-                  the quantity or switch to another provider.
-                </Typography>
-              </div>
-            </Grid>
-          )}
+              <Grid>
+                <div className={classes.infoBox}>
+                  <Typography className={classes.infoText}>
+                    Only {cartItem.item.product.quantity.available.count}{" "}
+                    available instead of {cartItem.item.quantity.count}. Update
+                    the quantity or switch to another provider.
+                  </Typography>
+                </div>
+              </Grid>
+            )}
           {idx === cartItems.length - 1 && haveDistinctProviders && (
             <Grid>
               <div
@@ -1171,10 +1169,9 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
             <Grid item xs={1.4}>
               <Typography variant="body" sx={{ fontWeight: 600 }}>
                 {cartItem.item.hasCustomisations
-                  ? `₹ ${
-                      parseInt(getPriceWithCustomisations(cartItem)) *
-                      parseInt(cartItem?.item?.quantity?.count)
-                    }`
+                  ? `₹ ${parseInt(getPriceWithCustomisations(cartItem)) *
+                  parseInt(cartItem?.item?.quantity?.count)
+                  }`
                   : `₹ ${parseInt(cartItem?.item?.product?.subtotal)}`}
               </Typography>
             </Grid>
@@ -1194,16 +1191,16 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
           </Grid>
           {cartItem.item.quantity.count >
             cartItem.item.product.quantity.available.count && (
-            <Grid>
-              <div className={classes.infoBox}>
-                <Typography className={classes.infoText}>
-                  Only {cartItem.item.product.quantity.available.count}{" "}
-                  available instead of {cartItem.item.quantity.count}. Update
-                  the quantity or switch to another provider.
-                </Typography>
-              </div>
-            </Grid>
-          )}
+              <Grid>
+                <div className={classes.infoBox}>
+                  <Typography className={classes.infoText}>
+                    Only {cartItem.item.product.quantity.available.count}{" "}
+                    available instead of {cartItem.item.quantity.count}. Update
+                    the quantity or switch to another provider.
+                  </Typography>
+                </div>
+              </Grid>
+            )}
           {idx === cartItems.length - 1 && haveDistinctProviders && (
             <Grid>
               <div
@@ -1728,7 +1725,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
             <div>
               {!showOnlyItems ? (
                 <Grid container className={classes.cartContainer}>
-                  <Grid item xs={8}>
+                  <Grid item xs={12} md={8}>
                     {renderTableHeads()}
                     <div
                       style={{
@@ -1748,7 +1745,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
                     </div>
                   </Grid>
 
-                  <Grid item xs={4}>
+                  <Grid item xs={12} md={4}>
                     {renderSummaryCard()}
                   </Grid>
                 </Grid>

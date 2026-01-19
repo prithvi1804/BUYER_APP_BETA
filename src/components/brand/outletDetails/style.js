@@ -3,7 +3,10 @@ import palette from "../../../utils/Theme/palette";
 
 const useStyles = makeStyles({
     outletDetailsContainer: {
-        padding: '48px 54px 28px 54px !important'
+        padding: '20px 40px 40px 40px !important',
+        "@media (max-width: 600px)": {
+            padding: "20px 20px 20px 20px !important",
+        },
     },
     outletDetailsHeaderContainer: {
 

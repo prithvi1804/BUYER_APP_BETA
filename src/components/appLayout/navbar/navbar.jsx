@@ -219,13 +219,9 @@ const NavBar = ({ isCheckout = false }) => {
   }, []);
 
   useEffect(() => {
-    //  getLastEnteredValues();
-    const anchor = document.querySelector("#back-to-top-anchor");
-    if (anchor) {
-      anchor.scrollIntoView({
-        block: "center",
-      });
-    } else {
+    const mainContent = document.getElementById("main-content-area");
+    if (mainContent) {
+      mainContent.scrollTo(0, 0);
     }
   }, [locationData]);
 
@@ -234,18 +230,18 @@ const NavBar = ({ isCheckout = false }) => {
       try {
         let sc = JSON.parse(getValueFromCookie("search_context") || {});
         if (sc && sc.location) {
-            setSearchedLocation({
-                name: sc.location.name,
-                lat: sc.location.lat,
-                lng: sc.location.lng,
-                pincode: sc.location.pincode,
-                city: sc.location.city,
-                state: sc.location.state,
-                tag: sc.location.tag,
-            });
+          setSearchedLocation({
+            name: sc.location.name,
+            lat: sc.location.lat,
+            lng: sc.location.lng,
+            pincode: sc.location.pincode,
+            city: sc.location.city,
+            state: sc.location.state,
+            tag: sc.location.tag,
+          });
         }
       } catch (error) {
-          console.error("Error parsing search_context in setCriteriaLatLng", error);
+        console.error("Error parsing search_context in setCriteriaLatLng", error);
       }
     }
     if (search.type === search_types.PRODUCT) {
@@ -400,7 +396,7 @@ const NavBar = ({ isCheckout = false }) => {
 
   return (
     <>
-      <AppBar position="absolute">
+      <AppBar position="static">
         <Toolbar className={classes.headerContainer}>
           <HouseIcon
             className={classes.appLogo}
@@ -416,7 +412,7 @@ const NavBar = ({ isCheckout = false }) => {
                 <Typography variant="body2" className={classes.addressTypo}>
                   Deliver to <b>{searchedLocation?.pincode}</b>
                 </Typography>
-                <AddressDownIcon className={classes.AddressDownIcon}/>
+                <AddressDownIcon className={classes.AddressDownIcon} />
               </div>
               <div className={classes.inputContainer}>
                 <Paper component="form" className={classes.inputForm}>
@@ -460,47 +456,8 @@ const NavBar = ({ isCheckout = false }) => {
                       AddCookie("search_context", JSON.stringify(search_context));
                     }}
                   />
-                  <IconButton
-                    className={classes.listIcon}
-                    onClick={handleClickCategoryMenu}
-                    id="basic-button-cat"
-                    aria-controls={openCategoryMenu ? "basic-menu-cat" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={openCategoryMenu ? "true" : undefined}
-                  >
-                    <ListIcon />
-                  </IconButton>
-                  <Menu
-                    className={classes.userMenu}
-                    id="basic-menu-cat"
-                    anchorEl={anchorElCaregoryMenu}
-                    open={openCategoryMenu}
-                    onClose={() => handleCloseCategoryMenu("")}
-                    MenuListProps={{
-                      "aria-labelledby": "basic-button-cat",
-                    }}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "right",
-                      width: "100%"
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                  >
-                    {categoryList.map((cat, catIndex) => {
-                      return (
-                        <MenuItem
-                          selected={cat?.routeName === query.get("c")}
-                          key={`cat-index-${catIndex}`}
-                          onClick={() => handleCloseCategoryMenu(cat.routeName)}
-                        >
-                          {cat.name}
-                        </MenuItem>
-                      );
-                    })}
-                  </Menu>
+
+
                 </Paper>
               </div>
               {/* <div className={classes.favourite}>
