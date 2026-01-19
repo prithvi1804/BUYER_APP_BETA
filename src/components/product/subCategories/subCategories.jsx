@@ -55,6 +55,8 @@ const CategoriesComponent = () => {
   const subCategoryName = query.get("sc");
   const searchProductName = query.get("s");
 
+
+
   useEffect(() => {
     const allOptions = Object.entries(PRODUCT_SUBCATEGORY).flatMap(
       ([category, subCategories]) =>
