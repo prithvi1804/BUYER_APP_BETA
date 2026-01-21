@@ -9,13 +9,16 @@ const useStyles = makeStyles({
     brandsContainer: {
         display: 'flex',
         gap: '25px',
-        overflow: 'auto',
+        overflow: 'hidden',
         paddingBottom: '10px',
-        '&::-webkit-scrollbar': {
-            display: 'none'
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        "@media (max-width: 600px)": {
+            gap: '10px',
         }
     },
-    paginationActionContainer:{
+    paginationActionContainer: {
         display: 'flex',
         gap: '25px',
     },
@@ -25,16 +28,22 @@ const useStyles = makeStyles({
         width: '171px !important',
         minWidth: '171px !important',
         borderRadius: '24.5px !important',
-        background:'#F5F5F5 !important',
+        background: '#F5F5F5 !important',
         display: 'flex',
         boxShadow: "none !important",
+        "@media (max-width: 600px)": {
+            height: '120px !important',
+            width: '120px !important',
+            minWidth: '120px !important',
+            borderRadius: '16px !important',
+        }
     },
     brandImage: {
         margin: 'auto !important',
         maxWidth: '100%'
     },
     dotsContainer: {
-      textAlign: 'center'
+        textAlign: 'center'
     },
     dot: {
         height: '10px',

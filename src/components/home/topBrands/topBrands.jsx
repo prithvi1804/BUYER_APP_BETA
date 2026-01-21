@@ -96,9 +96,9 @@ const TopBrands = () => {
     try {
       let latLongInfo = getValueFromCookie("LatLongInfo");
       try {
-          latLongInfo = latLongInfo ? JSON.parse(latLongInfo) : { lat: 12.9, lng: 77.7 };
+        latLongInfo = latLongInfo ? JSON.parse(latLongInfo) : { lat: 12.9, lng: 77.7 };
       } catch (e) {
-          latLongInfo = { lat: 12.9, lng: 77.7 };
+        latLongInfo = { lat: 12.9, lng: 77.7 };
       }
       console.log("LAT", latLongInfo);
       const lat = latLongInfo.lat;
@@ -125,15 +125,20 @@ const TopBrands = () => {
     getAllOffers();
   }, []);
 
-  const rowsPerPage = parseInt(screenWidth / 120) - 7;
+  const getRowsPerPage = () => {
+    if (screenWidth < 600) return 2;
+    if (screenWidth < 900) return 3;
+    if (screenWidth < 1200) return 4;
+    if (screenWidth < 1536) return 6;
+    return 8;
+  };
+  const rowsPerPage = getRowsPerPage();
   const totalPageCount = Math.ceil(brands.length / rowsPerPage);
   return (
     <>
       {offers && offers.length > 0 && <Offers offersList={offers} />}
       <Grid container spacing={3} className={classes.topBrandsContainer}>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <Typography variant="h4">All Providers</Typography>
-        </Grid>
+        {/* Heading removed to be managed by parent */}
         {isLoading ? (
           <Grid
             item
@@ -157,25 +162,17 @@ const TopBrands = () => {
               xl={12}
               className={classes.brandsContainer}
             >
-              <div
-                style={{
-                  marginLeft: "auto",
-                  marginTop: "auto",
-                  marginBottom: "auto",
+              <IconButton
+                color="inherit"
+                className={classes.actionButton}
+                onClick={() => {
+                  setPage(page - 1);
                 }}
+                disabled={page === 0}
               >
-                <IconButton
-                  color="inherit"
-                  className={classes.actionButton}
-                  onClick={() => {
-                    setPage(page - 1);
-                    // setActiveSubCatIndex(activeSubCatIndex-1)
-                  }}
-                  disabled={page === 0}
-                >
-                  <PreviousIcon />
-                </IconButton>
-              </div>
+                <PreviousIcon />
+              </IconButton>
+
               {brands
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((brand, brandIndex) => (
@@ -183,31 +180,22 @@ const TopBrands = () => {
                     key={`btand-index-${brandIndex}`}
                     data={brand}
                     index={brandIndex}
-                    // isActive={brandIndex === activeBrandIndex}
                     onMouseOver={() => {
                       setActiveBrandIndex(brandIndex);
                     }}
                   />
                 ))}
-              <div
-                style={{
-                  marginRight: "auto",
-                  marginTop: "auto",
-                  marginBottom: "auto",
+
+              <IconButton
+                color="inherit"
+                className={classes.actionButton}
+                onClick={() => {
+                  setPage(page + 1);
                 }}
+                disabled={page === totalPageCount - 1}
               >
-                <IconButton
-                  color="inherit"
-                  className={classes.actionButton}
-                  onClick={() => {
-                    setPage(page + 1);
-                    // setActiveSubCatIndex(activeSubCatIndex+1)
-                  }}
-                  disabled={page === totalPageCount - 1}
-                >
-                  <NextIcon />
-                </IconButton>
-              </div>
+                <NextIcon />
+              </IconButton>
             </Grid>
           </>
         )}

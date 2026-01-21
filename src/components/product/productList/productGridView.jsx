@@ -25,14 +25,19 @@ const ProductGridView = (props) => {
     bpp_provider_id,
     bpp_provider_descriptor,
     show_quantity_button = true,
-    onUpdateCart = () => {},
-    handleAddToCart = () => {},
+    onUpdateCart = () => { },
+    handleAddToCart = () => { },
     getProductDetails,
     productLoading,
   } = props;
+
   const { id, descriptor, provider_details } = product || {};
-  const { name: provider_name } = bpp_provider_descriptor || {};
   const { name: product_name, images, symbol } = descriptor || {};
+
+  const onAddtoCartPressed = (e) => {
+    e.stopPropagation();
+    getProductDetails(productId).then((data) => handleAddToCart(data, true));
+  };
 
   return (
     <div
@@ -40,43 +45,39 @@ const ProductGridView = (props) => {
       onClick={() => navigate(`/application/products?productId=${productId}`)}
     >
       <Card className={classes.productCard}>
-        <img className={classes.productImage} src={symbol ? symbol : no_image_found} alt={`sub-cat-img-${bpp_id}`} />
-        <Tooltip title="Add to cart">
-          <IconButton
-            onClick={(e) => {
-              e.stopPropagation();
-              // getProductDetails(productId).then((data) => handleAddToCart(data, true));
-            }}
-            color="inherit"
-            className={classes.cartIcon}
-          >
-            <CartIcon className={classes.cartIconSvg} />
-          </IconButton>
-        </Tooltip>
-        {/* <Button
+        <Box className={classes.imageContainer}>
+          <img
+            className={classes.productImage}
+            src={symbol ? symbol : no_image_found}
+            alt={product_name}
+          />
+        </Box>
+
+        <Typography component="div" className={classes.productNameTypo}>
+          {product_name}
+        </Typography>
+
+        <Box className={classes.priceContainer}>
+          <Typography className={classes.priceTypo}>
+            ₹{Number(price?.value).toLocaleString("en-IN")}
+          </Typography>
+          {price?.maximum_value && (
+            <Typography className={classes.originalPriceTypo}>
+              ₹{Number(price?.maximum_value).toLocaleString("en-IN")}
+            </Typography>
+          )}
+        </Box>
+
+        <Button
           fullWidth
-          className={classes.buyNowButton}
+          className={classes.addToCartBtn}
           variant="contained"
-          onClick={(e) => {
-            e.stopPropagation();
-            // getProductDetails(productId).then((data) => handleAddToCart(data, true, true));
-          }}
+          onClick={onAddtoCartPressed}
+          disabled={productLoading}
         >
-          Buy Now
-        </Button> */}
+          Add to cart
+        </Button>
       </Card>
-      <Typography component="div" variant="body" className={classes.productNameTypo}>
-        {product_name}
-      </Typography>
-      <Typography variant="body1" className={classes.providerTypo}>
-        {provider_name}
-      </Typography>
-      <Box component={"div"} className={classes.divider} />
-      <Typography variant="h5" className={classes.priceTypo}>
-        {`₹${
-          Number.isInteger(Number(price?.value)) ? Number(price?.value).toFixed(2) : Number(price?.value).toFixed(2)
-        }`}
-      </Typography>
     </div>
   );
 };
