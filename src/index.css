@@ -27,13 +27,13 @@ code {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #D3D3D3;
+  background: #d3d3d3;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #A9A9A9;
+  background: #a9a9a9;
 }
 
 .text-error {
@@ -70,3 +70,5 @@ body {
 .request-logs .MuiTablePagination-displayedRows {
   margin-bottom: 0 !important;
 }
+
+

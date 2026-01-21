@@ -2,10 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import useStyles from "./style";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { PRODUCT_SUBCATEGORY } from "../../../constants/categories";
+import { PRODUCTS } from "../../../constants/mock-data";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
 import { SearchContext } from "../../../context/searchContext";
+
+import iconMap from "../../../utils/iconMapping";
 
 const SingleCategory = ({ data, index }) => {
   // let { categoryName, subCategoryName } = useParams();
@@ -24,13 +27,22 @@ const SingleCategory = ({ data, index }) => {
     navigate({ pathname: locationData.pathname, search: params.toString() }, { replace: true });
   };
 
+  const Icon = data.icon ? iconMap[data.icon] : null;
+
   return (
-    <div className={classes.categoryItem} onClick={() => updateSearchParams()}>
+    // Apply selectedCategory class to the outer container (the card)
+    <div 
+      className={`${classes.categoryItem} ${subCategoryName === data.value ? classes.selectedCategory : ""}`} 
+      onClick={() => updateSearchParams()}
+    >
       <div
-        className={`${classes.categoryItemImageContainer} ${subCategoryName === data.value ? classes.selectedCategory : ""
-          }`}
+        className={classes.categoryItemImageContainer}
       >
-        <img className={classes.categoryImage} src={data.imageUrl} alt={`sub-category-img-${index}`} />
+        {Icon ? (
+           <Icon className={classes.subCategoryIcon} />
+        ) : (
+           <img className={classes.categoryImage} src={data.imageUrl || no_image_found} alt={`sub-category-img-${index}`} />
+        )}
       </div>
       <Typography variant="body1" className={classes.categoryNameTypo}>
         {data.value}
@@ -62,7 +74,9 @@ const CategoriesComponent = () => {
       ([category, subCategories]) =>
         subCategories.map((sub) => ({ ...sub, category }))
     );
-    setSubCatList(allOptions);
+    const availableCategories = new Set(PRODUCTS.map(p => p.item_details.category_id));
+    const filteredOptions = allOptions.filter(sub => availableCategories.has(sub.value));
+    setSubCatList(filteredOptions);
   }, [locationData, deliveryAddressLocation]);
 
 

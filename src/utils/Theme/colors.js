@@ -1,13 +1,13 @@
 const colors = {
   common: {
     white: '#ffffff',
-    black: '#000000',
+    black: '#363636',
   },
   primary: {
     main: '#3570c2',
     hover: '#175f9a',
     active: '#145589',
-    light: '#e8f0f7',
+    light: '#131516ff',
     lightHover: '#dde9f2',
     lightActive: '#b8d1e5',
     dark: '#135080',
@@ -16,11 +16,11 @@ const colors = {
     contrastText: '#fff',
   },
   secondary: {
-    main: '#008ecc',
+    main: '#ffbf00',
     hover: '#0080b8',
     active: '#0072a3',
-    light: '#e6f4fa',
-    lightHover: '#d9eef7',
+    light: '#FFF1C7',
+    lightHover: '#fce49fff',
     lightActive: '#b0dcef',
     dark: '#006b99',
     darkHover: '#00557a',
@@ -52,6 +52,8 @@ const colors = {
     cardBackground: '#F5F5F5',
     cardBackgroundHover: '#EEEEEE',
     text333: '#333',
+    scrollbar: '#D3D3D3',
+    scrollbarHover: '#A9A9A9',
   },
   text: {
     primary: '#1D1D1D', // fontColor

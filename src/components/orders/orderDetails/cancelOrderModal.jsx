@@ -1,5 +1,7 @@
+import typographyStyles from "../../../utils/Theme/typographyStyles";
 import React, { useContext, useRef, useState, useEffect } from "react";
 import CrossIcon from "../../shared/svg/cross-icon";
+import palette from "../../../utils/Theme/palette";
 import { ONDC_COLORS } from "../../shared/colors";
 // import Button from "../../shared/button/button";
 import { buttonTypes } from "../../shared/button/utils";
@@ -480,12 +482,12 @@ export default function CancelOrderModal(props) {
                           <Typography
                             className={productStyles.product_name}
                             title={product?.name}
-                            style={{ fontSize: "16px", textAlign: "left" }}
+                            style={{ fontSize: typographyStyles.body.fontSize, textAlign: "left" }}
                           >
                             {product?.name}
                           </Typography>
                           <div className="my-1">
-                            <Typography variant="subtitle1" color="#686868">
+                            <Typography variant="subtitle1" color={palette.text.disabled}>
                               QTY: {quantity?.[idx]?.count ?? "0"} X ₹{" "}
                               {Number(product?.price?.value)?.toFixed(2) || "Price Not Available"}
                             </Typography>
@@ -493,7 +495,7 @@ export default function CancelOrderModal(props) {
                               const isLastItem = idx === Object.keys(product.customizations || {}).length - 1;
                               return (
                                 <Grid container key={key}>
-                                  <Typography variant="subtitle1" color="#686868">
+                                  <Typography variant="subtitle1" color={palette.text.disabled}>
                                     {product.customizations[key].title || "Customization Title"} (₹
                                     {product.customizations[key].price.value || "0"}) {isLastItem ? "" : "+"}
                                   </Typography>
@@ -598,7 +600,7 @@ export default function CancelOrderModal(props) {
                       </p>
                     </div>
                     <div className="px-2 ms-auto">
-                      <ExpandMoreIcon sx={{ color: "#979797" }} />
+                      <ExpandMoreIcon sx={{ color: palette.text.disabled }} />
                     </div>
                   </div>
                 }
@@ -636,7 +638,7 @@ export default function CancelOrderModal(props) {
                       </p>
                     </div>
                     <div className="px-2 ms-auto">
-                      <ExpandMoreIcon sx={{ color: "#979797" }} />
+                      <ExpandMoreIcon sx={{ color: palette.text.disabled }} />
                     </div>
                   </div>
                 }

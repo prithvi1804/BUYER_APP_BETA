@@ -167,7 +167,7 @@ const useStyles = makeStyles((theme) => ({
       minWidth: "180px !important",
       top: "65px !important",
       borderRadius: "8px !important",
-      border: "1px solid #E2E8F0 !important",
+      border: `1px solid ${colors.grey.divider} !important`,
       boxShadow: "0px 10px 22px 0px rgba(45, 77, 108, 0.15) !important",
     },
   },

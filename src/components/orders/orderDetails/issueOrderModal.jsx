@@ -1,6 +1,8 @@
+import typographyStyles from "../../../utils/Theme/typographyStyles";
 import React, { useContext, useState, useEffect, useRef } from "react";
 import CrossIcon from "../../shared/svg/cross-icon";
 import { ONDC_COLORS } from "../../shared/colors";
+import colors from "../../../utils/Theme/colors";
 import styles from "../../../styles/search-product-modal/searchProductModal.module.scss";
 import productStyles from "../../../styles/orders/orders.module.scss";
 import productCartStyles from "../../../styles/products/productCard.module.scss";
@@ -431,7 +433,7 @@ export default function IssueOrderModal({
                         <Typography
                           className={productStyles.product_name}
                           title={product?.name}
-                          style={{ fontSize: "16px", textAlign: "left" }}
+                          style={{ fontSize: typographyStyles.body.fontSize, textAlign: "left" }}
                         >
                           {product?.name}
                         </Typography>
@@ -687,7 +689,7 @@ export default function IssueOrderModal({
                     width="20"
                     height="20"
                     color={ONDC_COLORS.SECONDARYCOLOR}
-                    style={{ cursor: "pointer", backgroundColor: '#F0F0F0', marginTop: -10 }}
+                    style={{ cursor: "pointer", backgroundColor: colors.grey.background, marginTop: -10 }}
                     onClick={() =>
                       setBaseImage(baseImage.filter(item => item !== image))
                     }

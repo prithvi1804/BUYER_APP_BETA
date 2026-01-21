@@ -34,6 +34,8 @@ import Radio from "@mui/material/Radio";
 
 import { makeStyles } from "@mui/styles";
 import { Fullscreen } from "@mui/icons-material";
+import typographyStyles from "../../../utils/Theme/typographyStyles";
+import palette from "../../../utils/Theme/palette";
 
 const useStyles = makeStyles({
   card: {
@@ -45,29 +47,29 @@ const useStyles = makeStyles({
   },
   cardLabel: {
     flex: 1,
-    fontSize: "15px !important",
-    fontWeight: "600 !important",
+    fontSize: `${typographyStyles.body1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   orderId: {
     flex: 1,
-    fontSize: "20px !important",
-    fontWeight: "600 !important",
+    fontSize: `${typographyStyles.h5.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
     color: "gray",
   },
   sellerName: {
     flex: 1,
-    fontSize: "18px !important",
-    fontWeight: "600 !important",
+    fontSize: `${typographyStyles.h6.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   itemName: {
     flex: 1,
-    fontSize: "16px !important",
-    fontWeight: "500 !important",
+    fontSize: `${typographyStyles.body.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   agentName: {
     flex: 1,
-    fontSize: "17px !important",
-    fontWeight: "600 !important",
+    fontSize: `${typographyStyles.body.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   centerItem: {
     display: "flex",
@@ -782,7 +784,7 @@ export default function RatingsModal({
             <CrossIcon
               width="20"
               height="20"
-              color={"#151515"}
+              color={palette.common.black}
               style={{ cursor: "pointer" }}
               onClick={onClose}
             />

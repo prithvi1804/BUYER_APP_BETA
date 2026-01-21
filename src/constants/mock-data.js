@@ -57,7 +57,7 @@ export const PRODUCTS = [
           count: "5"
         }
       },
-      category_id: "Smartphones", // [MODIFIED] Set category_id to "Smartphones" to match the category key in categories.js
+      category_id: "Mobile Phone", // [MODIFIED] Set category_id to "Mobile Phone" to match the category key in categories.js
       fulfillment_id: "f1",
       location_id: "loc-elec-1",
       tags: []
@@ -201,7 +201,7 @@ export const PRODUCTS = [
           count: "1"
         }
       },
-      category_id: "Washing Machines and Accessories",
+      category_id: "Washing Machine",
       tags: []
     },
     attributes: {
@@ -416,7 +416,7 @@ export const PRODUCTS = [
           count: "2"
         }
       },
-      category_id: "Television",
+      category_id: "Smart TV",
       fulfillment_id: "f1",
       location_id: "loc-app-1",
       tags: []
@@ -488,7 +488,7 @@ export const PRODUCTS = [
           count: "5"
         }
       },
-      category_id: "Kitchen Appliances",
+      category_id: "Coffee Maker",
       fulfillment_id: "f1",
       location_id: "loc-app-1",
       tags: []
@@ -579,13 +579,13 @@ export const OUTLETS = [
 
 export const FILTERS = {
   categories: [
-    { id: "cat-elec-1", name: "Smartphones" },
-    { id: "cat-elec-2", name: "Laptops" },
+    { id: "cat-elec-1", name: "Mobile Phone" },
+    { id: "cat-elec-2", name: "Laptop" },
     { id: "cat-elec-3", name: "Smart Watch" },
     { id: "cat-elec-4", name: "Headset" },
-    { id: "cat-app-1", name: "Washing Machines" },
-    { id: "cat-app-2", name: "Television" },
-    { id: "cat-app-3", name: "Kitchen Appliances" }
+    { id: "cat-app-1", name: "Washing Machine" },
+    { id: "cat-app-2", name: "Smart TV" },
+    { id: "cat-app-3", name: "Coffee Maker" }
   ],
   providers: [
     { id: "brand-electronics-1", name: "Tech Paradise" },

@@ -1,5 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import colors from "../../utils/Theme/colors";
+import typographyStyles from "../../utils/Theme/typographyStyles";
 
 const useStyles = makeStyles({
   homeContainer: {
@@ -272,7 +273,7 @@ const useStyles = makeStyles({
     height: '100% !important',
     width: '100% !important',
     borderRadius: '24px !important',
-    background: colors.grey.cardBackground,
+    background:`${colors.secondary.light} !important`,
     // background: '#F5F5F5 !important',
     display: 'flex',
     flexDirection: 'column',
@@ -281,7 +282,7 @@ const useStyles = makeStyles({
     boxShadow: "none !important",
     padding: '16px',
     '&:hover': {
-      background: `${colors.grey.cardBackgroundHover} !important`,
+      background: `${colors.secondary.lightHover} !important`,
     }
   },
   subCatImage: {
@@ -292,11 +293,19 @@ const useStyles = makeStyles({
     marginBottom: '12px'
   },
   subCatNameTypo: {
-    fontWeight: '600 !important',
+    fontWeight: `${typographyStyles.body1.fontWeight} !important`,
     textAlign: 'center',
-    color: colors.grey.text333,
-    fontSize: '0.8rem !important'
+    color: colors.common.black,
+    fontSize: `${typographyStyles.body1.fontSize} !important`
   },
+  subCategoryIcon: {
+    width: '36px',
+    height: '36px',
+    color: colors.common.black,
+    display: 'block',
+    margin: '0 auto',
+    marginBottom: '16px !important'
+  }
 });
 
 export default useStyles;

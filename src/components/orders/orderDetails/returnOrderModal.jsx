@@ -1,5 +1,7 @@
+import typographyStyles from "../../../utils/Theme/typographyStyles";
 import React, { useContext, useRef, useState, useEffect } from "react";
 import CrossIcon from "../../shared/svg/cross-icon";
+import palette from "../../../utils/Theme/palette";
 import styles from "../../../styles/search-product-modal/searchProductModal.module.scss";
 import productCartStyles from "../../../styles/products/productCard.module.scss";
 import productStyles from "../../../styles/orders/orders.module.scss";
@@ -412,7 +414,7 @@ export default function ReturnOrderModal({
             <CrossIcon
               width="20"
               height="20"
-              color={"#151515"}
+              color={palette.common.black}
               style={{ cursor: "pointer" }}
               onClick={onClose}
             />
@@ -445,12 +447,12 @@ export default function ReturnOrderModal({
                           <Typography
                             className={productStyles.product_name}
                             title={product?.name}
-                            style={{ fontSize: "16px", textAlign: "left" }}
+                            style={{ fontSize: typographyStyles.body.fontSize, textAlign: "left" }}
                           >
                             {product?.name}
                           </Typography>
                           <div className="my-1">
-                            <Typography variant="subtitle1" color="#686868">
+                            <Typography variant="subtitle1" color={palette.text.disabled}>
                               QTY: {qty} X ₹{" "}
                               {Number(product?.price?.value)?.toFixed(2) ||
                                 "Price Not Available"}
@@ -466,7 +468,7 @@ export default function ReturnOrderModal({
                                   <Grid container key={key}>
                                     <Typography
                                       variant="subtitle1"
-                                      color="#686868"
+                                      color={palette.text.disabled}
                                     >
                                       {product.customizations[key].title ||
                                         "Customization Title"}{" "}
@@ -546,9 +548,9 @@ export default function ReturnOrderModal({
                             <Radio
                               style={{
                                 padding: 0,
-                                color: isProductSelected(product?.id)
-                                  ? "#3f51b5"
-                                  : "rgba(0, 0, 0, 0.54)",
+                                  color: isProductSelected(product?.id)
+                                    ? palette.primary.main
+                                    : "rgba(0, 0, 0, 0.54)",
                               }}
                               id={product?.id}
                               checked={isProductSelected(product?.id)}
@@ -674,7 +676,7 @@ export default function ReturnOrderModal({
                       </p>
                     </div>
                     <div className="px-2 ms-auto">
-                      <ExpandMoreIcon sx={{ color: "#979797" }} />
+                      <ExpandMoreIcon sx={{ color: palette.text.disabled }} />
                     </div>
                   </div>
                 }

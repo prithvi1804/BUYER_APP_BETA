@@ -1,14 +1,16 @@
 import { makeStyles } from '@mui/styles';
 import palette from "../../../utils/Theme/palette";
+import colors from "../../../utils/Theme/colors";
+import typographyStyles from "../../../utils/Theme/typographyStyles";
 
 const useStyles = makeStyles({
     orderItemContainer: {
-        border: `1px solid #EDEDED`,
+        border: `1px solid ${palette.divider}`,
         borderRadius: '12px !important',
     },
     orderCard: {
         boxShadow: "none !important",
-        background: '#F5F5F5 !important',
+        background: `${colors.grey.cardBackground} !important`,
         display: 'flex',
         minHeight: '250px !important',
         // width: '314px !important',
@@ -27,27 +29,27 @@ const useStyles = makeStyles({
     },
     deliveryTimeTypo: {
         marginLeft: '6px !important',
-        color: '#686868 !important',
-        fontWeight: '500 !important',
-        lineHeight: '18px !important',
+        color: `${palette.text.disabled} !important`,
+        fontWeight: `${typographyStyles.h6.fontWeight} !important`,
+        lineHeight: `${typographyStyles.body1.lineHeight} !important`,
     },
     deliveryTimeTypoValue: {
-        fontWeight: '500 !important',
-        lineHeight: '18px !important',
+        fontWeight: `${typographyStyles.h6.fontWeight} !important`,
+        lineHeight: `${typographyStyles.body1.lineHeight} !important`,
     },
     statusChip: {
         float: 'right'
     },
     addressTypo: {
         marginTop: '12px !important',
-        fontWeight: '500 !important',
-        color: '#686868 !important',
-        lineHeight: '18px !important'
+        fontWeight: `${typographyStyles.h6.fontWeight} !important`,
+        color: `${palette.text.disabled} !important`,
+        lineHeight: `${typographyStyles.body1.lineHeight} !important`
     },
     itemNameTypo: {
         marginTop: '10px !important',
-        fontWeight: '600 !important',
-        lineHeight: '20px !important'
+        fontWeight: `${typographyStyles.h6.fontWeight} !important`,
+        lineHeight: `${typographyStyles.h6.lineHeight} !important`
     },
     vegNonVegIcon: {
         marginRight: '5px !important',
@@ -63,15 +65,15 @@ const useStyles = makeStyles({
     },
     priceTypoLabel: {
         marginTop: '12px !important',
-        fontWeight: '500 !important',
-        color: '#686868 !important',
-        lineHeight: '18px !important'
+        fontWeight: `${typographyStyles.h6.fontWeight} !important`,
+        color: `${palette.text.disabled} !important`,
+        lineHeight: `${typographyStyles.body1.lineHeight} !important`
     },
     orderDateTime: {
         marginTop: '14px !important',
-        fontWeight: '500 !important',
-        color: '#686868 !important',
-        lineHeight: '18px !important'
+        fontWeight: `${typographyStyles.h6.fontWeight} !important`,
+        color: `${palette.text.disabled} !important`,
+        lineHeight: `${typographyStyles.body1.lineHeight} !important`
     },
     viewSummaryButton: {
         float: 'right',

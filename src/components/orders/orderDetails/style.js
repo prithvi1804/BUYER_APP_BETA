@@ -1,5 +1,7 @@
 import { makeStyles } from "@mui/styles";
 import palette from "../../../utils/Theme/palette";
+import colors from "../../../utils/Theme/colors";
+import typographyStyles from "../../../utils/Theme/typographyStyles";
 
 const useStyles = makeStyles({
   orderDetailsContainer: {
@@ -7,7 +9,7 @@ const useStyles = makeStyles({
   },
   divider: {
     height: "1px",
-    backgroundColor: "#E0E0E0 !important",
+    backgroundColor: `${palette.divider} !important`,
     marginTop: "20px",
     marginBottom: "20px",
   },
@@ -41,25 +43,25 @@ const useStyles = makeStyles({
     marginTop: "5px",
   },
   orderNumberTypo: {
-    fontWeight: "400 !important",
-    lineHeight: "20px !important",
+    fontWeight: `${typographyStyles.body1.fontWeight} !important`,
+    lineHeight: `${typographyStyles.h6.lineHeight} !important`,
   },
   orderNumberTypoBold: {
-    fontWeight: "600 !important",
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   orderOnTypo: {
-    color: "#8A8A8A",
-    fontWeight: "500 !important",
+    color: palette.text.disabled,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
     marginTop: "7px !important",
   },
   orderSummaryDivider: {
     height: "1px",
-    backgroundColor: "#E0E0E0 !important",
+    backgroundColor: `${palette.divider} !important`,
     marginTop: "16px",
     marginBottom: "26px",
   },
   timelineDot: {
-    padding: "0px !important",
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
     margin: "7px 0px !important",
   },
   timelineIcon: {
@@ -71,13 +73,13 @@ const useStyles = makeStyles({
     background: "#fff !important",
   },
   timelineContentHeaderTypo: {
-    fontSize: "16px !important",
-    fontWeight: "500 !important",
+    fontSize: `${typographyStyles.body.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   timelineContentHeaderTimeTypo: {
-    fontWeight: "500 !important",
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
     marginLeft: "8px !important",
-    color: "#8A8A8A !important",
+    color: `${palette.text.disabled} !important`,
   },
 
   map: {
@@ -87,16 +89,16 @@ const useStyles = makeStyles({
   },
 
   customerDetailsTypo: {
-    fontWeight: "600 !important",
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   summaryItemValue: {
     width: "150px !important",
     textAlign: "right",
-    fontSize: "13px !important",
-    fontWeight: "600 !important",
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   summaryItemLabelDescription: {
-    color: "#A2A6B0 !important",
+    color: `${palette.text.disabled} !important`,
     marginTop: "2px !important",
     maxWidth: "300px !important",
     flex: 1,
@@ -107,13 +109,13 @@ const useStyles = makeStyles({
   },
   itemSummaryHeaderLabel: {
     flex: 1,
-    fontWeight: "600 !important",
-    color: "#8A8A8A !important",
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
+    color: `${palette.text.disabled} !important`,
   },
   itemSummaryHeaderValue: {
     width: "150px !important",
     textAlign: "right",
-    fontWeight: "600 !important",
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   itemContainer: {
     display: "flex",
@@ -121,28 +123,28 @@ const useStyles = makeStyles({
   },
   itemLabel: {
     flex: 1,
-    fontSize: "14px !important",
-    fontWeight: "600 !important",
-    color: "#686868 !important",
+    fontSize: `${typographyStyles.body1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
+    color: `${palette.text.disabled} !important`,
   },
   itemValue: {
     width: "150px !important",
     textAlign: "right",
     color: `${palette.primary.main} !important`,
-    fontSize: "14px !important",
-    fontWeight: "600 !important",
+    fontSize: `${typographyStyles.body1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
 
   customerDetailsLabel: {
-    fontSize: "16px !important",
-    fontWeight: "600 !important",
-    lineHeight: "20px !important",
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
+    lineHeight: `${typographyStyles.h6.lineHeight} !important`,
     marginBottom: "8px !important",
   },
   customerDetailsValue: {
-    fontSize: "16px !important",
-    fontWeight: "400 !important",
-    lineHeight: "26px !important",
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.body1.fontWeight} !important`,
+    lineHeight: `${typographyStyles.body1.lineHeight} !important`,
   },
   downloadInvoiceButton: {
     marginRight: "12px !important",
@@ -162,22 +164,22 @@ const useStyles = makeStyles({
   customizationValue: {
     width: "100px !important",
     textAlign: "right",
-    color: "#A2A6B0 !important",
+    color: `${palette.text.disabled} !important`,
   },
   customizationLabel: {
-    color: "#A2A6B0 !important",
+    color: `${palette.text.disabled} !important`,
     marginTop: "2px !important",
     flex: 1,
   },
   totalLabel: {
     flex: 1,
-    fontSize: "16px !important",
-    fontWeight: "600 !important",
+    fontSize: `${typographyStyles.body.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   totalValue: {
     width: "100px !important",
     textAlign: "right",
-    fontWeight: "600 !important",
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   actionButtons: {
     float: "right",
@@ -205,79 +207,79 @@ const useStyles = makeStyles({
   },
   summaryItemLabel: {
     flex: 1,
-    fontSize: "13px !important",
-    fontWeight: "600 !important",
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
     marginTop: "20px !important",
   },
   summaryDeliveryLabel: {
     flex: 1,
-    fontSize: "13px !important",
-    fontWeight: "600 !important",
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   summaryCustomizationLabel: {
     flex: 1,
-    color: "#A2A6B0 !important",
-    fontSize: "12px !important",
-    fontWeight: "600 !important",
-    marginLeft: "20px !important",
+    color: `${palette.text.disabled} !important`,
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
+    lineHeight: `${typographyStyles.h6.lineHeight} !important`,
   },
   summaryItemPriceLabel: {
     flex: 1,
-    fontSize: "12px !important",
-    fontWeight: "600 !important",
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
     marginLeft: "10px !important",
   },
   summaryItemDiscountLabel: {
     flex: 1,
-    color: "green",
-    fontSize: "12px !important",
-    fontWeight: "600 !important",
+    color: palette.success.main,
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
     marginLeft: "10px !important",
   },
   summaryCustomizationDiscountLabel: {
     flex: 1,
-    color: "#b1e3b1",
-    fontSize: "12px !important",
-    fontWeight: "600 !important",
+    color: palette.success.dark,
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
     marginLeft: "10px !important",
   },
   summaryItemTaxLabel: {
     flex: 1,
-    color: "red",
-    fontSize: "12px !important",
-    fontWeight: "600 !important",
+    color: palette.error.main,
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
     marginLeft: "10px !important",
   },
   summaryCustomizationTaxLabel: {
     flex: 1,
-    color: "#eb9494",
-    fontSize: "12px !important",
-    fontWeight: "600 !important",
+    color: palette.error.dark,
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
     marginLeft: "30px !important",
   },
   summaryCustomizationPriceLabel: {
     flex: 1,
-    color: "#A2A6B0 !important",
-    fontSize: "12px !important",
-    fontWeight: "600 !important",
+    color: `${palette.text.disabled} !important`,
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
     marginLeft: "30px !important",
   },
   summaryItemPriceValue: {
     width: "100px !important",
     textAlign: "right",
-    fontSize: "12px !important",
-    fontWeight: "600 !important",
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   summaryCustomizationPriceValue: {
-    color: "#A2A6B0 !important",
+    color: `${palette.text.disabled} !important`,
     width: "100px !important",
     textAlign: "right",
-    fontSize: "12px !important",
-    fontWeight: "600 !important",
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   subTotalLabel: {
     flex: 1,
-    fontWeight: "600 !important",
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   summarySubtotalContainer: {
     display: "flex",
@@ -287,11 +289,11 @@ const useStyles = makeStyles({
   subTotalValue: {
     width: "100px !important",
     textAlign: "right",
-    fontWeight: "600 !important",
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
   },
   orderTotalDivider: {
     height: "1px",
-    backgroundColor: "#CACDD8 !important",
+    backgroundColor: `${palette.divider} !important`,
     marginTop: "20px",
     marginBottom: "15px",
   },
@@ -300,9 +302,9 @@ const useStyles = makeStyles({
   },
   summaryOfferLabel: {
     flex: 1,
-    fontSize: "13px !important",
-    fontWeight: "600 !important",
-    color: "blue !important",
+    fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
+    fontWeight: `${typographyStyles.h6.fontWeight} !important`,
+    color: `${palette.primary.main} !important`,
   },
 });
 
