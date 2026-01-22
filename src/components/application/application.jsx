@@ -9,7 +9,7 @@ import Cart from "./cart/cart";
 // import Orders from "./orders/orders";
 // import ProductList from "./product-list/productList";
 // import Home from "../home/home";
-// import Profile from "./profile/profile";
+import Profile from "./profile/profile";
 // import Support from "./support/support";
 import ProductDetails from "./product-list/product-details/productDetails";
 import Brand from "../brand/brand";
@@ -39,6 +39,16 @@ export default function Application() {
                 <PrivateRoute>
                   <AppLayout>
                     <ProductRoutes />
+                  </AppLayout>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={"/profile"}
+              element={
+                <PrivateRoute>
+                  <AppLayout>
+                    <Profile />
                   </AppLayout>
                 </PrivateRoute>
               }

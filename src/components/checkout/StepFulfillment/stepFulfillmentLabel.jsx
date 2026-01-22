@@ -23,10 +23,10 @@ const StepFulfillmentLabel = ({
   };
 
   const renderCommonFulfillment = () => {
-    const fulfillment = fulfillments.find(
-      (fulfillment) => fulfillment.id === Object.values(selectedFulfillments)[0]
+    const fulfillment = fulfillments?.find(
+      (fulfillment) => fulfillment.id === Object.values(selectedFulfillments || {})[0]
     );
-    if(fulfillment){
+    if (fulfillment) {
       let deliveryTime = fulfillment["@ondc/org/TAT"];
       // Create a duration object from the ISO 8601 string
       const duration = moment.duration(fulfillment["@ondc/org/TAT"]);
@@ -34,7 +34,7 @@ const StepFulfillmentLabel = ({
       const hours = duration.humanize();
       deliveryTime = `${hours}`;
       return `${fulfillment["@ondc/org/category"]} - Delivery in ${deliveryTime}`;
-    }else{
+    } else {
       return ''
     }
 
@@ -43,14 +43,14 @@ const StepFulfillmentLabel = ({
   const renderAllFulfillments = () => {
     return (
       <div>
-        {products.map((product) => {
-          const fulfillment = fulfillments.find(
-            (fulfillment) => fulfillment.id === selectedFulfillments[product.id]
+        {products?.map((product) => {
+          const fulfillment = fulfillments?.find(
+            (fulfillment) => fulfillment.id === selectedFulfillments?.[product.id]
           );
           let deliveryTime = "";
           let category = "";
-          if(fulfillment){
-            category=fulfillment["@ondc/org/category"]
+          if (fulfillment) {
+            category = fulfillment["@ondc/org/category"]
             deliveryTime = fulfillment["@ondc/org/TAT"];
             // Create a duration object from the ISO 8601 string
             const duration = moment.duration(fulfillment["@ondc/org/TAT"]);
@@ -61,7 +61,7 @@ const StepFulfillmentLabel = ({
           }
 
           return (
-            <div>
+            <div key={product.id}>
               {/* {product.name + " : " + fulfillment["@ondc/org/category"]} */}
               {`${product.name} : ${category} - Delivery in ${deliveryTime}`}
             </div>

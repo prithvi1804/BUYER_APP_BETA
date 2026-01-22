@@ -1,10 +1,10 @@
 import { makeStyles } from "@mui/styles";
-import palette from "../../../utils/Theme/palette";
+import colors from "../../../utils/Theme/colors";
 
 const useStyles = makeStyles({
   productContainer: {
     padding: "20px 40px 40px 40px !important",
-    "@media (max-width: 600px)": {
+    "@media (max-width: 768px)": {
       padding: "20px 20px 20px 20px !important",
     },
   },
@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     height: "100% !important",
     borderRadius: "16px !important",
-    padding: "12px",
+    padding: "10px",
     position: "relative !important",
     transition: "transform 0.2s ease-in-out",
     "&:hover": {
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     position: "relative",
     width: "100%",
     paddingTop: "100%", // 1:1 Aspect Ratio
-    marginBottom: "12px",
+    marginBottom: "8px",
   },
   productImage: {
     position: "absolute",
@@ -43,43 +43,65 @@ const useStyles = makeStyles({
   },
   productNameTypo: {
     fontWeight: "600 !important",
-    fontSize: "1rem !important",
+    fontSize: "0.875rem !important",
     color: "#333",
-    marginBottom: "8px !important",
+    marginBottom: "4px !important",
     display: "-webkit-box",
     "-webkit-line-clamp": 2,
     "-webkit-box-orient": "vertical",
     overflow: "hidden",
-    height: "2.4em",
-    lineHeight: "1.2em",
+    height: "2.8em",
+    lineHeight: "1.4em",
   },
   priceContainer: {
     display: "flex",
     alignItems: "baseline",
     gap: "8px",
-    marginBottom: "16px !important",
+    marginBottom: "12px !important",
   },
   priceTypo: {
     fontWeight: "700 !important",
-    fontSize: "1.25rem !important",
+    fontSize: "1rem !important",
     color: "#000",
   },
   originalPriceTypo: {
-    fontSize: "0.9rem !important",
+    fontSize: "0.8rem !important",
     color: "#888",
     textDecoration: "line-through",
   },
   addToCartBtn: {
     width: "100%",
-    backgroundColor: "#C6E3FF !important",
-    color: "#007AFF !important",
+    backgroundColor: colors.primary.lightHover + " !important",
+    color: colors.primary.main + " !important",
     fontWeight: "700 !important",
     borderRadius: "12px !important",
     textTransform: "none !important",
-    padding: "10px !important",
+    padding: "8px !important",
+    fontSize: "0.875rem !important",
     "&:hover": {
-      backgroundColor: "#B0D7FF !important",
+      backgroundColor: colors.primary.lightActive + " !important",
     },
+  },
+  quantitySelector: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    backgroundColor: colors.primary.lightHover + " !important",
+    borderRadius: "12px !important",
+    padding: "4px !important",
+  },
+  quantityButton: {
+    minWidth: "32px !important",
+    height: "32px !important",
+    color: colors.primary.main + " !important",
+    fontSize: "1.2rem !important",
+    fontWeight: "700 !important",
+  },
+  quantityCount: {
+    fontWeight: "700 !important",
+    fontSize: "1rem !important",
+    color: colors.primary.main + " !important",
   },
 
 
@@ -96,7 +118,7 @@ const useStyles = makeStyles({
   filterSidebar: {
     borderRight: "1px solid #EDEDED",
     paddingRight: "20px !important",
-    "@media (max-width: 900px)": {
+    "@media (max-width: 768px)": {
       display: "none !important",
     },
   },
@@ -116,7 +138,7 @@ const useStyles = makeStyles({
     display: "none",
     boxShadow: "0px -2px 10px rgba(0,0,0,0.1)",
     zIndex: 1000,
-    "@media (max-width: 900px)": {
+    "@media (max-width: 768px)": {
       display: "flex",
     },
   },
@@ -141,7 +163,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "flex-end",
     marginBottom: "20px",
-    "@media (max-width: 900px)": {
+    "@media (max-width: 768px)": {
       display: "none",
     },
   },

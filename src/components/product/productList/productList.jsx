@@ -463,8 +463,8 @@ const ProductList = ({ isOnHomePage = false }) => {
                           item
                           xs={6}
                           sm={4}
-                          md={4}
-                          lg={3}
+                          md={2}
+                          lg={2}
                           xl={2}
                         >
                           <ProductGridView

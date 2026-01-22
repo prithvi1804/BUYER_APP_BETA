@@ -21,8 +21,8 @@ const ProductListView = (props) => {
     bpp_provider_id,
     bpp_provider_descriptor,
     show_quantity_button = true,
-    onUpdateCart = () => {},
-    handleAddToCart = () => {},
+    onUpdateCart = () => { },
+    handleAddToCart = () => { },
     getProductDetails,
     productLoading,
   } = props;
@@ -45,9 +45,8 @@ const ProductListView = (props) => {
           {provider_name}
         </Typography>
         <Typography variant="h4" className={classes.priceTypoList}>
-          {`₹${
-            Number.isInteger(Number(price?.value)) ? Number(price?.value).toFixed(2) : Number(price?.value).toFixed(2)
-          }`}
+          {`₹${Number.isInteger(Number(price?.value)) ? Number(price?.value).toFixed(2) : Number(price?.value).toFixed(2)
+            }`}
         </Typography>
         <Typography component="div" variant="body" className={classes.descriptionTypoList}>
           {product_description}

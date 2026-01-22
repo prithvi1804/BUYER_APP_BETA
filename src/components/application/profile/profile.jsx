@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import Navbar from "../../shared/navbar/navbar";
 import styles from "../../../styles/profile/profile.module.scss";
 import { getValueFromCookie } from "../../../utils/cookies";
 import default_user_avatar from "../../../assets/icons/fontawesome/solid/user.svg";
@@ -8,7 +7,6 @@ export default function Profile() {
   const user = JSON.parse(getValueFromCookie("user"));
   return (
     <Fragment>
-      <Navbar />
       <div className="container pt-5">
         <div className="row align-items-center">
           <div className="col-md-6 col-lg-2">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import useStyles from "./style";
 
 import Card from "@mui/material/Card";
@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { postCall } from "../../../api/client";
 import { getValueFromCookie } from "../../../utils/cookies";
 import { Button } from "@mui/material";
+import { CartContext } from "../../../context/cartContext";
 
 const ProductGridView = (props) => {
   const classes = useStyles();
@@ -31,12 +32,34 @@ const ProductGridView = (props) => {
     productLoading,
   } = props;
 
+  const { cartItems, addItem, updateItem } = useContext(CartContext);
+  const cartItem = cartItems.find((item) => item.id === productId);
+
   const { id, descriptor, provider_details } = product || {};
   const { name: product_name, images, symbol } = descriptor || {};
 
   const onAddtoCartPressed = (e) => {
     e.stopPropagation();
-    getProductDetails(productId).then((data) => handleAddToCart(data, true));
+    // For dummy implementation, we add directly using context
+    const itemToAdd = {
+      id: productId,
+      item_details: product,
+      price: price,
+      provider_details: { descriptor: bpp_provider_descriptor, id: bpp_provider_id },
+      bpp_details: { bpp_id },
+      location_details: { id: location_id }
+    };
+    addItem(itemToAdd);
+  };
+
+  const handleIncrement = (e) => {
+    e.stopPropagation();
+    updateItem(productId, cartItem.quantity.count + 1);
+  };
+
+  const handleDecrement = (e) => {
+    e.stopPropagation();
+    updateItem(productId, cartItem.quantity.count - 1);
   };
 
   return (
@@ -68,15 +91,29 @@ const ProductGridView = (props) => {
           )}
         </Box>
 
-        <Button
-          fullWidth
-          className={classes.addToCartBtn}
-          variant="contained"
-          onClick={onAddtoCartPressed}
-          disabled={productLoading}
-        >
-          Add to cart
-        </Button>
+        {cartItem ? (
+          <Box className={classes.quantitySelector}>
+            <Button className={classes.quantityButton} onClick={handleDecrement}>
+              -
+            </Button>
+            <Typography className={classes.quantityCount}>
+              {cartItem.quantity.count}
+            </Typography>
+            <Button className={classes.quantityButton} onClick={handleIncrement}>
+              +
+            </Button>
+          </Box>
+        ) : (
+          <Button
+            fullWidth
+            className={classes.addToCartBtn}
+            variant="contained"
+            onClick={onAddtoCartPressed}
+            disabled={productLoading}
+          >
+            Add to cart
+          </Button>
+        )}
       </Card>
     </div>
   );

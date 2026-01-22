@@ -57,7 +57,7 @@ export const PRODUCTS = [
           count: "5"
         }
       },
-      category_id: "Mobile Phone", // [MODIFIED] Set category_id to "Mobile Phone" to match the category key in categories.js
+      category_id: "Mobile Phone",
       fulfillment_id: "f1",
       location_id: "loc-elec-1",
       tags: []
@@ -71,6 +71,80 @@ export const PRODUCTS = [
     customisation_groups: [],
     customisation_items: [],
     locations: ["loc-elec-1"],
+    related_items: [],
+    categories: []
+  },
+  {
+    id: "product-electronics-1-low",
+    local_id: "elec-1-low",
+    bpp_details: {
+      bpp_id: "digital-world-bpp",
+      bpp_uri: "https://digitalworld.com/ondc"
+    },
+    context: {
+      domain: "ONDC:RET14",
+      city: "std:080",
+      bpp_uri: "https://digitalworld.com/ondc"
+    },
+    descriptor: {
+      name: "iPhone 15 Pro",
+      short_desc: "Apple's latest flagship smartphone with Titanium design",
+      long_desc: "The iPhone 15 Pro features a strong and lightweight aerospace-grade titanium design with contoured edges. Special offer from Digital World!",
+      images: [
+        "https://images.unsplash.com/photo-1696446701796-da61225697cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      ],
+      symbol: "https://images.unsplash.com/photo-1696446701796-da61225697cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+    },
+    price: {
+      value: "124900",
+      currency: "INR",
+      maximum_value: "144900"
+    },
+    provider_details: {
+      id: "brand-electronics-2",
+      descriptor: {
+        name: "Digital World"
+      }
+    },
+    location_id: "loc-elec-2",
+    item_details: {
+      id: "product-electronics-1-low",
+      descriptor: {
+        name: "iPhone 15 Pro",
+        short_desc: "Apple's latest flagship smartphone with Titanium design",
+        long_desc: "The iPhone 15 Pro features a strong and lightweight aerospace-grade titanium design with contoured edges.",
+        images: [
+          "https://images.unsplash.com/photo-1696446701796-da61225697cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        ],
+        symbol: "https://images.unsplash.com/photo-1696446701796-da61225697cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      },
+      price: {
+        value: "124900",
+        currency: "INR",
+        maximum_value: "144900"
+      },
+      quantity: {
+        available: {
+          count: "20"
+        },
+        maximum: {
+          count: "2"
+        }
+      },
+      category_id: "Mobile Phone",
+      fulfillment_id: "f1",
+      location_id: "loc-elec-2",
+      tags: []
+    },
+    attributes: {
+      "Model": "iPhone 15 Pro",
+      "Storage": "256GB",
+      "Color": "Natural Titanium",
+      "Display": "6.1-inch Super Retina XDR"
+    },
+    customisation_groups: [],
+    customisation_items: [],
+    locations: ["loc-elec-2"],
     related_items: [],
     categories: []
   },
@@ -528,6 +602,17 @@ export const BRANDS = [
       ]
     },
     domain: "ONDC:RET15" // Appliances
+  },
+  {
+    id: "brand-electronics-2",
+    descriptor: {
+      name: "Digital World",
+      short_desc: "Electronics at the best prices",
+      images: [
+        "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      ]
+    },
+    domain: "ONDC:RET14"
   }
 ];
 
@@ -547,6 +632,14 @@ export const BRAND_DETAILS = {
       images: ["https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"]
     },
     domain: "ONDC:RET15"
+  },
+  "brand-electronics-2": {
+    id: "brand-electronics-2",
+    descriptor: {
+      name: "Digital World",
+      images: ["https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"]
+    },
+    domain: "ONDC:RET14"
   }
 };
 
@@ -574,6 +667,18 @@ export const OUTLETS = [
       area_code: "560038"
     },
     provider_id: "brand-appliances-1"
+  },
+  {
+    id: "loc-elec-2",
+    descriptor: {
+      name: "Digital World - MG Road"
+    },
+    address: {
+      street: "MG Road",
+      city: "Bengaluru",
+      area_code: "560001"
+    },
+    provider_id: "brand-electronics-2"
   }
 ];
 
@@ -589,6 +694,7 @@ export const FILTERS = {
   ],
   providers: [
     { id: "brand-electronics-1", name: "Tech Paradise" },
+    { id: "brand-electronics-2", name: "Digital World" },
     { id: "brand-appliances-1", name: "Home Essentials" }
   ]
 };

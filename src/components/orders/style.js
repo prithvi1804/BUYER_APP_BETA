@@ -4,7 +4,7 @@ import palette from "../../utils/Theme/palette";
 const useStyles = makeStyles({
     ordersContainer: {
         padding: "20px 40px 40px 40px !important",
-        "@media (max-width: 600px)": {
+        "@media (max-width: 768px)": {
             padding: "20px 20px 20px 20px !important",
         },
     },

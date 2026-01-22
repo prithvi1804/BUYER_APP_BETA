@@ -1,5 +1,5 @@
 import { makeStyles } from "@mui/styles";
-import palette from "../../../utils/Theme/palette";
+import colors from "../../../utils/Theme/colors";
 
 const moreImageContainer = (size, borderColor) => ({
   height: size,
@@ -15,29 +15,35 @@ const moreImageContainer = (size, borderColor) => ({
 
 const useStyles = makeStyles({
   headingContainer: {
-    backgroundColor: palette.background.paper,
-    height: 70,
+    backgroundColor: "#ffffff",
+    height: 80,
     width: "100%",
-    padding: "20px 40px 0 40px",
+    padding: "0 40px",
     display: "flex",
     alignItems: "center",
-    "@media (max-width: 600px)": {
-      padding: "20px 20px 0 20px",
+    borderBottom: "1px solid #eee",
+    "@media (max-width: 768px)": {
+      padding: "0 20px",
       height: "auto",
     },
   },
   heading: {
     textTransform: "none !important",
+    fontWeight: "700 !important",
+    fontSize: "24px !important",
     fontFamily: "var(--font-body-fontFamily) !important",
   },
   cartContainer: {
-    padding: "20px 40px",
-    "@media (max-width: 600px)": {
-      padding: "20px 20px",
+    padding: "40px",
+    "@media (max-width: 768px)": {
+      padding: "20px",
+      paddingBottom: "120px", // space for sticky footer
     },
   },
   tableHead: {
-    fontWeight: "600 !important",
+    fontWeight: "700 !important",
+    color: "#686868",
+    fontSize: "14px !important",
   },
   moreImages: {
     ...moreImageContainer(110, "lightgrey"),
@@ -45,6 +51,9 @@ const useStyles = makeStyles({
     borderRadius: 10,
     padding: 4,
     backgroundColor: "#ffffff",
+    "@media (max-width: 768px)": {
+      ...moreImageContainer(80, "lightgrey"),
+    },
   },
   greyContainer: {
     ...moreImageContainer("100%", "#e7e7e7"),
@@ -53,7 +62,8 @@ const useStyles = makeStyles({
     position: "relative",
   },
   moreImage: {
-    height: 80,
+    width: "100%",
+    height: "100%",
     objectFit: "contain",
   },
   logoContainer: {
@@ -93,28 +103,59 @@ const useStyles = makeStyles({
     cursor: "pointer",
   },
   summaryCard: {
-    marginTop: 20,
+    padding: "32px",
+    borderRadius: "20px !important",
+    boxShadow: "0px 20px 40px 0px rgba(0, 0, 0, 0.05) !important",
+    border: "1px solid #f0f0f0 !important",
     flexDirection: "column",
-    "@media (max-width: 600px)": {
-      width: "100%",
-      padding: "16px",
+    backgroundColor: "#ffffff !important",
+    "@media (max-width: 768px)": {
+      display: "none !important",
+    },
+  },
+  mobileSummary: {
+    display: "none",
+    "@media (max-width: 768px)": {
+      display: "block",
+      position: "fixed",
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "#ffffff",
+      padding: "20px",
+      boxShadow: "0px -10px 20px rgba(0,0,0,0.05)",
+      zIndex: 1000,
+      borderTop: "1px solid #eee",
+    },
+  },
+  checkoutBtn: {
+    width: "100%",
+    height: "50px",
+    fontSize: "16px !important",
+    fontWeight: "600 !important",
+    borderRadius: "12px !important",
+    textTransform: "none !important",
+    marginTop: "20px !important",
+    "@media (max-width: 768px)": {
+      marginTop: "10px !important",
     },
   },
   hideOnMobile: {
-    "@media (max-width: 600px)": {
+    "@media (max-width: 768px)": {
       display: "none !important",
     },
   },
   showOnMobile: {
     display: "none",
-    "@media (max-width: 600px)": {
+    "@media (max-width: 768px)": {
       display: "block !important",
     },
   },
   summaryTypo: {
     fontFamily: "var(--font-body-fontFamily) !important",
-    fontWeight: "600 !important",
-    marginBottom: "20px",
+    fontWeight: "700 !important",
+    fontSize: "1.25rem !important",
+    marginBottom: "10px",
   },
   summaryLabel: {
     fontSize: "13px !important",
@@ -134,22 +175,22 @@ const useStyles = makeStyles({
     fontFamily: "var(--font-body-fontFamily) !important",
     fontWeight: "700 !important",
     textTransform: "none",
-    fontSize: "3rem !important",
-    "@media (max-width: 600px)": {
+    fontSize: "2.5rem !important",
+    "@media (max-width: 768px)": {
       fontSize: "24px !important",
     },
   },
   emptyCartSubMsg: {
     marginTop: "16px !important",
     marginBottom: "16px !important",
-    "@media (max-width: 600px)": {
+    "@media (max-width: 768px)": {
       fontSize: "14px !important",
     },
   },
   emptyCartIcon: {
     fontSize: "90px !important",
     marginBottom: "16px !important",
-    "@media (max-width: 600px)": {
+    "@media (max-width: 768px)": {
       fontSize: "60px !important",
     },
   },

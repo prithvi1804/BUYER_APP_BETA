@@ -84,13 +84,13 @@ const Checkout = () => {
   const { cancellablePromise } = useCancellablePromise();
 
   const resetCartItems = () => {
-    const cartItemsData = JSON.parse(localStorage.getItem("cartItems"));
+    const cartItemsData = JSON.parse(localStorage.getItem("cartItems") || "[]");
     const updatedCartItemsData = JSON.parse(
-      localStorage.getItem("updatedCartItems")
+      localStorage.getItem("updatedCartItems") || "[]"
     );
-    setCartItems(cartItemsData);
+    setCartItems(cartItemsData || []);
     setSelectedFulfillments({});
-    setUpdatedCartItems(updatedCartItemsData);
+    setUpdatedCartItems(updatedCartItemsData || []);
   };
 
   function dispatchToast(type, message) {
@@ -108,10 +108,10 @@ const Checkout = () => {
     resetCartItems();
     let timeout;
     const duration = moment.duration(
-      updatedCartItems[0]?.message.quote.quote.ttl
+      updatedCartItems?.[0]?.message?.quote?.quote?.ttl || 0
     );
 
-    if (updatedCartItems[0]?.message.quote.quote.ttl) {
+    if (updatedCartItems?.[0]?.message?.quote?.quote?.ttl) {
       console.log(
         "Request timeout",
         updatedCartItems[0]?.message.quote.quote.ttl,
@@ -129,11 +129,11 @@ const Checkout = () => {
         clearTimeout(timeout);
       };
     }
-  }, [updatedCartItems[0]?.message.quote.quote.ttl]);
+  }, [updatedCartItems?.[0]?.message?.quote?.quote?.ttl]);
 
   useEffect(() => {
     try {
-      if (updatedCartItems.length > 0) {
+      if (updatedCartItems && updatedCartItems.length > 0) {
         // fetch request object length and compare it with the response length
         let c = cartItems.map((item) => {
           return item.item;
@@ -148,7 +148,7 @@ const Checkout = () => {
         let total_payable = 0;
         let isAnyError = false;
         let quotes = updatedCartItems?.map((item, index) => {
-          let { message, error } = item;
+          let { message, error } = item || {};
           let provider_payable = 0;
           const provider = {
             products: [],
@@ -208,8 +208,8 @@ const Checkout = () => {
               let cartQuantity = findItemFromCartItems
                 ? findItemFromCartItems?.quantity?.count
                 : cartItem
-                ? cartItem?.quantity?.count
-                : 0;
+                  ? cartItem?.quantity?.count
+                  : 0;
               let quantity = break_up_item["@ondc/org/item_quantity"]
                 ? break_up_item["@ondc/org/item_quantity"]["count"]
                 : 0;
@@ -282,10 +282,10 @@ const Checkout = () => {
             let offers = [];
             let outOfStock = [];
             let errorCode = "";
-            let selected_fulfillments = selectedFulfillments;
+            let selected_fulfillments = selectedFulfillments || {};
 
-            if (Object.keys(selectedFulfillments).length === 0) {
-              updatedCartItems[0]?.message?.quote.items.forEach((item) => {
+            if (Object.keys(selectedFulfillments || {}).length === 0) {
+              updatedCartItems?.[0]?.message?.quote?.items?.forEach((item) => {
                 selected_fulfillments[item.id] = item.fulfillment_id;
               });
               setSelectedFulfillments(selected_fulfillments);
@@ -519,7 +519,7 @@ const Checkout = () => {
     if (paymentStatus) {
       if (paymentStatus === "success") {
         setConfirmOrderLoading(true);
-        let c = cartItems.map((item) => {
+        let c = (cartItems || []).map((item) => {
           return item.item;
         });
         const { successOrderIds } = JSON.parse(
@@ -626,10 +626,10 @@ const Checkout = () => {
 
   const getCartProducts = () => {
     let products = {};
-    return cartItems?.map((cartItem) => {
+    return (cartItems || [])?.map((cartItem) => {
       return {
         name: cartItem?.item?.product?.descriptor?.name,
-        id: cartItem.item.local_id,
+        id: cartItem?.item?.local_id,
       };
     });
   };
@@ -732,9 +732,9 @@ const Checkout = () => {
               setActiveStep(4);
             }}
             updateInitLoading={(value) => setInitLoading(value)}
-            responseReceivedIds={updatedCartItems.map((item) => {
-              const { message } = item;
-              return message?.quote?.provider?.id.toString();
+            responseReceivedIds={(updatedCartItems || []).map((item) => {
+              const { message } = item || {};
+              return message?.quote?.provider?.id?.toString() || "";
             })}
           />
         );
@@ -742,9 +742,9 @@ const Checkout = () => {
         return (
           <StepPaymentContent
             isError={productsQuote.isError}
-            responseReceivedIds={updatedCartItems.map((item) => {
-              const { message } = item;
-              return message?.quote?.provider?.id.toString();
+            responseReceivedIds={(updatedCartItems || []).map((item) => {
+              const { message } = item || {};
+              return message?.quote?.provider?.id?.toString() || "";
             })}
             activePaymentMethod={activePaymentMethod}
             setActivePaymentMethod={(value) => {

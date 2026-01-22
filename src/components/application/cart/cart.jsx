@@ -18,6 +18,9 @@ import {
   TextField,
   Typography,
   styled,
+  Box,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { deleteCall, getCall, postCall, putCall } from "../../../api/client";
 import { AddCookie, getValueFromCookie } from "../../../utils/cookies";
@@ -55,8 +58,10 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
   const navigate = useNavigate();
   const dispatch = useContext(ToastContext);
   const { deliveryAddress } = useContext(AddressContext);
-  const { fetchCartItems } = useContext(CartContext);
+  const { fetchCartItems, cartItems: contextCartItems, updateItem: updateContextItem } = useContext(CartContext);
   const { locationData: deliveryAddressLocation } = useContext(SearchContext);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const { cancellablePromise } = useCancellablePromise();
   const transaction_id = localStorage.getItem("transaction_id");
@@ -95,14 +100,9 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
   const getCartSubtotal = () => {
     let subtotal = 0;
     (cartItems || []).map((cartItem) => {
-      if (cartItem.item.hasCustomisations) {
-        subtotal +=
-          getPriceWithCustomisations(cartItem) *
-          cartItem?.item?.quantity?.count;
-      } else {
-        subtotal +=
-          cartItem?.item?.product?.subtotal * cartItem?.item?.quantity?.count;
-      }
+      // For dummy data, we might not have complex customization logic in the same way
+      const priceValue = cartItem?.item?.product?.subtotal || cartItem?.item?.price?.value || 0;
+      subtotal += priceValue * cartItem?.item?.quantity?.count;
     });
     return subtotal;
   };
@@ -111,7 +111,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
     if (cartItems.length < 2) {
       setHaveDistinctProviders(false);
     } else {
-      const firstProvider = cartItems[0].item.provider.id;
+      const firstProvider = cartItems?.[0]?.item?.provider?.id;
       let haveDifferentProvider = false;
 
       for (let i = 1; i < cartItems.length; i++) {
@@ -128,16 +128,22 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
   const getCartItems = async () => {
     try {
       setLoading(true);
-      const url = `/clientApis/v2/cart/${user.id}`;
-      const res = await getCall(url);
-      setCartItems(Array.isArray(res) ? res : res?.items || []);
-      updatedCartItems.current = res;
+      // For dummy implementation, we format the contextCartItems into the expected structure
+      const formattedItems = contextCartItems.map((item, index) => ({
+        _id: item.id || `item-${index}`,
+        item: {
+          ...item,
+          product: item.item_details || item.product || {},
+          provider: item.provider_details || item.provider || { id: "p1" }
+        }
+      }));
+      setCartItems(formattedItems);
+      updatedCartItems.current = formattedItems;
       if (setCheckoutCartItems) {
-        setCheckoutCartItems(res);
+        setCheckoutCartItems(formattedItems);
       }
     } catch (error) {
       console.log("Error fetching cart items:", error);
-      setLoading(false);
     } finally {
       setLoading(false);
     }
@@ -155,92 +161,19 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
     });
   }
 
-  const updateCartItem = async (itemId, increment, uniqueId) => {
-    const url = `/clientApis/v2/cart/${user.id}/${uniqueId}`;
-    const items = cartItems.concat([]);
-    const itemIndex = items.findIndex((item) => item._id === uniqueId);
-    if (itemIndex !== -1) {
-      let updatedCartItem = items[itemIndex];
-      updatedCartItem.id = updatedCartItem.item.id;
-
-      if (increment !== null) {
-        if (increment) {
-          const productMaxQuantity =
-            updatedCartItem?.item?.product?.quantity?.maximum;
-          if (productMaxQuantity) {
-            if (
-              updatedCartItem.item.quantity.count < productMaxQuantity.count
-            ) {
-              updatedCartItem.item.quantity.count += 1;
-
-              let customisations = updatedCartItem.item.customisations;
-
-              if (customisations) {
-                customisations = customisations.map((c) => {
-                  return {
-                    ...c,
-                    quantity: { ...c.quantity, count: c.quantity.count + 1 },
-                  };
-                });
-
-                updatedCartItem.item.customisations = customisations;
-              } else {
-                updatedCartItem.item.customisations = null;
-              }
-
-              updatedCartItem = updatedCartItem.item;
-              console.log("updatedCartItem", updatedCartItem);
-              const res = await putCall(url, updatedCartItem);
-              setLoading(false);
-              getCartItems();
-              fetchCartItems();
-            } else {
-              dispatchError(
-                `Maximum allowed quantity is ${updatedCartItem.item.quantity.count}`
-              );
-            }
-          } else {
-            updatedCartItem.item.quantity.count += 1;
-            updatedCartItem = updatedCartItem.item;
-            const res = await putCall(url, updatedCartItem);
-            setLoading(false);
-            getCartItems();
-            fetchCartItems();
-          }
-        } else {
-          if (updatedCartItem.item.quantity.count > 1) {
-            updatedCartItem.item.quantity.count -= 1;
-
-            let customisations = updatedCartItem.item.customisations;
-
-            if (customisations) {
-              customisations = customisations.map((c) => {
-                return {
-                  ...c,
-                  quantity: { ...c.quantity, count: c.quantity.count - 1 },
-                };
-              });
-              updatedCartItem.item.customisations = customisations;
-            } else {
-              updatedCartItem.item.customisations = null;
-            }
-
-            updatedCartItem = updatedCartItem.item;
-            const res = await putCall(url, updatedCartItem);
-            setLoading(false);
-            getCartItems();
-            fetchCartItems();
-          }
-        }
-      }
-    }
+  const updateCartItem = (itemId, increment, uniqueId) => {
+    const item = cartItems.find((ci) => ci._id === uniqueId);
+    if (!item) return;
+    const currentCount = item.item.quantity.count;
+    const newCount = increment ? currentCount + 1 : currentCount - 1;
+    updateContextItem(itemId, newCount);
   };
 
-  const deleteCartItem = async (itemId) => {
-    const url = `/clientApis/v2/cart/${user.id}/${itemId}`;
-    const res = await deleteCall(url);
-    getCartItems();
-    fetchCartItems();
+  const deleteCartItem = (itemId) => {
+    const item = cartItems.find((ci) => ci._id === itemId);
+    if (item) {
+      updateContextItem(item.item.id, 0);
+    }
   };
 
   //   const getProductDetails = async (productId) => {
@@ -276,10 +209,10 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
     try {
       const latLongInfo = JSON.parse(getValueFromCookie("LatLongInfo"));
       console.log("LAT", latLongInfo);
-      const lat = latLongInfo.lat;
-      const lng = latLongInfo.lng;
-      const provider_id = cartItems[0].item.provider.id;
-      console.log(cartItems[0].item.provider);
+      const lat = latLongInfo?.lat;
+      const lng = latLongInfo?.lng;
+      const provider_id = cartItems?.[0]?.item?.provider?.id;
+      console.log(cartItems?.[0]?.item?.provider);
       const data = await cancellablePromise(
         getAllOffersRequest("", lat, lng, provider_id)
       );
@@ -301,7 +234,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
 
   useEffect(() => {
     getCartItems();
-  }, [openDrawer]);
+  }, [openDrawer, contextCartItems]);
 
   const checkAvailableQuantity = () => {
     let quantityIsZero = false;
@@ -315,9 +248,9 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
   };
 
   const checkDifferentCategory = () => {
-    const everyEnvHasSameValue = cartItems.every(
-      ({ item }) => item.domain === cartItems[0].item.domain
-    ); // use proper name
+    const everyEnvHasSameValue = cartItems.length > 0 ? cartItems.every(
+      ({ item }) => item.domain === cartItems?.[0]?.item?.domain
+    ) : true; // use proper name
     setIsProductCategoryIsDifferent(!everyEnvHasSameValue);
   };
 
@@ -649,42 +582,40 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
     return (
       <Grid className={classes.hideOnMobile}>
         <Grid container sx={{ paddingTop: "20px" }}>
-          <Grid item xs={4.3}>
+          <Grid item xs={4}>
             <Typography variant="body1" className={classes.tableHead}>
               Item
             </Typography>
           </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={1.5}>
             <Typography
               variant="body1"
               className={classes.tableHead}
-              sx={{ marginLeft: "6px" }}
             >
               Price
             </Typography>
           </Grid>
-          <Grid item xs={1.2}>
+          <Grid item xs={1.5}>
             <Typography
               variant="body1"
               className={classes.tableHead}
-              sx={{ marginLeft: "12px" }}
             >
               Qty
             </Typography>
           </Grid>
-          <Grid item xs={1.4}>
+          <Grid item xs={2}>
             <Typography variant="body1" className={classes.tableHead}>
               Subtotal
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Typography variant="body1" className={classes.tableHead}>
               Special Instructions
             </Typography>
           </Grid>
         </Grid>
         <Divider
-          sx={{ borderColor: "#616161", margin: "20px 0", width: "98.5%" }}
+          sx={{ borderColor: "#ececec", margin: "20px 0 30px 0", width: "100%" }}
         />
       </Grid>
     );
@@ -729,7 +660,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
           </Grid> */}
         </Grid>
         <Divider
-          sx={{ borderColor: "#616161", margin: "20px 0", width: "98.5%" }}
+          sx={{ borderColor: "#ececec", margin: "20px 0", width: "100%" }}
         />
       </Grid>
     );
@@ -862,13 +793,13 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
   const renderProducts = () => {
     return (cartItems || []).map((cartItem, idx) => {
       return (
-        <Grid key={cartItem._id}>
+        <Grid key={cartItem._id} sx={{ mb: 2 }}>
           <Grid
             container
             key={cartItem?.item?.id}
-            style={{ alignItems: "flex-start" }}
+            sx={{ alignItems: "center" }}
           >
-            <Grid item xs={12} sm={12} md={4.3}>
+            <Grid item xs={12} sm={12} md={4}>
               <Grid container>
                 <div className={classes.moreImages}>
                   <div className={classes.greyContainer}>
@@ -887,12 +818,12 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
                 </div>
                 <Grid sx={{ maxWidth: "200px" }}>
                   <Typography
-                    variant="body1"
-                    sx={{ width: 200, fontWeight: 600 }}
+                    variant={isMobile ? "body2" : "body1"}
+                    sx={{ width: isMobile ? "100%" : 200, fontWeight: 700, mb: 0.5 }}
                   >
                     {cartItem?.item?.product?.descriptor?.name}
                   </Typography>
-                  {getCustomizations(cartItem)}
+                  {!isMobile && getCustomizations(cartItem)}
                   {cartItem.item.hasCustomisations && (
                     <Grid
                       container
@@ -931,7 +862,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
                       />
                     </div>
                     <Typography
-                      variant="subtitle1"
+                      variant="caption"
                       color="#686868"
                       sx={{ fontWeight: 500 }}
                     >
@@ -940,64 +871,67 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
                   </Grid>
                 </Grid>
               </Grid>
-              {/* {getCustomizations(cartItem)} */}
             </Grid>
-            <Grid item xs={4} sm={4} md={1}>
-              <Typography variant="body" sx={{ fontWeight: 600 }}>
-                {cartItem.item.hasCustomisations
-                  ? `₹ ${getPriceWithCustomisations(cartItem)}`
-                  : `₹ ${cartItem?.item?.product?.price?.value}`}
+            <Grid item xs={4} sm={4} md={1.5} sx={{ pt: isMobile ? 2 : 1 }}>
+              <Typography variant={isMobile ? "caption" : "body1"} sx={{ color: "#686868", display: isMobile ? "block" : "none", mb: 0.5 }}>Price</Typography>
+              <Typography variant={isMobile ? "body2" : "body1"} sx={{ fontWeight: 600, color: "#000" }}>
+                ₹{(cartItem?.item?.product?.price?.value || cartItem?.item?.price?.value || 0).toLocaleString("en-IN")}
               </Typography>
             </Grid>
-            <Grid item xs={4} sm={4} md={1.2}>
-              <div className={classes.qtyContainer}>
+            <Grid item xs={4} sm={4} md={1.5} sx={{ pt: isMobile ? 2 : 0 }}>
+              <Typography variant={isMobile ? "caption" : "body1"} sx={{ color: "#686868", display: isMobile ? "block" : "none", mb: 0.5 }}>Qty</Typography>
+              <div className={classes.qtyContainer} style={isMobile ? { height: 30, minWidth: 50, maxWidth: 50 } : {}}>
                 <Typography
-                  variant="body1"
-                  sx={{ marginRight: "12px", fontWeight: 600 }}
+                  variant="body2"
+                  sx={{ marginRight: "12px", fontWeight: 700, color: "#000" }}
                 >
                   {cartItem?.item?.quantity?.count}
                 </Typography>
                 <KeyboardArrowUpIcon
                   className={classes.qtyArrowUp}
+                  style={isMobile ? { fontSize: 14 } : {}}
                   onClick={() =>
                     updateCartItem(cartItem.item.id, true, cartItem._id)
                   }
                 />
                 <KeyboardArrowDownIcon
                   className={classes.qtyArrowDown}
+                  style={isMobile ? { fontSize: 14 } : {}}
                   onClick={() =>
                     updateCartItem(cartItem.item.id, false, cartItem._id)
                   }
                 />
               </div>
             </Grid>
-            <Grid item xs={4} sm={4} md={1.4}>
-              <Typography variant="body" sx={{ fontWeight: 600 }}>
+            <Grid item xs={4} sm={4} md={2} sx={{ pt: isMobile ? 2 : 1, textAlign: isMobile ? "right" : "left" }}>
+              <Typography variant={isMobile ? "caption" : "body1"} sx={{ color: "#686868", display: isMobile ? "block" : "none", mb: 0.5 }}>Subtotal</Typography>
+              <Typography variant={isMobile ? "body2" : "body1"} sx={{ fontWeight: 700, color: "#000" }}>
                 {cartItem.item.hasCustomisations
-                  ? `₹ ${parseInt(getPriceWithCustomisations(cartItem)) *
-                  parseInt(cartItem?.item?.quantity?.count)
+                  ? `₹ ${(parseInt(getPriceWithCustomisations(cartItem)) *
+                    parseInt(cartItem?.item?.quantity?.count)).toLocaleString("en-IN")
                   }`
-                  : `₹ ${parseInt(cartItem?.item?.product?.subtotal) *
-                  parseInt(cartItem?.item?.quantity?.count)
+                  : `₹ ${((parseInt(cartItem?.item?.product?.subtotal) || parseInt(cartItem?.item?.product?.price?.value) || 0) *
+                    parseInt(cartItem?.item?.quantity?.count)).toLocaleString("en-IN")
                   }`}
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={12} md={4}>
+            <Grid item xs={12} sm={12} md={3}>
               {renderSpecialInstructions(cartItem.item, cartItem._id)}
 
               <Grid
                 container
-                sx={{ margin: "16px 0" }}
+                sx={{ margin: "4px 0" }}
                 alignItems="center"
                 justifyContent="flex-end"
               >
                 <Button
                   variant="text"
-                  startIcon={<DeleteOutlineIcon size="small" />}
+                  startIcon={<DeleteOutlineIcon sx={{ fontSize: isMobile ? "18px !important" : "20px" }} />}
                   color="error"
                   onClick={() => deleteCartItem(cartItem._id)}
+                  sx={{ textTransform: "none", py: isMobile ? 0 : 0.5 }}
                 >
-                  <Typography>Delete</Typography>
+                  <Typography variant={isMobile ? "caption" : "body2"}>Delete</Typography>
                 </Button>
               </Grid>
             </Grid>
@@ -1047,7 +981,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
             </Grid>
           )}
           <Divider
-            sx={{ borderColor: "#616161", margin: "20px 0", width: "98.5%" }}
+            sx={{ borderColor: "#ececec", margin: "20px 0", width: "100%" }}
           />
         </Grid>
       );
@@ -1249,38 +1183,30 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
         <Typography variant="h4" className={classes.summaryTypo}>
           Summary
         </Typography>
-        <Divider sx={{ borderColor: "#616161", margin: "20px 0" }} />
+        <Divider sx={{ borderColor: "#ececec", margin: "20px 0" }} />
         <Grid
           container
           justifyContent="space-between"
           sx={{ marginBottom: "14px" }}
         >
-          <Typography variant="subtitle1" className={classes.summaryLabel}>
+          <Typography variant="subtitle1" className={classes.summaryLabel} sx={{ fontSize: "16px !important" }}>
             Cart Subtotal
           </Typography>
-          <Typography variant="subtitle1" className={classes.summaryLabel}>
-            ₹{getCartSubtotal()}
+          <Typography variant="subtitle1" className={classes.summaryLabel} sx={{ fontSize: "18px !important", color: "#000" }}>
+            ₹{getCartSubtotal().toLocaleString("en-IN")}
           </Typography>
         </Grid>
         <Button
           variant="contained"
-          sx={{ marginTop: 1, marginBottom: 2 }}
+          className={classes.checkoutBtn}
           disabled={!isValidCart()}
           onClick={() => {
-            if (cartItems.length > 0) {
-              let c = (cartItems || []).map((item) => {
-                return item.item;
-              });
-
-              const request_object = constructQouteObject(c);
-              getQuote(request_object[0]);
-              getProviderIds(request_object[0]);
-            }
+            navigate("/application/checkout");
           }}
         >
           {checkoutLoading ? <Loading /> : "Checkout"}
         </Button>
-      </Card>
+      </Card >
     );
   };
 
@@ -1705,7 +1631,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: "#fbfbfb", minHeight: "auto" }}>
       {!showOnlyItems && (
         <div className={classes.headingContainer}>
           <Typography variant="h3" className={classes.heading}>
@@ -1724,17 +1650,12 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
           ) : (
             <div>
               {!showOnlyItems ? (
-                <Grid container className={classes.cartContainer}>
+                <Grid container className={classes.cartContainer} spacing={4}>
                   <Grid item xs={12} md={8}>
-                    {renderTableHeads()}
-                    <div
-                      style={{
-                        minHeight: "80vh",
-                      }}
-                    >
+                    {!isMobile && renderTableHeads()}
+                    <div>
                       <div
                         style={{
-                          // minHeight: "50vh",
                           alignItems: "flex-start",
                           justifyContent: "flex-start",
                         }}
@@ -1745,13 +1666,15 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
                     </div>
                   </Grid>
 
-                  <Grid item xs={12} md={4}>
-                    {renderSummaryCard()}
-                  </Grid>
+                  {!isMobile && (
+                    <Grid item xs={12} md={4}>
+                      {renderSummaryCard()}
+                    </Grid>
+                  )}
                 </Grid>
               ) : (
                 <div>
-                  {renderTableHeadForCheckoutPage()}
+                  {!isMobile && renderTableHeadForCheckoutPage()}
                   <div
                     style={{
                       alignItems: "flex-start",
@@ -1760,6 +1683,33 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
                   >
                     {renderProductsForCheckoutPage()}
                   </div>
+                </div>
+              )}
+              {isMobile && !showOnlyItems && (
+                <div className={classes.mobileSummary}>
+                  <Grid container justifyContent="space-between" alignItems="center">
+                    <Box>
+                      <Typography variant="subtitle2" sx={{ color: "#686868" }}>
+                        Cart Subtotal
+                      </Typography>
+                      <Typography variant="h5" sx={{ fontWeight: 700 }}>
+                        ₹{getCartSubtotal().toLocaleString("en-IN")}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ width: "150px" }}>
+                      <Button
+                        variant="contained"
+                        className={classes.checkoutBtn}
+                        sx={{ mt: "0 !important" }}
+                        disabled={!isValidCart()}
+                        onClick={() => {
+                          navigate("/application/checkout");
+                        }}
+                      >
+                        {checkoutLoading ? <Loading /> : "Checkout"}
+                      </Button>
+                    </Box>
+                  </Grid>
                 </div>
               )}
               <Drawer

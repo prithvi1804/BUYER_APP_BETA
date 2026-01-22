@@ -8,6 +8,11 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 import Badge from "@mui/material/Badge";
+import Drawer from "@mui/material/Drawer";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Box from "@mui/material/Box";
+import CloseIcon from "@mui/icons-material/Close";
 
 import HouseIcon from "../../../assets/icons/fontawesome/solid/house.svg?react";
 import LocationIcon from "../../../assets/icons/fontawesome/solid/location-dot.svg?react";
@@ -45,6 +50,8 @@ import { toast_actions, toast_types } from "../../shared/toast/utils/toast";
 
 const NavBar = ({ isCheckout = false }) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
   const locationData = useLocation();
   const user = getUser();
@@ -468,7 +475,7 @@ const NavBar = ({ isCheckout = false }) => {
               </div> */}
               <div className={classes.cart}>
                 <Link to="/application/cart">
-                  <Badge color="error" badgeContent={cartItems.length}>
+                  <Badge color="error" badgeContent={cartItems.reduce((acc, item) => acc + (item.quantity?.count || 0), 0)}>
                     <CartSshoppingFast className={classes.cartIcon} />
                   </Badge>
                   <Typography variant="body2" className={classes.cartTypo}>
@@ -507,7 +514,10 @@ const NavBar = ({ isCheckout = false }) => {
                   horizontal: "right",
                 }}
               >
-                <MenuItem onClick={() => { }}>My Profile</MenuItem>
+                <MenuItem onClick={() => {
+                  navigate("/application/profile");
+                  handleCloseUserMenu();
+                }}>My Profile</MenuItem>
                 <MenuItem
                   onClick={() => {
                     navigate(`/application/orders`);
@@ -557,91 +567,198 @@ const NavBar = ({ isCheckout = false }) => {
           )}
         </Toolbar>
         {(selectAddressModal || (deliveryAddress === undefined && addressList.length > 0)) && (
-          <ModalComponent
-            open={selectAddressModal || deliveryAddress === undefined}
-            onClose={() => {
-              setSelectAddressModal(false);
-            }}
-            title="Select Address"
-          >
-            <SelectAddress
-              addresses={addressList}
-              onSelectAddress={(pin) => {
-                fetchLatLongFromEloc(pin);
-              }}
+          isMobile ? (
+            <Drawer
+              anchor="bottom"
+              open={selectAddressModal || deliveryAddress === undefined}
               onClose={() => setSelectAddressModal(false)}
-              setAddAddress={() => {
-                setSelectAddressModal(false);
-                setToggleAddressModal({
-                  actionType: "add",
-                  toggle: true,
-                  address: restoreToDefault(),
-                });
+              PaperProps={{
+                sx: { borderTopLeftRadius: "20px", borderTopRightRadius: "20px", padding: "20px", maxHeight: "80vh" }
               }}
-              setUpdateAddress={(address) => {
+            >
+              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
+                <Typography variant="h6" fontWeight="700">Select Address</Typography>
+                <IconButton onClick={() => setSelectAddressModal(false)}><CloseIcon /></IconButton>
+              </Box>
+              <SelectAddress
+                addresses={addressList}
+                onSelectAddress={(pin) => {
+                  fetchLatLongFromEloc(pin);
+                  setSelectAddressModal(false);
+                }}
+                onClose={() => setSelectAddressModal(false)}
+                setAddAddress={() => {
+                  setSelectAddressModal(false);
+                  setToggleAddressModal({
+                    actionType: "add",
+                    toggle: true,
+                    address: restoreToDefault(),
+                  });
+                }}
+                setUpdateAddress={(address) => {
+                  setSelectAddressModal(false);
+                  setToggleAddressModal({
+                    actionType: "edit",
+                    toggle: true,
+                    address: address,
+                  });
+                }}
+              />
+            </Drawer>
+          ) : (
+            <ModalComponent
+              open={selectAddressModal || deliveryAddress === undefined}
+              onClose={() => {
                 setSelectAddressModal(false);
-                setToggleAddressModal({
-                  actionType: "edit",
-                  toggle: true,
-                  address: address,
-                });
               }}
-            />
-          </ModalComponent>
+              title="Select Address"
+            >
+              <SelectAddress
+                addresses={addressList}
+                onSelectAddress={(pin) => {
+                  fetchLatLongFromEloc(pin);
+                }}
+                onClose={() => setSelectAddressModal(false)}
+                setAddAddress={() => {
+                  setSelectAddressModal(false);
+                  setToggleAddressModal({
+                    actionType: "add",
+                    toggle: true,
+                    address: restoreToDefault(),
+                  });
+                }}
+                setUpdateAddress={(address) => {
+                  setSelectAddressModal(false);
+                  setToggleAddressModal({
+                    actionType: "edit",
+                    toggle: true,
+                    address: address,
+                  });
+                }}
+              />
+            </ModalComponent>
+          )
         )}
         {toggleAddressModal.toggle && (
-          <ModalComponent
-            open={toggleAddressModal.toggle}
-            onClose={() => {
-              if (addressList.length > 0) {
-                setToggleAddressModal({
-                  actionType: "",
-                  toggle: false,
-                  address: restoreToDefault(),
-                });
-                setSelectAddressModal(true);
-              }
-            }}
-            title={`${toggleAddressModal.actionType === "edit" ? `Update Delivery Address` : `Add Delivery Address`}`}
-          >
-            <AddressForm
-              action_type={toggleAddressModal.actionType}
-              address_type={address_types.delivery}
-              selectedAddress={toggleAddressModal.address}
+          isMobile ? (
+            <Drawer
+              anchor="bottom"
+              open={toggleAddressModal.toggle}
               onClose={() => {
-                setToggleAddressModal({
-                  actionType: "",
-                  toggle: false,
-                  address: restoreToDefault(),
-                });
-                setSelectAddressModal(true);
+                if (addressList.length > 0) {
+                  setToggleAddressModal({
+                    actionType: "",
+                    toggle: false,
+                    address: restoreToDefault(),
+                  });
+                  setSelectAddressModal(true);
+                }
               }}
-              onAddAddress={(address) => {
-                setToggleAddressModal({
-                  actionType: "",
-                  toggle: false,
-                  address: restoreToDefault(),
-                });
-                setAddressList([...addressList, address]);
-                setSelectAddressModal(true);
+              PaperProps={{
+                sx: { borderTopLeftRadius: "20px", borderTopRightRadius: "20px", padding: "20px", maxHeight: "90vh" }
               }}
-              onUpdateAddress={(address) => {
-                const updatedAddress = addressList.map((d) => {
-                  if (d.id === address.id) {
-                    return address;
-                  }
-                  return d;
-                });
-                setAddressList(updatedAddress);
-                setToggleAddressModal({
-                  actionType: "",
-                  toggle: false,
-                  address: restoreToDefault(),
-                });
-                setSelectAddressModal(true);
+            >
+              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
+                <Typography variant="h6" fontWeight="700">
+                  {toggleAddressModal.actionType === "edit" ? `Update Delivery Address` : `Add Delivery Address`}
+                </Typography>
+                <IconButton onClick={() => {
+                  setToggleAddressModal({ actionType: "", toggle: false, address: restoreToDefault() });
+                  if (addressList.length > 0) setSelectAddressModal(true);
+                }}><CloseIcon /></IconButton>
+              </Box>
+              <AddressForm
+                action_type={toggleAddressModal.actionType}
+                address_type={address_types.delivery}
+                selectedAddress={toggleAddressModal.address}
+                onClose={() => {
+                  setToggleAddressModal({
+                    actionType: "",
+                    toggle: false,
+                    address: restoreToDefault(),
+                  });
+                  setSelectAddressModal(true);
+                }}
+                onAddAddress={(address) => {
+                  setToggleAddressModal({
+                    actionType: "",
+                    toggle: false,
+                    address: restoreToDefault(),
+                  });
+                  setAddressList([...addressList, address]);
+                  setSelectAddressModal(true);
+                }}
+                onUpdateAddress={(address) => {
+                  const updatedAddress = addressList.map((d) => {
+                    if (d.id === address.id) {
+                      return address;
+                    }
+                    return d;
+                  });
+                  setAddressList(updatedAddress);
+                  setToggleAddressModal({
+                    actionType: "",
+                    toggle: false,
+                    address: restoreToDefault(),
+                  });
+                  setSelectAddressModal(true);
+                }}
+              />
+            </Drawer>
+          ) : (
+            <ModalComponent
+              open={toggleAddressModal.toggle}
+              onClose={() => {
+                if (addressList.length > 0) {
+                  setToggleAddressModal({
+                    actionType: "",
+                    toggle: false,
+                    address: restoreToDefault(),
+                  });
+                  setSelectAddressModal(true);
+                }
               }}
-            />
-          </ModalComponent>
+              title={`${toggleAddressModal.actionType === "edit" ? `Update Delivery Address` : `Add Delivery Address`}`}
+            >
+              <AddressForm
+                action_type={toggleAddressModal.actionType}
+                address_type={address_types.delivery}
+                selectedAddress={toggleAddressModal.address}
+                onClose={() => {
+                  setToggleAddressModal({
+                    actionType: "",
+                    toggle: false,
+                    address: restoreToDefault(),
+                  });
+                  setSelectAddressModal(true);
+                }}
+                onAddAddress={(address) => {
+                  setToggleAddressModal({
+                    actionType: "",
+                    toggle: false,
+                    address: restoreToDefault(),
+                  });
+                  setAddressList([...addressList, address]);
+                  setSelectAddressModal(true);
+                }}
+                onUpdateAddress={(address) => {
+                  const updatedAddress = addressList.map((d) => {
+                    if (d.id === address.id) {
+                      return address;
+                    }
+                    return d;
+                  });
+                  setAddressList(updatedAddress);
+                  setToggleAddressModal({
+                    actionType: "",
+                    toggle: false,
+                    address: restoreToDefault(),
+                  });
+                  setSelectAddressModal(true);
+                }}
+              />
+            </ModalComponent>
+          )
         )}
       </AppBar>
     </>
