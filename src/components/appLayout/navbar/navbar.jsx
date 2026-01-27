@@ -417,7 +417,7 @@ const NavBar = ({ isCheckout = false }) => {
               <div className={classes.addressContainer} onClick={() => setSelectAddressModal(true)}>
                 <LocationIcon className={classes.locationIcon} />
                 <Typography variant="body2" className={classes.addressTypo}>
-                  Deliver to <b>{searchedLocation?.pincode}</b>
+                  Deliver to <b>{searchedLocation?.tag ? `${searchedLocation.tag} - ${searchedLocation.pincode}` : searchedLocation?.pincode}</b>
                 </Typography>
                 <AddressDownIcon className={classes.AddressDownIcon} />
               </div>

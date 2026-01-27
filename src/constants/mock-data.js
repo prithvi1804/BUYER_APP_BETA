@@ -17,9 +17,9 @@ export const PRODUCTS = [
       short_desc: "Apple's latest flagship smartphone with Titanium design",
       long_desc: "The iPhone 15 Pro features a strong and lightweight aerospace-grade titanium design with contoured edges. It also includes an Action button, powerful camera upgrades, and A17 Pro for next-level performance and mobile gaming.",
       images: [
-        "https://images.unsplash.com/photo-1696446701796-da61225697cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        "https://images.unsplash.com/photo-1710023038502-ba80a70a9f53?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       ],
-      symbol: "https://images.unsplash.com/photo-1696446701796-da61225697cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      symbol: "https://images.unsplash.com/photo-1710023038502-ba80a70a9f53?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     price: {
       value: "134900",
@@ -40,9 +40,9 @@ export const PRODUCTS = [
         short_desc: "Apple's latest flagship smartphone with Titanium design",
         long_desc: "The iPhone 15 Pro features a strong and lightweight aerospace-grade titanium design with contoured edges.",
         images: [
-          "https://images.unsplash.com/photo-1696446701796-da61225697cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+          "https://images.unsplash.com/photo-1710023038502-ba80a70a9f53?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         ],
-        symbol: "https://images.unsplash.com/photo-1696446701796-da61225697cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        symbol: "https://images.unsplash.com/photo-1710023038502-ba80a70a9f53?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       },
       price: {
         value: "134900",
@@ -91,9 +91,9 @@ export const PRODUCTS = [
       short_desc: "Apple's latest flagship smartphone with Titanium design",
       long_desc: "The iPhone 15 Pro features a strong and lightweight aerospace-grade titanium design with contoured edges. Special offer from Digital World!",
       images: [
-        "https://images.unsplash.com/photo-1696446701796-da61225697cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        "https://images.unsplash.com/photo-1710023038502-ba80a70a9f53?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       ],
-      symbol: "https://images.unsplash.com/photo-1696446701796-da61225697cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      symbol: "https://images.unsplash.com/photo-1710023038502-ba80a70a9f53?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     price: {
       value: "124900",
@@ -114,9 +114,9 @@ export const PRODUCTS = [
         short_desc: "Apple's latest flagship smartphone with Titanium design",
         long_desc: "The iPhone 15 Pro features a strong and lightweight aerospace-grade titanium design with contoured edges.",
         images: [
-          "https://images.unsplash.com/photo-1696446701796-da61225697cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+          "https://images.unsplash.com/photo-1710023038502-ba80a70a9f53?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         ],
-        symbol: "https://images.unsplash.com/photo-1696446701796-da61225697cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        symbol: "https://images.unsplash.com/photo-1710023038502-ba80a70a9f53?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       },
       price: {
         value: "124900",
@@ -165,9 +165,9 @@ export const PRODUCTS = [
       short_desc: "Thinnest and lightest laptop with M2 chip",
       long_desc: "Redesigned around the next-generation M2 chip, MacBook Air is strikingly thin and brings exceptional speed and power efficiency within its durable all-aluminum enclosure. It’s the ultraportable, ultracapable laptop that lets you work, play, or create just about anything — anywhere.",
       images: [
-        "https://images.unsplash.com/photo-1611186871348-b1ec696e52c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        "https://images.unsplash.com/photo-1717865499857-ec35ce6e65fa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFjYm9vayUyMGFpciUyMG0yfGVufDB8fDB8fHww"
       ],
-      symbol: "https://images.unsplash.com/photo-1611186871348-b1ec696e52c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+      symbol: "https://images.unsplash.com/photo-1717865499857-ec35ce6e65fa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFjYm9vayUyMGFpciUyMG0yfGVufDB8fDB8fHww"
     },
     price: {
       value: "104900",
@@ -187,9 +187,9 @@ export const PRODUCTS = [
         name: "MacBook Air M2",
         short_desc: "Thinnest and lightest laptop with M2 chip",
         images: [
-          "https://images.unsplash.com/photo-1611186871348-b1ec696e52c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+          "https://images.unsplash.com/photo-1717865499857-ec35ce6e65fa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFjYm9vayUyMGFpciUyMG0yfGVufDB8fDB8fHww"
         ],
-        symbol: "https://images.unsplash.com/photo-1611186871348-b1ec696e52c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        symbol: "https://images.unsplash.com/photo-1717865499857-ec35ce6e65fa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFjYm9vayUyMGFpciUyMG0yfGVufDB8fDB8fHww"
       },
       price: {
         value: "104900",
@@ -258,9 +258,9 @@ export const PRODUCTS = [
         name: "Samsung 8kg Front Load",
         short_desc: "AI-powered washing machine with Steam Clean",
         images: [
-          "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+          "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/1467c7b3-b8b2-5e25-8c27-ebfb05e207ac/892b4ea5-3125-5d89-98ea-51460dba721e.jpg"
         ],
-        symbol: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        symbol: "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/1467c7b3-b8b2-5e25-8c27-ebfb05e207ac/892b4ea5-3125-5d89-98ea-51460dba721e.jpg"
       },
       price: {
         value: "35000",
@@ -545,9 +545,9 @@ export const PRODUCTS = [
         name: "Philips Coffee Maker",
         short_desc: "Daily Collection Drip Coffee Maker",
         images: [
-          "https://images.unsplash.com/photo-1517036666792-5eb3dbf640c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+          "https://images.unsplash.com/photo-1608354580875-30bd4168b351?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29mZmVlJTIwbWFrZXJ8ZW58MHx8MHx8fDA%3D"
         ],
-        symbol: "https://images.unsplash.com/photo-1517036666792-5eb3dbf640c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
+        symbol: "https://images.unsplash.com/photo-1608354580875-30bd4168b351?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29mZmVlJTIwbWFrZXJ8ZW58MHx8MHx8fDA%3D"
       },
       price: {
         value: "3495",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import useStyles from "./style";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import MuiLink from "@mui/material/Link";
 import Button from "@mui/material/Button";
-import Pagination from "@mui/material/Pagination";
+
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -118,7 +118,11 @@ const ProductList = ({ isOnHomePage = false }) => {
       const data = await cancellablePromise(
         getAllProductRequest(paginationData.searchData)
       );
-      setProducts(data.data);
+      if (paginationData.pageNumber > 1) {
+        setProducts((prev) => [...prev, ...data.data]);
+      } else {
+        setProducts(data.data);
+      }
       setTotalProductCount(data.count);
     } catch (err) {
       dispatch({
@@ -224,13 +228,34 @@ const ProductList = ({ isOnHomePage = false }) => {
   }, [paginationModel]);
 
   useEffect(() => {
-    // TODO: Check how many times use effect is being called after mmi call removal
-    // console.log("in use effect 3", locationData, deliveryAddressLocation);
+    // Reset page to 1 if location/category changes
     if (locationData) {
-      const searchName = query.get("s");
-      getAllProducts(searchName);
+      setPaginationModel((prev) => ({ ...prev, page: 1 }));
     }
   }, [locationData, deliveryAddressLocation]);
+
+  const observerTarget = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isLoading && products.length < totalProductCount) {
+          setPaginationModel((prev) => ({ ...prev, page: prev.page + 1 }));
+        }
+      },
+      { threshold: 1.0 }
+    );
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current);
+      }
+    };
+  }, [isLoading, products.length, totalProductCount]);
 
   const handleChangeFilter = (filterIndex, value) => {
     const data = Object.assign({}, JSON.parse(JSON.stringify(paginationModel)));
@@ -448,7 +473,7 @@ const ProductList = ({ isOnHomePage = false }) => {
           </Box>
 
           <Grid container spacing={2}>
-            {isLoading ? (
+            {isLoading && paginationModel.page === 1 ? (
               <Grid item xs={12}>
                 <Loading />
               </Grid>
@@ -494,31 +519,19 @@ const ProductList = ({ isOnHomePage = false }) => {
                     <Typography variant="body1">No Products available</Typography>
                   </Grid>
                 )}
+                {products.length > 0 && products.length < totalProductCount && (
+                  <Grid item xs={12} ref={observerTarget} sx={{ height: "20px" }}></Grid>
+                )}
+                {isLoading && paginationModel.page > 1 && (
+                  <Grid item xs={12}>
+                    <Loading />
+                  </Grid>
+                )}
               </>
             )}
           </Grid>
-
-          {products.length > 0 && (
-            <Grid
-              item
-              xs={12}
-              className={classes.paginationContainer}
-            >
-              <Pagination
-                className={classes.pagination}
-                count={Math.ceil(totalProductCount / paginationModel.pageSize)}
-                shape="rounded"
-                color="primary"
-                page={paginationModel.page}
-                onChange={(event, page) => {
-                  let paginationData = Object.assign({}, paginationModel);
-                  paginationData.page = page;
-                  setPaginationModel(paginationData);
-                }}
-              />
-            </Grid>
-          )}
         </Grid>
+
       </Grid>
 
       {/* Mobile Sticky Footer */}

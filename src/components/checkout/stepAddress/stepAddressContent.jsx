@@ -139,7 +139,7 @@ const StepAddressContent = ({
     fetchDeliveryAddress();
   }, []);
 
-  useEffect(() => {}, [cartItems, updatedCartItems]);
+  useEffect(() => { }, [cartItems, updatedCartItems]);
 
   const onGetQuote = async (message_id) => {
     try {
@@ -412,8 +412,8 @@ const StepAddressContent = ({
                           billingAddress
                             ? deliveryAddress?.id !== billingAddress?.id
                             : addressType === address_types.billing
-                            ? true
-                            : false
+                              ? true
+                              : false
                         }
                       />
                     }

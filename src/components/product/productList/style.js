@@ -29,7 +29,8 @@ const useStyles = makeStyles({
   imageContainer: {
     position: "relative",
     width: "100%",
-    paddingTop: "100%", // 1:1 Aspect Ratio
+    paddingTop: "100%",
+    // 1:1 Aspect Ratio
     marginBottom: "8px",
   },
   productImage: {
@@ -38,7 +39,7 @@ const useStyles = makeStyles({
     left: 0,
     width: "100%",
     height: "100%",
-    objectFit: "contain",
+    objectFit: "cover",
     borderRadius: "20px",
   },
   productNameTypo: {

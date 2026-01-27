@@ -7,7 +7,7 @@ const colors = {
     main: '#3570c2',
     hover: '#175f9a',
     active: '#145589',
-    light: '#131516ff',
+    light: '#c4e0f6ff',
     lightHover: '#dde9f2',
     lightActive: '#b8d1e5',
     dark: '#135080',
