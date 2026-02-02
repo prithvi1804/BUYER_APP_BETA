@@ -320,12 +320,11 @@ const StepPaymentContent = ({
   };
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={{ xs: 2, md: 3 }}>
       <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
         <Card
-          className={`${classes.paymentCard} ${activePaymentMethod === payment_methods.COD ? classes.activeCard : ""} ${
-            initializeOrderLoading ? classes.nonClickable : ""
-          }`}
+          className={`${classes.paymentCard} ${activePaymentMethod === payment_methods.COD ? classes.activeCard : ""} ${initializeOrderLoading ? classes.nonClickable : ""
+            }`}
           onClick={() => {
             if (!initializeOrderLoading && activePaymentMethod !== payment_methods.COD) {
               setActivePaymentMethod(payment_methods.COD);
@@ -343,9 +342,8 @@ const StepPaymentContent = ({
       </Grid>
       <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
         <Card
-          className={`${classes.paymentCard} ${
-            activePaymentMethod === payment_methods.RAZORPAY ? classes.activeCard : ""
-          } ${initializeOrderLoading ? classes.nonClickable : ""}`}
+          className={`${classes.paymentCard} ${activePaymentMethod === payment_methods.RAZORPAY ? classes.activeCard : ""
+            } ${initializeOrderLoading ? classes.nonClickable : ""}`}
           onClick={async () => {
             if (!initializeOrderLoading && activePaymentMethod !== payment_methods.RAZORPAY) {
               setActivePaymentMethod(payment_methods.RAZORPAY);

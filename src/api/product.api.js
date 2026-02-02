@@ -37,9 +37,45 @@ export const getAllProductRequest = (params) => {
                             product.item_details.descriptor.short_desc.toLowerCase().includes(searchName)
                         );
                     }
+
+                    // Filter by Price
+                    if (params.price) {
+                        const priceRanges = params.price.split(",");
+                        filteredProducts = filteredProducts.filter(product => {
+                            const price = parseInt(product.item_details.price.value);
+                            return priceRanges.some(range => {
+                                if (range === "below_10k") return price < 10000;
+                                if (range === "10k_50k") return price >= 10000 && price <= 50000;
+                                if (range === "50k_1l") return price > 50000 && price <= 100000;
+                                if (range === "1l_above") return price > 100000;
+                                return false;
+                            });
+                        });
+                    }
                 }
 
                 resolve({ data: filteredProducts, count: filteredProducts.length });
+            }, 500);
+        } catch (err) {
+            return reject(err);
+        }
+    });
+};
+
+/**
+ * function to get a specific product by id
+ * @returns
+ */
+export const getProductDetailsRequest = (productId) => {
+    return new Promise((resolve, reject) => {
+        try {
+            setTimeout(() => {
+                const product = PRODUCTS.find((p) => p.id === productId);
+                if (product) {
+                    resolve(product);
+                } else {
+                    reject(new Error("Product not found"));
+                }
             }, 500);
         } catch (err) {
             return reject(err);

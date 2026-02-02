@@ -24,7 +24,10 @@ export default function Profile() {
           </div>
           <div className="col-md-6 col-lg-10">
             <p className={styles.user_name}>{user?.name}</p>
-            <p className={styles.user_email}>{user?.email}</p>
+            <div className={styles.email_container}>
+              <p className={styles.user_email}>{user?.email}</p>
+              <button className={styles.logout_button}>Logout</button>
+            </div>
           </div>
         </div>
       </div>

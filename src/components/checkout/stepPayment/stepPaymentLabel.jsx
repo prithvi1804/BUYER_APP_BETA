@@ -6,11 +6,9 @@ import Typography from "@mui/material/Typography";
 const StepPaymentLabel = () => {
   const classes = useStyles();
   return (
-    <div>
-      <Typography variant="h4" className={classes.labelTypo}>
-        Payment
-      </Typography>
-    </div>
+    <Typography variant="h4" className={classes.labelTypo} component="div">
+      Payment
+    </Typography>
   );
 };
 

@@ -45,8 +45,7 @@ const ProductListView = (props) => {
           {provider_name}
         </Typography>
         <Typography variant="h4" className={classes.priceTypoList}>
-          {`₹${Number.isInteger(Number(price?.value)) ? Number(price?.value).toFixed(2) : Number(price?.value).toFixed(2)
-            }`}
+          {`₹${Number(price?.value).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
         </Typography>
         <Typography component="div" variant="body" className={classes.descriptionTypoList}>
           {product_description}

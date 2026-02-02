@@ -173,26 +173,25 @@ const ProductList = ({ isOnHomePage = false }) => {
   const getAllFilters = async () => {
     setIsLoading(true);
     try {
-      const data = await cancellablePromise(
-        getAllFiltersRequest(subCategoryName)
-      );
-      let filtersData = data.data;
-      filtersData = filtersData.filter((item) => item.code !== "size_chart");
-      filtersData = Object.values(
-        filtersData.reduce((acc, obj) => ({ ...acc, [obj.code]: obj }), {})
-      );
-
-      for (let filter of filtersData) {
-        const values = await getFilterValues(filter.code);
-        const findIndex = filtersData.findIndex(
-          (item) => item.code === filter.code
-        );
-        if (findIndex > -1) {
-          filtersData[findIndex].options = values;
-          filtersData[findIndex].selectedValues = [];
+      // Only use the Price Filter
+      const priceFilter = [
+        {
+          code: "price",
+          name: "Price",
+          options: [
+            { id: "below_10k", name: "Below 10k" },
+            { id: "10k_50k", name: "10k-50k" },
+            { id: "50k_1l", name: "50k - 1L" },
+            { id: "1l_above", name: "1L and above" }
+          ],
+          selectedValues: []
         }
-      }
+      ];
+
+      const filtersData = priceFilter;
+
       let paginationData = Object.assign(
+        {},
         JSON.parse(JSON.stringify(paginationModel))
       );
       paginationData.searchData = filtersData;
@@ -438,8 +437,8 @@ const ProductList = ({ isOnHomePage = false }) => {
                   <Box key={`filter-${filter.code}-${filterIndex}`} sx={{ mb: 2 }}>
                     <MultiSelctFilter
                       arrayList={filter?.options || []}
-                      filterName={filter.code}
-                      title={filter.code}
+                      filterName={filter.name || filter.code}
+                      title={filter.name || filter.code}
                       filterOn="id"
                       saveButtonText="Apply"
                       value={filter?.selectedValues || []}
@@ -590,7 +589,7 @@ const ProductList = ({ isOnHomePage = false }) => {
         </List>
       </Drawer>
 
-      {/* Mobile Filter Drawer (Placeholder) */}
+      {/* Mobile Filter Drawer */}
       <Drawer
         anchor="bottom"
         open={isFilterOpen}
@@ -604,10 +603,32 @@ const ProductList = ({ isOnHomePage = false }) => {
           <IconButton onClick={() => setIsFilterOpen(false)}><CloseIcon /></IconButton>
         </Box>
         <Divider />
-        <Box sx={{ py: 4, textAlign: "center" }}>
-          <Typography color="textSecondary">Filter options placeholder</Typography>
+        <Box sx={{ py: 2 }}>
+          {paginationModel.searchData &&
+            paginationModel.searchData.length > 0 ? (
+            paginationModel.searchData.map((filter, filterIndex) => {
+              return (
+                <Box key={`mobile-filter-${filter.code}-${filterIndex}`} sx={{ mb: 2 }}>
+                  <MultiSelctFilter
+                    arrayList={filter?.options || []}
+                    filterName={filter.name || filter.code}
+                    title={filter.name || filter.code}
+                    filterOn="id"
+                    saveButtonText="Apply"
+                    value={filter?.selectedValues || []}
+                    onChangeFilter={(value) =>
+                      handleChangeFilter(filterIndex, value)
+                    }
+                    clearButtonText="Clear"
+                    disabled={false}
+                  />
+                </Box>
+              );
+            })
+          ) : (
+            <Typography variant="body2" color="textSecondary" sx={{ textAlign: "center", py: 4 }}>No filters available</Typography>
+          )}
         </Box>
-        {/* You can map the actual filters here too similar to desktop sidebar */}
       </Drawer>
     </>
   );

@@ -16,7 +16,7 @@ export default function ProductCard(props) {
     bpp_provider_id,
     bpp_provider_descriptor,
     show_quantity_button = true,
-    onUpdateCart = () => {},
+    onUpdateCart = () => { },
   } = props;
   const { id, descriptor, provider_details } = product;
   const { cartItems, onAddProduct, onAddQuantity, onRemoveProduct, onReduceQuantity } = useContext(CartContext);
@@ -145,14 +145,14 @@ export default function ProductCard(props) {
                 <div className={styles.quantity_count_wrapper}>
                   <div
                     className={`d-flex align-items-center justify-content-center`}
-                    // onClick={() => {
-                    //   setQuantityCount(quantityCount - 1);
-                    //   onReduceQuantity(id);
-                    //   if (quantityCount - 1 === 0) {
-                    //     setToggleAddToCart(false);
-                    //   }
-                    //   onUpdateCart();
-                    // }}
+                  // onClick={() => {
+                  //   setQuantityCount(quantityCount - 1);
+                  //   onReduceQuantity(id);
+                  //   if (quantityCount - 1 === 0) {
+                  //     setToggleAddToCart(false);
+                  //   }
+                  //   onUpdateCart();
+                  // }}
                   >
                     {/* <Subtract width="13" classes={styles.subtract_svg_color} /> */}
                   </div>
@@ -161,11 +161,11 @@ export default function ProductCard(props) {
                   </div>
                   <div
                     className={`d-flex align-items-center justify-content-center`}
-                    // onClick={() => {
-                    //   setQuantityCount((quantityCount) => quantityCount + 1);
-                    //   onAddQuantity(id);
-                    //   onUpdateCart();
-                    // }}
+                  // onClick={() => {
+                  //   setQuantityCount((quantityCount) => quantityCount + 1);
+                  //   onAddQuantity(id);
+                  //   onUpdateCart();
+                  // }}
                   >
                     {/* <Add
                         width="13"

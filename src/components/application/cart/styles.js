@@ -56,15 +56,15 @@ const useStyles = makeStyles({
     },
   },
   greyContainer: {
-    ...moreImageContainer("100%", "#e7e7e7"),
-    backgroundColor: "#e7e7e7",
+    ...moreImageContainer("100%", "#f0f0f0"),
+    backgroundColor: "#ffffff",
     borderRadius: 8,
     position: "relative",
   },
   moreImage: {
     width: "100%",
     height: "100%",
-    objectFit: "contain",
+    objectFit: "cover",
   },
   logoContainer: {
     height: 25,
@@ -74,6 +74,7 @@ const useStyles = makeStyles({
   logo: {
     height: "100%",
     width: "100%",
+    objectFit: "contain",
   },
   qtyContainer: {
     border: "1px solid #E8E8E8",

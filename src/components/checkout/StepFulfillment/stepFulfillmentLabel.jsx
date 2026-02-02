@@ -73,10 +73,10 @@ const StepFulfillmentLabel = ({
 
   return (
     <div>
-      <Typography variant="h4" className={classes.labelTypo}>
+      <Typography variant="h4" className={classes.labelTypo} component="div">
         Fulfillment
       </Typography>
-      {activeStep > 1 && (
+      {activeStep > 0 && (
         <div className={classes.userLabelTypo}>
           <Typography
             className={classes.nameLabelTypo}

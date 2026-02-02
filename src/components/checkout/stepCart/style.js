@@ -16,9 +16,13 @@ const useStyles = makeStyles({
   userActionContainer: {
     marginTop: "30px !important",
     marginLeft: "34px !important",
+    "@media (max-width: 768px)": {
+      marginLeft: "0px !important",
+      marginTop: "20px !important",
+    },
   },
   editAddress: {
-    float: 'right'
+    marginLeft: "auto !important",
   }
 });
 

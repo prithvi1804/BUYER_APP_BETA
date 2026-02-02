@@ -265,26 +265,6 @@ const StepCartContent = (props) => {
         >
           Continue
         </Button>
-        <Button
-          sx={{ marginLeft: "10px", width: 130 }}
-          variant="contained"
-          onClick={() => {
-            if (cartItems.length > 0) {
-              let c = cartItems.map((item) => {
-                return item.item;
-              });
-              const request_object = constructQouteObject(c);
-              getQuote(request_object[0]);
-            }
-          }}
-          disabled={cartItems.length == 0 || getQuoteLoading}
-        >
-          {getQuoteLoading ? (
-            <Loading width="8px" height="8px" />
-          ) : (
-            "Update Cart"
-          )}
-        </Button>
       </div>
     </div>
   );

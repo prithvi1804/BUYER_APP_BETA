@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import DeleteIcon from "@mui/icons-material/Delete";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import {
@@ -623,41 +624,36 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
 
   const renderTableHeadForCheckoutPage = () => {
     return (
-      <Grid xs={14}>
+      <Grid item xs={12}>
         <Grid container>
-          <Grid item xs={5.5}>
+          <Grid item xs={7} md={5.5}>
             <Typography variant="body1" className={classes.tableHead}>
               Item
             </Typography>
           </Grid>
-          <Grid item xs={1.3}>
+          <Grid item xs={2} md={1.3}>
             <Typography
               variant="body1"
               className={classes.tableHead}
-              sx={{ marginLeft: "6px" }}
+              sx={{ marginLeft: { xs: "0px", md: "6px" } }}
             >
               Price
             </Typography>
           </Grid>
-          <Grid item xs={1.5}>
+          <Grid item xs={1} md={1.5}>
             <Typography
               variant="body1"
               className={classes.tableHead}
-              sx={{ marginLeft: "12px" }}
+              sx={{ marginLeft: { xs: "0px", md: "12px" } }}
             >
               Qty
             </Typography>
           </Grid>
-          <Grid item xs={1}>
-            <Typography variant="body1" className={classes.tableHead}>
+          <Grid item xs={2} md={1}>
+            <Typography variant="body1" className={classes.tableHead} sx={{ textAlign: { xs: "right", md: "left" } }}>
               Subtotal
             </Typography>
           </Grid>
-          {/* <Grid item xs={4}>
-            <Typography variant="body1" className={classes.tableHead}>
-              Special Instructions
-            </Typography>
-          </Grid> */}
         </Grid>
         <Divider
           sx={{ borderColor: "#ececec", margin: "20px 0", width: "100%" }}
@@ -675,7 +671,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
         return (
           <Grid container>
             <Typography variant="subtitle1" color="#686868">
-              {c.item_details.descriptor.name} (₹{c.item_details.price.value}){" "}
+              {c.item_details.descriptor.name} (₹{Number(c.item_details.price.value).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}){" "}
               {isLastItem ? "" : "+"}
             </Typography>
           </Grid>
@@ -875,7 +871,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
             <Grid item xs={4} sm={4} md={1.5} sx={{ pt: isMobile ? 2 : 1 }}>
               <Typography variant={isMobile ? "caption" : "body1"} sx={{ color: "#686868", display: isMobile ? "block" : "none", mb: 0.5 }}>Price</Typography>
               <Typography variant={isMobile ? "body2" : "body1"} sx={{ fontWeight: 600, color: "#000" }}>
-                ₹{(cartItem?.item?.product?.price?.value || cartItem?.item?.price?.value || 0).toLocaleString("en-IN")}
+                ₹{Number(cartItem?.item?.product?.price?.value || cartItem?.item?.price?.value || 0).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </Typography>
             </Grid>
             <Grid item xs={4} sm={4} md={1.5} sx={{ pt: isMobile ? 2 : 0 }}>
@@ -907,11 +903,11 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
               <Typography variant={isMobile ? "caption" : "body1"} sx={{ color: "#686868", display: isMobile ? "block" : "none", mb: 0.5 }}>Subtotal</Typography>
               <Typography variant={isMobile ? "body2" : "body1"} sx={{ fontWeight: 700, color: "#000" }}>
                 {cartItem.item.hasCustomisations
-                  ? `₹ ${(parseInt(getPriceWithCustomisations(cartItem)) *
-                    parseInt(cartItem?.item?.quantity?.count)).toLocaleString("en-IN")
+                  ? `₹ ${(Number(getPriceWithCustomisations(cartItem)) *
+                    Number(cartItem?.item?.quantity?.count)).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
                   }`
-                  : `₹ ${((parseInt(cartItem?.item?.product?.subtotal) || parseInt(cartItem?.item?.product?.price?.value) || 0) *
-                    parseInt(cartItem?.item?.quantity?.count)).toLocaleString("en-IN")
+                  : `₹ ${((Number(cartItem?.item?.product?.subtotal) || Number(cartItem?.item?.product?.price?.value) || 0) *
+                    Number(cartItem?.item?.quantity?.count)).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
                   }`}
               </Typography>
             </Grid>
@@ -926,7 +922,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
               >
                 <Button
                   variant="text"
-                  startIcon={<DeleteOutlineIcon sx={{ fontSize: isMobile ? "18px !important" : "20px" }} />}
+                  startIcon={<DeleteIcon sx={{ fontSize: isMobile ? "18px !important" : "20px" }} />}
                   color="error"
                   onClick={() => deleteCartItem(cartItem._id)}
                   sx={{ textTransform: "none", py: isMobile ? 0 : 0.5 }}
@@ -995,29 +991,31 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
           <Grid
             container
             key={cartItem?.item?.id}
-            style={{ alignItems: "flex-start" }}
+            style={{ alignItems: "center" }}
           >
-            <Grid item xs={5.5}>
-              <Grid container>
-                <div className={classes.moreImages}>
-                  <div className={classes.greyContainer}>
-                    <img
-                      className={classes.moreImage}
-                      alt="product-image"
-                      src={cartItem?.item?.product?.descriptor?.symbol}
-                      onClick={() =>
-                        navigate(
-                          `/application/products?productId=${cartItem.item.id}`
-                        )
-                      }
-                    />
-                    {renderVegNonVegTag(cartItem)}
+            <Grid item xs={12} md={5.5}>
+              <Grid container spacing={1} alignItems="center" wrap="nowrap">
+                <Grid item>
+                  <div className={classes.moreImages}>
+                    <div className={classes.greyContainer}>
+                      <img
+                        className={classes.moreImage}
+                        alt="product-image"
+                        src={cartItem?.item?.product?.descriptor?.symbol}
+                        onClick={() =>
+                          navigate(
+                            `/application/products?productId=${cartItem.item.id}`
+                          )
+                        }
+                      />
+                      {renderVegNonVegTag(cartItem)}
+                    </div>
                   </div>
-                </div>
-                <Grid sx={{ maxWidth: "200px" }}>
+                </Grid>
+                <Grid item xs>
                   <Typography
                     variant="body1"
-                    sx={{ width: 200, fontWeight: 600 }}
+                    sx={{ fontWeight: 600, fontSize: { xs: "14px", sm: "16px" }, mb: 0.5 }}
                   >
                     {cartItem?.item?.product?.descriptor?.name}
                   </Typography>
@@ -1026,7 +1024,6 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
                     <Grid
                       container
                       sx={{
-                        marginTop: "4px",
                         width: "max-content",
                         cursor: "pointer",
                       }}
@@ -1051,7 +1048,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
                       </Typography>
                     </Grid>
                   )}
-                  <Grid container sx={{ marginTop: "4px" }} alignItems="center">
+                  <Grid container alignItems="center">
                     <div className={classes.logoContainer}>
                       <img
                         className={classes.logo}
@@ -1062,65 +1059,47 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
                     <Typography
                       variant="subtitle1"
                       color="#686868"
-                      sx={{ fontWeight: 500 }}
+                      sx={{ fontWeight: 500, fontSize: { xs: "11px", sm: "14px" } }}
                     >
                       {cartItem?.item?.provider?.descriptor?.name}
                     </Typography>
                   </Grid>
                 </Grid>
               </Grid>
-              {/* {getCustomizations(cartItem)} */}
             </Grid>
-            <Grid item xs={1.3}>
+            <Grid item xs={4} md={1.3} sx={{ display: { xs: "none", md: "block" } }}>
               <Typography variant="body" sx={{ fontWeight: 600 }}>
                 {cartItem.item.hasCustomisations
-                  ? `₹ ${getPriceWithCustomisations(cartItem)}`
-                  : `₹ ${cartItem?.item?.product?.price?.value}`}
+                  ? `₹ ${Number(getPriceWithCustomisations(cartItem)).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                  : `₹ ${Number(cartItem?.item?.product?.price?.value || 0).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
               </Typography>
             </Grid>
-            <Grid item xs={1.5}>
+            <Grid item xs={4} md={1.5} sx={{ textAlign: "left", mt: { xs: 1, md: 0 } }}>
               <div className={classes.qtyContainer}>
                 <Typography
                   variant="body1"
-                  sx={{ marginRight: "12px", fontWeight: 600 }}
+                  sx={{ fontWeight: 600 }}
                 >
                   {cartItem?.item?.quantity?.count}
                 </Typography>
-                <KeyboardArrowUpIcon
-                  className={classes.qtyArrowUp}
-                  onClick={() =>
-                    updateCartItem(cartItem.item.id, true, cartItem._id)
-                  }
-                />
-                <KeyboardArrowDownIcon
-                  className={classes.qtyArrowDown}
-                  onClick={() =>
-                    updateCartItem(cartItem.item.id, false, cartItem._id)
-                  }
-                />
               </div>
             </Grid>
-            <Grid item xs={1.4}>
+            <Grid item xs={6} md={1.4} sx={{ textAlign: "right", mt: { xs: 1, md: 0 } }}>
               <Typography variant="body" sx={{ fontWeight: 600 }}>
                 {cartItem.item.hasCustomisations
-                  ? `₹ ${parseInt(getPriceWithCustomisations(cartItem)) *
-                  parseInt(cartItem?.item?.quantity?.count)
+                  ? `₹ ${(Number(getPriceWithCustomisations(cartItem)) *
+                    Number(cartItem?.item?.quantity?.count)).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
                   }`
-                  : `₹ ${parseInt(cartItem?.item?.product?.subtotal)}`}
+                  : `₹ ${(Number(cartItem?.item?.product?.subtotal || cartItem?.item?.product?.price?.value || 0) *
+                    Number(cartItem?.item?.quantity?.count)).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                  }`}
               </Typography>
             </Grid>
-            <Grid item xs={1.3}>
-              {/* {renderSpecialInstructions(cartItem.item, cartItem._id)} */}
-              <div style={{ marginTop: -10 }}>
-                <Button
-                  variant="text"
-                  startIcon={<DeleteOutlineIcon size="small" />}
-                  color="error"
-                  onClick={() => deleteCartItem(cartItem._id)}
-                >
-                  <Typography>Delete</Typography>
-                </Button>
-              </div>
+            <Grid item xs={2} md={1.3} sx={{ textAlign: "right", mt: { xs: 1, md: 0 } }}>
+              <DeleteIcon
+                style={{ cursor: "pointer", color: "red" }}
+                onClick={() => deleteCartItem(cartItem._id)}
+              />
             </Grid>
           </Grid>
           {cartItem.item.quantity.count >
@@ -1193,7 +1172,7 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
             Cart Subtotal
           </Typography>
           <Typography variant="subtitle1" className={classes.summaryLabel} sx={{ fontSize: "18px !important", color: "#000" }}>
-            ₹{getCartSubtotal().toLocaleString("en-IN")}
+            ₹{getCartSubtotal().toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </Typography>
         </Grid>
         <Button
@@ -1734,7 +1713,8 @@ export default function Cart({ showOnlyItems = false, setCheckoutCartItems }) {
             </div>
           )}
         </>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }

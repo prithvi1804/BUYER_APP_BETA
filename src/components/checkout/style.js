@@ -6,10 +6,10 @@ const useStyles = makeStyles({
     background: palette.common.white,
     padding: "20px 40px 15px 40px !important",
     "@media (max-width: 1024px)": {
-      padding: "20px 40px 15px 40px !important",
+      padding: "20px 30px 15px 30px !important",
     },
     "@media (max-width: 768px)": {
-      padding: "16px 20px 12px 20px !important",
+      padding: "12px 16px 10px 16px !important",
     },
   },
   headerTypo: {
@@ -19,15 +19,18 @@ const useStyles = makeStyles({
     "&:hover": {
       textDecoration: "underline",
     },
+    "@media (max-width: 768px)": {
+      fontSize: "14px !important",
+    },
   },
   bodyContainer: {
     background: "#F9F9F9 !important",
     padding: "20px 40px !important",
     "@media (max-width: 1024px)": {
-      padding: "20px 40px !important",
+      padding: "20px 30px !important",
     },
     "@media (max-width: 768px)": {
-      padding: "16px 20px !important",
+      padding: "16px 12px !important",
     },
   },
   stepRoot: {
@@ -42,8 +45,8 @@ const useStyles = makeStyles({
     padding: "32px !important",
     marginLeft: "16px !important",
     "@media (max-width: 768px)": {
-      padding: "16px 8px !important",
-      marginLeft: "8px !important",
+      padding: "16px !important",
+      marginLeft: "32px !important",
     },
   },
   stepContentHidden: {
@@ -51,24 +54,45 @@ const useStyles = makeStyles({
     padding: "16px !important",
     marginLeft: "16px !important",
     "@media (max-width: 768px)": {
-      padding: "12px 8px !important",
-      marginLeft: "8px !important",
+      padding: "12px 16px !important",
+      marginLeft: "32px !important",
     },
   },
   stepLabel: {
-    alignItems: "start !important",
+    padding: "0px !important",
+    alignItems: "flex-start !important",
     "& .MuiStepLabel-labelContainer": {
+      padding: "0px !important",
       marginLeft: "16px !important",
+      flex: "1 !important",
       "@media (max-width: 768px)": {
         marginLeft: "8px !important",
       },
     },
+    "& .MuiStepLabel-iconContainer": {
+      padding: "0px !important",
+      display: "flex !important",
+      alignItems: "center !important",
+      height: "32px !important",
+      "@media (max-width: 768px)": {
+        height: "24px !important",
+      },
+    },
+    "& .MuiStepLabel-label": {
+      display: "flex !important",
+      width: "100%",
+    },
   },
   labelTypo: {
     fontWeight: "600 !important",
-    lineHeight: "20px !important",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    lineHeight: "32px !important",
     "@media (max-width: 768px)": {
       fontSize: "14px !important",
+      lineHeight: "24px !important",
     },
   },
 
@@ -247,7 +271,8 @@ const useStyles = makeStyles({
     fontSize: "13px !important",
     fontWeight: "600 !important",
     "@media (max-width: 768px)": {
-      width: "70px !important",
+      width: "auto !important",
+      minWidth: "60px !important",
       fontSize: "12px !important",
     },
   },

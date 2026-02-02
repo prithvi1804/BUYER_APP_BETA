@@ -29,6 +29,8 @@ import { SearchContext } from "../../../../context/searchContext";
 import { updateCartItem } from "../../cart/utils/updateCartItem";
 import { ToastContext } from "../../../../context/toastContext";
 import { toast_actions, toast_types } from "../../../shared/toast/utils/toast";
+import { getProductDetailsRequest } from "../../../../api/product.api";
+
 
 const ProductDetails = ({ productId }) => {
   const classes = useStyles();
@@ -60,6 +62,11 @@ const ProductDetails = ({ productId }) => {
     const providerTags = data.provider_details?.time?.label;
     const locationTags = data.location_details?.time?.label;
 
+    if (!itemTags && !providerTags && !locationTags) {
+      setProductAvailability(true);
+      return;
+    }
+
     const isItemEnabled = itemTags === "enable";
     const isProviderEnabled = providerTags === "enable";
     const isLocationEnabled = locationTags === "enable";
@@ -70,6 +77,7 @@ const ProductDetails = ({ productId }) => {
       setProductAvailability(false);
     }
   };
+
 
   const handleImageClick = (imageUrl) => {
     setActiveImage(imageUrl);
@@ -91,7 +99,7 @@ const ProductDetails = ({ productId }) => {
   const getProductDetails = async (productId) => {
     try {
       const data = await cancellablePromise(
-        getCall(`/clientApis/v2/item-details?id=${productId}`)
+        getProductDetailsRequest(productId)
       );
       const { item_details } = data;
       fetchCartItems();
@@ -99,11 +107,12 @@ const ProductDetails = ({ productId }) => {
 
       checkProductDisability(data);
       setProductDetails(item_details);
-      setActiveImage(item_details?.descriptor?.symbol);
+      setActiveImage(item_details?.descriptor?.symbol || item_details?.descriptor?.images?.[0]);
     } catch (error) {
       console.error("Error fetching product details:", error);
     }
   };
+
 
   const calculateSubtotal = (groupId, customization_state) => {
     let group = customization_state[groupId];
@@ -234,10 +243,10 @@ const ProductDetails = ({ productId }) => {
 
         findItem = customisations
           ? cartItems.find(
-              (item) =>
-                item.item.id === productPayload.id &&
-                checkCustomisationIsAvailableInCart(customisations, item)
-            )
+            (item) =>
+              item.item.id === productPayload.id &&
+              checkCustomisationIsAvailableInCart(customisations, item)
+          )
           : cartItems.find((item) => item.item.id === productPayload.id);
       } else {
         findItem = cartItems.find((item) => item.item.id === productPayload.id);
@@ -560,26 +569,26 @@ const ProductDetails = ({ productId }) => {
           : "No",
       Cancellable:
         productPayload.item_details?.["@ondc/org/cancellable"]?.toString() ===
-        "true"
+          "true"
           ? "Yes"
           : "No",
       "Return window value": returnWindowValue,
       Returnable:
         productPayload.item_details?.["@ondc/org/returnable"]?.toString() ===
-        "true"
+          "true"
           ? "Yes"
           : "No",
       "Customer care":
         productPayload.item_details?.[
-          "@ondc/org/contact_details_consumer_care"
+        "@ondc/org/contact_details_consumer_care"
         ],
       "Manufacturer name":
         productPayload.item_details?.[
-          "@ondc/org/statutory_reqs_packaged_commodities"
+        "@ondc/org/statutory_reqs_packaged_commodities"
         ]?.["manufacturer_or_packer_name"],
       "Manufacturer address":
         productPayload.item_details?.[
-          "@ondc/org/statutory_reqs_packaged_commodities"
+        "@ondc/org/statutory_reqs_packaged_commodities"
         ]?.["manufacturer_or_packer_address"] || "",
     };
 
@@ -673,7 +682,7 @@ const ProductDetails = ({ productId }) => {
         </div>
       ) : (
         <div>
-          <div className={classes.breadCrumbs} onClick={() => {}}>
+          <div className={classes.breadCrumbs} onClick={() => { }}>
             <Breadcrumbs aria-label="breadcrumb">
               <MuiLink
                 component={Link}
@@ -734,7 +743,7 @@ const ProductDetails = ({ productId }) => {
                       color="black"
                       sx={{ fontFamily: "var(--font-body-fontFamily)", fontWeight: 700 }}
                     >
-                      {`₹${rangePriceTag?.minPrice} - ₹${rangePriceTag?.maxPrice}`}
+                      {`₹${Number(rangePriceTag?.minPrice).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} - ₹${Number(rangePriceTag?.maxPrice).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
                     </Typography>
                   </Grid>
                 ) : (
@@ -744,7 +753,7 @@ const ProductDetails = ({ productId }) => {
                       color="black"
                       sx={{ fontFamily: "var(--font-body-fontFamily)", fontWeight: 700 }}
                     >
-                      ₹{productDetails?.price?.value}
+                      ₹{Number(productDetails?.price?.value).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </Typography>
                     <Typography
                       variant="h4"
@@ -757,9 +766,8 @@ const ProductDetails = ({ productId }) => {
                       }}
                     >
                       ₹
-                      {parseInt(productDetails?.price?.maximum_value || 0).toFixed(
-                        0
-                      )}
+                      {Number(productDetails?.price?.maximum_value || 0).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+
                     </Typography>
                   </Grid>
                 )}
@@ -943,7 +951,7 @@ const ProductDetails = ({ productId }) => {
                     sx={{ flex: 1, textTransform: "none" }}
                     disabled={
                       !parseInt(productDetails?.quantity?.available?.count) >=
-                        1 ||
+                      1 ||
                       itemOutOfStock ||
                       !productAvailability
                     }

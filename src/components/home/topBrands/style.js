@@ -40,7 +40,10 @@ const useStyles = makeStyles({
     },
     brandImage: {
         margin: 'auto !important',
-        maxWidth: '100%'
+        maxWidth: '100%',
+        maxHeight: '100%',
+        objectFit: 'contain',
+        padding: '10px'
     },
     dotsContainer: {
         textAlign: 'center'

@@ -17,6 +17,9 @@ const useStyles = makeStyles({
     paymentImage: {
         width: '100% !important',
         height: '326px !important',
+        "@media (max-width: 768px)": {
+            height: '160px !important',
+        },
         "& rect": {
             width: '100% !important',
             height: '100% !important',

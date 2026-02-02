@@ -15,9 +15,9 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import MuiLink from "@mui/material/Link";
 
-import StepCustomerLabel from "./stepCustomer/stepCustomerLabel";
-import StepCustomerContent from "./stepCustomer/stepCustomerContent";
 import StepAddressLabel from "./stepAddress/stepAddressLabel";
 import StepAddressContent from "./stepAddress/stepAddressContent";
 import StepPaymentLabel from "./stepPayment/stepPaymentLabel";
@@ -50,9 +50,15 @@ import { AddressContext } from "../../context/addressContext";
 const Checkout = () => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const formatPrice = (price) => {
+    return Number(price || 0).toLocaleString("en-IN", {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2,
+    });
+  };
 
   const { billingAddress } = useContext(AddressContext);
-  const steps = ["Cart", "Customer", "Fulfillment", "Add Address", "Payment"];
+  const steps = ["Cart", "Fulfillment", "Add Address", "Payment"];
   const [activeStep, setActiveStep] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   const [updatedCartItems, setUpdatedCartItems] = useState([]);
@@ -646,8 +652,6 @@ const Checkout = () => {
           />
         );
       case 1:
-        return <StepCustomerLabel activeStep={activeStep} />;
-      case 2:
         return (
           <StepFulfillmentLabel
             fulfillment={getSelectedFulfillment()}
@@ -656,20 +660,20 @@ const Checkout = () => {
             products={getCartProducts()}
             activeStep={activeStep}
             onUpdateActiveStep={() => {
+              setActiveStep(1);
+            }}
+          />
+        );
+      case 2:
+        return (
+          <StepAddressLabel
+            activeStep={activeStep}
+            onUpdateActiveStep={() => {
               setActiveStep(2);
             }}
           />
         );
       case 3:
-        return (
-          <StepAddressLabel
-            activeStep={activeStep}
-            onUpdateActiveStep={() => {
-              setActiveStep(3);
-            }}
-          />
-        );
-      case 4:
         return <StepPaymentLabel />;
       default:
         return <>stepLabel</>;
@@ -696,25 +700,16 @@ const Checkout = () => {
         );
       case 1:
         return (
-          <StepCustomerContent
-            isError={productsQuote.isError}
+          <StepFulfillmentContent
+            fulfillments={updatedCartItems[0]?.message?.quote?.fulfillments}
+            selectedFulfillment={selectedFulfillments}
+            setSelectedFulfillment={setSelectedFulfillments}
             handleNext={() => {
               setActiveStep(2);
             }}
           />
         );
       case 2:
-        return (
-          <StepFulfillmentContent
-            fulfillments={updatedCartItems[0]?.message?.quote?.fulfillments}
-            selectedFulfillment={selectedFulfillments}
-            setSelectedFulfillment={setSelectedFulfillments}
-            handleNext={() => {
-              setActiveStep(3);
-            }}
-          />
-        );
-      case 3:
         return (
           <StepAddressContent
             isError={productsQuote.isError}
@@ -729,7 +724,7 @@ const Checkout = () => {
               setUpdatedCartItems(data);
             }}
             handleNext={() => {
-              setActiveStep(4);
+              setActiveStep(3);
             }}
             updateInitLoading={(value) => setInitLoading(value)}
             responseReceivedIds={(updatedCartItems || []).map((item) => {
@@ -738,7 +733,7 @@ const Checkout = () => {
             })}
           />
         );
-      case 4:
+      case 3:
         return (
           <StepPaymentContent
             isError={productsQuote.isError}
@@ -1054,7 +1049,7 @@ const Checkout = () => {
           {quote?.title}
         </Typography>
         <Typography variant="body1" className={classes.summaryItemPriceValue}>
-          {`₹${parseFloat(quote?.value).toFixed(2)}`}
+          {`₹${formatPrice(quote?.value)}`}
         </Typography>
       </div>
     );
@@ -1082,7 +1077,7 @@ const Checkout = () => {
                   Total
                 </Typography>
                 <Typography variant="body2" className={classes.subTotalValue}>
-                  {`₹${getDeliveryTotalAmount(productsQuote?.providers)}`}
+                  {`₹${formatPrice(getDeliveryTotalAmount(productsQuote?.providers))}`}
                 </Typography>
               </div>
             </>
@@ -1101,7 +1096,7 @@ const Checkout = () => {
           {"Offer (" + offer?.title + ")"}
         </Typography>
         <Typography variant="body1" className={classes.summaryItemPriceValue}>
-          {`₹${parseFloat(offer?.value).toFixed(2)}`}
+          {`₹${formatPrice(offer?.value)}`}
         </Typography>
       </div>
     );
@@ -1184,7 +1179,7 @@ const Checkout = () => {
                 : classes.summaryItemPriceValue
             }
           >
-            {`₹${parseFloat(quote?.price?.value).toFixed(2)}`}
+            {`₹${formatPrice(quote?.price?.value)}`}
           </Typography>
         </div>
         {quote?.tax && (
@@ -1210,7 +1205,7 @@ const Checkout = () => {
                   : classes.summaryItemPriceValue
               }
             >
-              {`₹${parseFloat(quote?.tax.value).toFixed(2)}`}
+              {`₹${formatPrice(quote?.tax.value)}`}
             </Typography>
           </div>
         )}
@@ -1233,7 +1228,7 @@ const Checkout = () => {
               variant="body1"
               className={classes.summaryItemPriceValue}
             >
-              {`₹${parseFloat(quote?.discount.value).toFixed(2)}`}
+              {`₹${formatPrice(quote?.discount.value)}`}
             </Typography>
           </div>
         )}
@@ -1254,7 +1249,7 @@ const Checkout = () => {
                   variant="body1"
                   className={classes.summaryItemPriceValue}
                 >
-                  {`₹${parseFloat(offer.value).toFixed(2)}`}
+                  {`₹${formatPrice(offer.value)}`}
                 </Typography>
               </div>
             );
@@ -1465,12 +1460,29 @@ const Checkout = () => {
     );
   };
 
+  const getDraftSubtotal = () => {
+    let total = 0;
+    cartItems.forEach((ci) => {
+      // Handle both wrapped {item: {product: ...}} and flat structures
+      const item = ci.item || ci;
+      const productObj = item?.product || item?.item_details || item;
+      const price = productObj?.price?.value || item?.price?.value || 0;
+      const count = item?.quantity?.count || 0;
+      total += Number(price) * Number(count);
+    });
+    return total;
+  };
+
   const getFinalPrice = () => {
-    return (
+    const quoteTotal =
       parseFloat(getItemsTotal(productsQuote?.providers)) +
       parseFloat(getDeliveryTotalAmount(productsQuote?.providers)) +
-      parseFloat(getOffersTotalAmount(productsQuote?.providers))
-    ).toFixed(2);
+      parseFloat(getOffersTotalAmount(productsQuote?.providers));
+
+    if (quoteTotal === 0 && activeStep === 0) {
+      return getDraftSubtotal().toFixed(2);
+    }
+    return quoteTotal.toFixed(2);
   };
 
   const renderQuote = () => {
@@ -1489,10 +1501,10 @@ const Checkout = () => {
             )}
             <div className={classes.summarySubtotalContainer}>
               <Typography variant="body2" className={classes.subTotalLabel}>
-                Total
+                Cart Subtotal
               </Typography>
               <Typography variant="body2" className={classes.subTotalValue}>
-                {`₹${getItemsTotal(productsQuote?.providers)}`}
+                {`₹${formatPrice(Number(getItemsTotal(productsQuote?.providers)) || getDraftSubtotal())}`}
               </Typography>
             </div>
             <Box component={"div"} className={classes.divider} />
@@ -1522,8 +1534,8 @@ const Checkout = () => {
                 Order Total
               </Typography>
               <Typography variant="body" className={classes.totalValue}>
-                {`₹${getFinalPrice()}`}
-                {/* {`₹${parseFloat(productsQuote?.total_payable).toFixed(2)}`} */}
+                {`₹${formatPrice(getFinalPrice())}`}
+                {/* {`₹${formatPrice(productsQuote?.total_payable)}`} */}
               </Typography>
             </div>
             <Button
@@ -1535,7 +1547,7 @@ const Checkout = () => {
                 productsQuote.isError ||
                 confirmOrderLoading ||
                 initLoading ||
-                activeStep !== 4
+                activeStep !== 3
               }
               onClick={() => {
                 const { productQuotes, successOrderIds } = JSON.parse(
@@ -1583,19 +1595,20 @@ const Checkout = () => {
   return (
     <>
       <div className={classes.header}>
-        <Typography
-          component={Link}
-          underline="hover"
-          color="primary.main"
-          variant="body1"
-          className={classes.headerTypo}
-          to={`/application`}
-        >
-          BACK TO SHOP
-        </Typography>
+        <Breadcrumbs aria-label="breadcrumb">
+          <MuiLink
+            component={Link}
+            underline="hover"
+            color="inherit"
+            to="/application"
+          >
+            Home
+          </MuiLink>
+          <Typography color="text.primary">Checkout</Typography>
+        </Breadcrumbs>
       </div>
       <div className={classes.bodyContainer}>
-        <Grid container spacing={6}>
+        <Grid container spacing={{ xs: 2, md: 3, lg: 6 }}>
           <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
             <Stepper
               activeStep={activeStep}

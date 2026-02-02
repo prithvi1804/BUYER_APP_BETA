@@ -181,8 +181,8 @@ const CustomizationRenderer = (props) => {
         let childGroups =
           customization_state[groupId].selected[0]?.id != undefined
             ? customizationToGroupMap[
-                customization_state[groupId].selected[0]?.id
-              ]
+            customization_state[groupId].selected[0]?.id
+            ]
             : [];
         customization_state[groupId].childs = childGroups;
 
@@ -416,7 +416,7 @@ const CustomizationRenderer = (props) => {
                       <>
                         <div
                           className={classes.radioTypoContainer}
-                          //  onClick={() => handleClick(group, option)}
+                        //  onClick={() => handleClick(group, option)}
                         >
                           {renderVegNonVegTag(option.vegNonVeg)}
                           <Typography

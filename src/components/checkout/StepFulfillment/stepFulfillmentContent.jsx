@@ -94,7 +94,7 @@ const StepFulfillmentContent = ({
   const renderSelectedFulfillments = () => { };
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={{ xs: 2, md: 3 }}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
         {should_allow_fulfillment_selection()
           ? renderFulfillmentSelection()

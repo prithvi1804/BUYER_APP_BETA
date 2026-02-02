@@ -1041,10 +1041,9 @@ const OrderSummary = ({
               Order Total
             </Typography>
             <Typography variant="h5" className={classes.totalValue}>
-              {`₹${
-                parseInt(orderDetails?.updatedQuote?.price?.value).toFixed(2) ||
+              {`₹${parseInt(orderDetails?.updatedQuote?.price?.value).toFixed(2) ||
                 0
-              }`}
+                }`}
             </Typography>
           </div>
         </div>
@@ -1379,13 +1378,13 @@ const OrderSummary = ({
             className={classes.statusChip}
             color={
               orderDetails?.state === "Confirmed" ||
-              orderDetails?.state === "Created"
+                orderDetails?.state === "Created"
                 ? "primary"
                 : orderDetails?.state === "Delivered"
-                ? "success"
-                : orderDetails?.state === "Cancelled"
-                ? "error"
-                : "primary"
+                  ? "success"
+                  : orderDetails?.state === "Cancelled"
+                    ? "error"
+                    : "primary"
             }
             label={orderDetails?.state}
           />
@@ -1411,30 +1410,30 @@ const OrderSummary = ({
             orderDetails?.state === "Accepted" ||
             orderDetails?.state === "In-progress" ||
             orderDetails?.state === "Completed") && (
-            <>
-              {isIssueRaised ? (
-                <Button
-                  fullWidth
-                  variant="outlined"
-                  className={classes.helpButton}
-                  disabled={trackOrderLoading || statusLoading || issueLoading}
-                  onClick={() => navigate(`/application/complaints/`)}
-                >
-                  {issueLoading ? <Loading /> : "Track Issue"}
-                </Button>
-              ) : (
-                <Button
-                  fullWidth
-                  variant="outlined"
-                  className={classes.helpButton}
-                  disabled={trackOrderLoading || statusLoading || issueLoading}
-                  onClick={() => setToggleIssueModal(true)}
-                >
-                  {issueLoading ? <Loading /> : "Raise Issue"}
-                </Button>
-              )}
-            </>
-          )}
+              <>
+                {isIssueRaised ? (
+                  <Button
+                    fullWidth
+                    variant="outlined"
+                    className={classes.helpButton}
+                    disabled={trackOrderLoading || statusLoading || issueLoading}
+                    onClick={() => navigate(`/application/complaints/`)}
+                  >
+                    {issueLoading ? <Loading /> : "Track Issue"}
+                  </Button>
+                ) : (
+                  <Button
+                    fullWidth
+                    variant="outlined"
+                    className={classes.helpButton}
+                    disabled={trackOrderLoading || statusLoading || issueLoading}
+                    onClick={() => setToggleIssueModal(true)}
+                  >
+                    {issueLoading ? <Loading /> : "Raise Issue"}
+                  </Button>
+                )}
+              </>
+            )}
           <Button
             fullWidth
             variant="outlined"
@@ -1454,17 +1453,17 @@ const OrderSummary = ({
           </Button>
           {(orderDetails?.state === "Accepted" ||
             orderDetails?.state === "Created") && (
-            <Button
-              fullWidth
-              variant="contained"
-              color="error"
-              className={classes.cancelOrderButton}
-              onClick={() => setToggleCancelOrderModal(true)}
-              disabled={allNonCancellable || statusLoading || trackOrderLoading}
-            >
-              Cancel Order
-            </Button>
-          )}
+              <Button
+                fullWidth
+                variant="contained"
+                color="error"
+                className={classes.cancelOrderButton}
+                onClick={() => setToggleCancelOrderModal(true)}
+                disabled={allNonCancellable || statusLoading || trackOrderLoading}
+              >
+                Cancel Order
+              </Button>
+            )}
           {orderDetails?.state === "Completed" && (
             <>
               <Button

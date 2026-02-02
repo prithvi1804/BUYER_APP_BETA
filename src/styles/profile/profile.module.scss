@@ -27,12 +27,41 @@
   margin: 0;
 }
 
+.email_container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logout_button {
+  background-color: transparent;
+  color: #ff4d4f;
+  border: 1px solid #ff4d4f;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: #ff4d4f;
+    color: #fff;
+  }
+}
+
+
 @media screen and (max-width: 767px) {
   .user_name {
     text-align: center;
     padding-top: 20px;
   }
+
   .user_email {
     text-align: center;
+  }
+
+  .email_container {
+    justify-content: center;
+    margin-top: 8px;
   }
 }

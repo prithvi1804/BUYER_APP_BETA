@@ -13,7 +13,7 @@ const useStyles = makeStyles({
         minWidth: '130px', // Ensure enough width for the card look
         height: '100% !important',
         borderRadius: '24px !important',
-        background:`${colors.common.white} !important`,
+        background: `${colors.common.white} !important`,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
         textAlign: 'center',
         color: colors.common.black,
         fontSize: `${typographyStyles.subtitle1.fontSize} !important`,
-        lineHeight: `${typographyStyles.subtitle1.lineHeight} !important`, 
+        lineHeight: `${typographyStyles.subtitle1.lineHeight} !important`,
         maxWidth: '120px',
     },
     selectedCategory: {
@@ -76,7 +76,8 @@ const useStyles = makeStyles({
         color: colors.common.black,
         display: 'block',
         margin: '0 auto',
-        marginBottom: '12px !important'
+        marginBottom: '12px !important',
+        objectFit: 'contain'
     }
 });
 

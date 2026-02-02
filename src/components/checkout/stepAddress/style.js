@@ -15,32 +15,38 @@ const useStyles = makeStyles({
     selectAddressRadioContainer: {
         // display: 'flex !important'
         marginTop: '12px !important',
-        marginLeft: '24px !important',
+        marginLeft: '0px !important',
         padding: '12px 20px !important',
         border: `1px solid ${palette.primary.main}`,
         background: `${palette.common.white} !important`,
-        borderRadius: '8px !important'
+        borderRadius: '8px !important',
+        "@media (max-width: 768px)": {
+            marginLeft: '0px !important',
+            padding: '10px 12px !important',
+        },
     },
     formControlLabel: {
         width: '100% !important',
         alignItems: 'center !important',
         marginLeft: '0px !important',
         "& .MuiFormControlLabel-label": {
-            marginLeft: '24px !important',
+            marginLeft: '12px !important',
             "&.MuiTypography-root": {
                 flex: 1
-                // marginBottom: '5px !important'
             }
         },
         "& .MuiRadio-root": {
-            // marginTop: '2px !important'
+            padding: '4px !important',
             width: '20px !important'
         }
     },
     addressTypoContainer: {
         display: 'flex',
         gap: '13px',
-        // padding: '0px 5px !important'
+        "@media (max-width: 768px)": {
+            flexDirection: 'column',
+            gap: '4px',
+        },
     },
     addressNameTypo: {
         fontSize: '16px !important',
@@ -49,14 +55,26 @@ const useStyles = makeStyles({
         display: 'flex',
         alignItems: 'center !important',
         width: '100px',
+        "@media (max-width: 768px)": {
+            width: '100%',
+            fontSize: '14px !important',
+        },
     },
     addressTypo: {
         flex: 1,
+        "@media (max-width: 768px)": {
+            fontSize: '13px !important',
+        },
     },
     addressActionContainer: {
         width: '100px',
         margin: 'auto',
         textAlign: 'right',
+        "@media (max-width: 768px)": {
+            width: '100%',
+            textAlign: 'left',
+            marginTop: '8px',
+        },
     },
     addressActionIcon: {
         height: "20px",
@@ -68,9 +86,13 @@ const useStyles = makeStyles({
         border: `1px dashed ${palette.primary.main} !important`,
         background: `${palette.primary.light} !important`,
         marginTop: '12px !important',
-        marginLeft: '24px !important',
+        marginLeft: '0px !important',
         borderRadius: '8px',
-        padding: '16px !important'
+        padding: '16px !important',
+        "@media (max-width: 768px)": {
+            marginLeft: '0px !important',
+            padding: '12px !important',
+        },
     },
     addAddressTypo: {
         textAlign: 'center',
@@ -86,7 +108,12 @@ const useStyles = makeStyles({
     pickupBillingAddress: {
         marginTop: '20px !important',
         marginBottom: '20px !important',
-        display: 'flex'
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '10px',
+        "@media (max-width: 768px)": {
+            flexDirection: 'column',
+        },
     },
     billingTypo: {
         marginLeft: '8px !important'
@@ -96,7 +123,7 @@ const useStyles = makeStyles({
 
 
     editAddress: {
-        float: 'right'
+        marginLeft: 'auto !important'
     },
     labelTypo: {
         fontWeight: '600 !important',
